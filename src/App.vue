@@ -1,10 +1,14 @@
 <template>
   <div id="app">
     <div class="search">
-      <a-input-search placeholder=" 请输入名称或代码：如友阿股份">
-        <a-icon slot="prefix" type="search" />
-        <a-button type="primary" slot="enterButton">
-          诊股
+      <a-input-search size="large" placeholder=" 请输入名称或代码：如友阿股份">
+        <a-icon
+          slot="prefix"
+          type="search"
+          :style="{ fontSize: '1.3rem', color: '#c6c4c7' }"
+        />
+        <a-button shape="round" type="primary" slot="enterButton">
+          <a-icon type="medicine-box" :style="{ fontSize: '1.2rem' }" /> 诊股
         </a-button>
       </a-input-search>
     </div>
@@ -43,73 +47,19 @@
     <div class="notify blue">
       <div class="notify-col1">
         <img src="./assets/img/laba.png" />
-        2020/09/09复盘总结
+        {{ new Date().toLocaleDateString() }}复盘总结
       </div>
       <div class="notify-col2">更多 ></div>
     </div>
     <div class="zhishu">
-      <div class="zhishu-cell">
-        <div class="bigtxt">上证指数</div>
-        <div class="red bignum">3380.68</div>
+      <div class="zhishu-cell" :key="obj.id" v-for="obj in zhishu">
+        <div class="bigtxt">{{ obj.name }}</div>
+        <div class="red bignum">{{ obj.value }}</div>
         <div class="zhishu-cell-row3 red midnum">
           <div>
-            +16.78
+            {{ obj.zhangdie }}
           </div>
-          <div>+0.50%</div>
-        </div>
-      </div>
-      <div class="zhishu-cell">
-        <div class="bigtxt">深证指数</div>
-        <div class="red bignum">12380.68</div>
-        <div class="zhishu-cell-row3 red midnum">
-          <div>
-            +16.78
-          </div>
-          <div>+0.50%</div>
-        </div>
-      </div>
-
-      <div class="zhishu-cell">
-        <div class="bigtxt">中小板</div>
-        <div class="red bignum">3380.68</div>
-        <div class="zhishu-cell-row3 red midnum">
-          <div>
-            +16.78
-          </div>
-          <div>+0.50%</div>
-        </div>
-      </div>
-
-      <div class="zhishu-cell">
-        <div class="bigtxt">创业指数</div>
-        <div class="red bignum">3380.68</div>
-        <div class="zhishu-cell-row3 red midnum">
-          <div>
-            +16.78
-          </div>
-          <div>+0.50%</div>
-        </div>
-      </div>
-
-      <div class="zhishu-cell">
-        <div class="bigtxt">科创50</div>
-        <div class="red bignum">3380.68</div>
-        <div class="zhishu-cell-row3 red midnum">
-          <div>
-            +16.78
-          </div>
-          <div>+0.50%</div>
-        </div>
-      </div>
-
-      <div class="zhishu-cell">
-        <div class="bigtxt">上证59</div>
-        <div class="red bignum">3380.68</div>
-        <div class="zhishu-cell-row3 red midnum">
-          <div>
-            +16.78
-          </div>
-          <div>+0.50%</div>
+          <div>{{ obj.zhangfu }}</div>
         </div>
       </div>
     </div>
@@ -117,24 +67,41 @@
     <div class="shichangwendu">
       <div class="shichangwendu-row1">
         <div class="shichangwendu-row1-col1 title-txt">市场温度</div>
-        <div class="shichangwendu-row1-col2">7.2℃</div>
+        <div class="shichangwendu-row1-col2">
+          <div class="relative">
+            <a-progress
+              class="absolute"
+              :width="80"
+              type="circle"
+              :strokeWidth="10"
+              :percent="shichangwendu.wendu / 2"
+            >
+              <template #format="percent">
+                <span>{{ shichangwendu.wendu + "℃" }}</span>
+              </template>
+            </a-progress>
+          </div>
+        </div>
         <div class="shichangwendu-row1-col3">
-          <div>2020-8-24</div>
+          <div>{{ new Date().toLocaleDateString().replace(/\//g, "-") }}</div>
           <div>持仓建议：适宜中仓位</div>
         </div>
       </div>
       <div class="shichangwendu-row2">
-        <div class="relative"><div class="zhuzi1 greenbg"></div></div>
-        <div class="relative"><div class="zhuzi1 greenbg"></div></div>
-        <div class="relative"><div class="zhuzi1 greenbg"></div></div>
-        <div class="relative"><div class="zhuzi1 greenbg"></div></div>
-        <div class="relative"><div class="zhuzi1 greenbg"></div></div>
-        <div class="relative"><div class="zhuzi1 graybg"></div></div>
-        <div class="relative"><div class="zhuzi1 redbg"></div></div>
-        <div class="relative"><div class="zhuzi1 redbg"></div></div>
-        <div class="relative"><div class="zhuzi1 redbg"></div></div>
-        <div class="relative"><div class="zhuzi1 redbg"></div></div>
-        <div class="relative"><div class="zhuzi1 redbg"></div></div>
+        <div class="relative" :key="obj.id" v-for="obj in shichangwendu.chart">
+          <div class="zhuzi1">
+            <div>{{ obj.value }}</div>
+            <div
+              :style="{ height: obj.value + 'px' }"
+              :class="{
+                'zhuzi1-bg': true,
+                greenbg: obj.type === 1,
+                graybg: obj.type === 2,
+                redbg: obj.type === 3,
+              }"
+            ></div>
+          </div>
+        </div>
         <div class="justify-self-center">跌停</div>
         <div class="justify-self-center">>7</div>
         <div class="justify-self-center">4~7</div>
@@ -150,15 +117,17 @@
       <div class="shichangwendu-row3">
         <img src="./assets/img/down.png" />
         <div class="greenbg"></div>
+        <div></div>
         <div class="graybg"></div>
+        <div></div>
         <div class="redbg"></div>
         <img src="./assets/img/up.png" />
       </div>
       <div class="shichangwendu-row4">
         <div class="">泸股通资金</div>
-        <div class="green">-14.98亿</div>
+        <div class="green">{{ shichangwendu.hugutongzijin }}</div>
         <div class="">深股通资金</div>
-        <div class="red">18.68亿</div>
+        <div class="red">{{ shichangwendu.shengutongzijin }}</div>
       </div>
     </div>
 
@@ -168,35 +137,14 @@
         <div class="more-txt">更多></div>
       </div>
       <div class="bankuaihangye-content">
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
+        <div
+          class="bankuaihangye-content-cell"
+          :key="obj.id"
+          v-for="obj in bankuaihangye"
+        >
+          <div class="bigtxt">{{ obj.hangye }}</div>
+          <div class="red bignum">{{ obj.zhangdie }}</div>
+          <div class="graytxt">{{ obj.gongsi }}</div>
         </div>
       </div>
     </div>
@@ -207,35 +155,14 @@
         <div class="more-txt">更多></div>
       </div>
       <div class="bankuaihangye-content">
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
-        </div>
-        <div class="bankuaihangye-content-cell">
-          <div class="bigtxt">食品加工制造</div>
-          <div class="red bignum">+3.70%</div>
-          <div class="graytxt">天润乳业</div>
+        <div
+          class="bankuaihangye-content-cell"
+          :key="obj.id"
+          v-for="obj in gainianbankuai"
+        >
+          <div class="bigtxt">{{ obj.hangye }}</div>
+          <div class="red bignum">{{ obj.zhangdie }}</div>
+          <div class="graytxt">{{ obj.gongsi }}</div>
         </div>
       </div>
     </div>
@@ -245,52 +172,92 @@
         <div class="title-txt">涨停分析</div>
         <div class="more-txt">更多></div>
       </div>
-      <a-tabs default-active-key="1">
+      <a-tabs default-active-key="1" size="large">
         <a-tab-pane key="1" tab="昨日涨停(100)">昨日涨停(100)</a-tab-pane>
         <a-tab-pane key="2" tab="今日连板(25)"> </a-tab-pane>
         <a-tab-pane key="3" tab="最高6连板"></a-tab-pane>
       </a-tabs>
       <div class="zhangtingfenxi-row1"></div>
-      <div class="zhangtingfenxi-row2">代码名称 涨幅 连板天数 概念</div>
-      <div class="zhangtingfenxi-row3">
-        <div>
-          阿里巴巴 +8.79% 5 食品饮料
+      <a-table
+        :pagination="false"
+        :columns="zhangtingfenxi_columns"
+        :data-source="zhangtingfenxi_data"
+      >
+        <div slot="代码名称" slot-scope="代码名称">
+          <div class="bigtxt">{{ 代码名称.名称 }}</div>
+          <div>{{ 代码名称.代码 }}</div>
         </div>
-        <div>
-          阿里巴巴 +8.79% 5 食品饮料
+        <div slot="涨跌幅" slot-scope="涨跌幅">
+          <div class="bignum red">{{ 涨跌幅 }}</div>
         </div>
-        <div>
-          阿里巴巴 +8.79% 5 食品饮料
+        <div slot="连扳天数" slot-scope="连扳天数">
+          <div class="bignum red">{{ 连扳天数 }}</div>
         </div>
-      </div>
+        <div slot="概念" slot-scope="概念">
+          <div class="bigtxt">{{ 概念 }}</div>
+        </div>
+      </a-table>
     </div>
+
     <div class="celuechi">
       <div class="celuechi-row1 title-txt">策略池</div>
       <div class="celuechi-row2">
         <div class="graytxt">短线收割机</div>
         <div class="more-txt">更多></div>
       </div>
-      <div class="celuechi-row3">代码名称 涨跌幅 现价 行业</div>
-      <div class="celuechi-row4">
-        <div class="celuechi-row4-col1">
-          <div>当日选出</div>
-          <div>在池</div>
-          <div>不在池</div>
+      <a-table
+        :pagination="false"
+        :columns="celuechi_columns"
+        :data-source="celuechi_data"
+      >
+        <div slot="代码名称" slot-scope="代码名称">
+          <div class="bigtxt">{{ 代码名称.名称 }}</div>
+          <div>{{ 代码名称.代码 }}</div>
         </div>
-        <div class="celuechi-row4-col2">
-          <div>阿里巴巴 +8.79% 5 食品饮料</div>
-          <div>阿里巴巴 +8.79% 5 食品饮料</div>
-          <div>阿里巴巴 +8.79% 5 食品饮料</div>
-          <div>阿里巴巴 +8.79% 5 食品饮料</div>
+        <div slot="涨跌幅" slot-scope="涨跌幅">
+          <div class="bignum red">{{ 涨跌幅 }}</div>
         </div>
-      </div>
+        <div slot="现价" slot-scope="现价">
+          <div class="bignum red">{{ 现价 }}</div>
+        </div>
+        <div slot="行业" slot-scope="行业">
+          <div class="bigtxt">{{ 行业 }}</div>
+        </div>
+      </a-table>
     </div>
   </div>
 </template>
 
 <script>
+import {
+  zhangtingfenxi_columns,
+  zhangtingfenxi_data,
+  celuechi_columns,
+  celuechi_data,
+  zhishu,
+  shichangwendu,
+  bankuaihangye,
+  gainianbankuai,
+  zhangtingfenxi,
+  celuechi,
+} from "./data";
+
 export default {
   name: "App",
+  data() {
+    return {
+      zhangtingfenxi_columns,
+      zhangtingfenxi_data,
+      celuechi_columns,
+      celuechi_data,
+      zhishu,
+      shichangwendu,
+      bankuaihangye,
+      gainianbankuai,
+      zhangtingfenxi,
+      celuechi,
+    };
+  },
   components: {},
 };
 </script>
@@ -335,13 +302,15 @@ body {
 }
 .bigtxt {
   font-size: 1.2rem;
+  color: black;
 }
 .bignum {
   font-size: 1.5rem;
   font-weight: bold;
 }
 .midnum {
-  font-size: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 .graytxt {
   color: #ababab;
@@ -363,12 +332,19 @@ body {
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: 1rem;
   padding: 10px;
+  border-bottom: 10px #f4f8f9 solid;
+  height: 60vw;
+
   &-cell {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    box-shadow: 0 0 8px 0 rgb(0 0 0 / 5%);
+    grid-template-rows: 14fr 11fr 9fr;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.05);
+    align-items: end;
+    background: linear-gradient(0deg, #fef6f4, #ffffff);
+    border-radius: 1rem;
+    align-items: center;
     &-row3 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -377,10 +353,13 @@ body {
 }
 .bankuaihangye {
   display: grid;
-  grid-template-rows: 30px 1fr;
+  grid-template-rows: 50px 1fr;
+  border-bottom: 10px #f4f8f9 solid;
+
   &-head {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    border-bottom: 0.5px solid #80808014;
   }
   &-content {
     text-align: center;
@@ -396,7 +375,8 @@ body {
 }
 .zhangtingfenxi {
   display: grid;
-  grid-template-rows: 30px 30px 30px 1fr;
+  grid-template-rows: 50px 60px 1fr;
+  border-bottom: 10px #f4f8f9 solid;
   ::v-deep {
     .ant-tabs-nav-scroll {
       text-align: center;
@@ -448,10 +428,12 @@ body {
   padding: 0 20px;
   height: 40px;
   align-items: center;
-  font-weight: 600;
+  height: 3.2rem;
+  align-items: center;
+  font-size: 1.2rem;
   &-col1 {
     img {
-      width: 1rem;
+      width: 1.8rem;
     }
   }
   &-col2 {
@@ -459,15 +441,19 @@ body {
   }
 }
 .shichangwendu {
+  padding-bottom: 1.5rem;
+  border-bottom: 10px #f4f8f9 solid;
+
   &-row1 {
     display: grid;
     grid-template-columns: 3fr 3fr 4fr;
     &-col1 {
     }
     &-col2 {
-      justify-self: end;
-      align-self: end;
-      font-size: 1.4rem;
+      justify-self: center;
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #000000b8;
     }
     &-col3 {
       display: grid;
@@ -476,6 +462,8 @@ body {
       align-self: end;
       font-size: 0.8rem;
       padding-right: 0.8rem;
+      text-align: end;
+      font-size: 0.85rem;
     }
   }
   &-row2 {
@@ -486,8 +474,8 @@ body {
   }
   &-row3 {
     display: grid;
-    grid-template-columns: 1rem 1fr 5px 1fr 1rem;
-    margin: 0 0.8rem;
+    grid-template-columns: 1rem 1fr 2px 5px 2px 1fr 1rem;
+    margin: 1rem 0.8rem;
     img {
       width: 1rem;
       justify-self: center;
@@ -496,7 +484,7 @@ body {
   }
   &-row4 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-columns: 1fr 3fr 1fr auto;
     margin: 0 1.8rem;
     .red {
       justify-self: end;
@@ -505,20 +493,25 @@ body {
 }
 .celuechi {
   display: grid;
-  grid-template-rows: auto 3rem auto 1fr;
+  grid-template-rows: 3rem 4rem auto 1fr;
   &-row2 {
     padding-left: 0.8rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    border-bottom: 0.5px solid #80808014;
+    border-top: 0.5px solid #80808014;
   }
 }
 .zhuzi1 {
-  width: 50%;
-  height: 70%;
   position: absolute;
   bottom: 0;
-  transform: translate(50%, 0px);
+  transform: translate(-50%, 0px);
+  left: 50%;
+  width: 50%;
+  text-align: center;
+}
+.zhuzi1-bg {
 }
 .justify-self-center {
   justify-self: center;
@@ -526,10 +519,14 @@ body {
 .relative {
   position: relative;
 }
+.absolute {
+  position: absolute;
+}
 .title-txt {
   font-size: 18pt;
   font-weight: bold;
   padding-left: 0.8rem;
+  color: black;
 }
 
 .more-txt {
@@ -537,6 +534,7 @@ body {
   justify-self: end;
   font-size: 1rem;
   padding-right: 20px;
+  align-self: center;
 }
 .renqi {
   background-image: url(./assets/img/renqi.png);
@@ -558,5 +556,53 @@ body {
 }
 .zixuan {
   background-image: url(./assets/img/zixuan.png);
+}
+</style>
+<style lang="scss" scoped>
+::v-deep {
+  .ant-table-thead > tr > th {
+    background: white;
+    border-bottom: 0.5px solid #80808014;
+  }
+  .ant-table-tbody > tr > td {
+    border-bottom: 0.5px solid #80808014;
+  }
+  .ant-table-thead > tr:first-child > th:last-child {
+    text-align: center;
+  }
+  .ant-table-thead > tr > th {
+    color: #ababab;
+    font-size: 1.1rem;
+  }
+  .ant-input-search > input {
+    border-radius: 32px !important;
+  }
+  .ant-input-group .ant-input-affix-wrapper {
+    width: calc(100% - 10px);
+  }
+  .ant-input-search-enter-button
+    + .ant-input-group-addon
+    .ant-input-search-button {
+    border-radius: 32px;
+  }
+  .ant-tabs-bar.ant-tabs-top-bar > div {
+    display: grid;
+    grid-auto-flow: column;
+  }
+  .ant-tabs-nav > div {
+    font-size: 1.2rem;
+  }
+  .ant-tabs {
+    border-top: 0.5px solid #80808014;
+  }
+  .ant-progress {
+    transform: rotate(-90deg);
+    -webkit-clip-path: polygon(100% 100%, 100% 0, 50% 0, 50% 100%);
+    clip-path: polygon(100% 100%, 100% 0, 50% 0, 50% 100%);
+  }
+  .ant-progress-circle .ant-progress-text {
+    transform: translate(-40%, -50%) rotate(90deg);
+    font-size: 1.1rem;
+  }
 }
 </style>
