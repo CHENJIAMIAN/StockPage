@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <div class="search">
-      <a-input-search size="large" placeholder=" 请输入名称或代码：如友阿股份">
+      <a-input-search
+        size="large"
+        placeholder=" 请输入名称或代码：如友阿股份"
+        @search="handleZhenguClick"
+      >
         <a-icon
           slot="prefix"
           type="search"
@@ -337,6 +341,11 @@ export default {
     //   });
   },
   mounted() {},
+  methods: {
+    handleZhenguClick() {
+      this.$router.push("/zhenduanbaogao");
+    },
+  },
 };
 </script>
 

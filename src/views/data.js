@@ -4,6 +4,7 @@ export const zhangtingfenxi_columns = [
         dataIndex: "代码名称",
         key: "代码名称",
         scopedSlots: { customRender: '代码名称' },
+        width: 110
     },
     {
         title: "涨跌幅",
@@ -22,6 +23,7 @@ export const zhangtingfenxi_columns = [
         dataIndex: "概念",
         key: "概念",
         scopedSlots: { customRender: '概念' },
+        width: 80
     },
 
 ];
@@ -126,13 +128,14 @@ export const celuechi_columns = [
         },
         // 在有customRender时失效
         // scopedSlots: { customRender: 'status' },
-        width: 110
+        width: 10
     },
     {
         title: "代码名称",
         dataIndex: "代码名称",
         key: "代码名称",
         scopedSlots: { customRender: '代码名称' },
+        width: 110
     },
     {
         title: "涨跌幅",
@@ -151,7 +154,7 @@ export const celuechi_columns = [
         dataIndex: "行业",
         key: "行业",
         scopedSlots: { customRender: '行业' },
-        width: 110
+        width: 80
     }
 ];
 
