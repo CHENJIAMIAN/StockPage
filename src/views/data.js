@@ -28,57 +28,63 @@ export const zhangtingfenxi_columns = [
 
 export const zhangtingfenxi_data = [
     {
+        id: 0,
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        连扳天数: 5,
+        涨跌幅: "+8.80",
+        连扳天数: 6,
         概念: "食品饮料"
     },
     {
+        id: 1,
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        连扳天数: 5,
+        涨跌幅: "+8.80",
+        连扳天数: 6,
         概念: "食品饮料"
     },
     {
+        id: 2,
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        连扳天数: 5,
+        涨跌幅: "+8.80",
+        连扳天数: 6,
         概念: "食品饮料"
     },
     {
+        id: 3,
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        连扳天数: 5,
+        涨跌幅: "+8.80",
+        连扳天数: 6,
         概念: "食品饮料"
     },
     {
+        id: 4,
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        连扳天数: 5,
+        涨跌幅: "+8.80",
+        连扳天数: 6,
         概念: "食品饮料"
     },
     {
+        id: 5,
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        连扳天数: 5,
+        涨跌幅: "+8.80",
+        连扳天数: 6,
         概念: "食品饮料"
     }
 ];
@@ -120,6 +126,7 @@ export const celuechi_columns = [
         },
         // 在有customRender时失效
         // scopedSlots: { customRender: 'status' },
+        width: 110
     },
     {
         title: "代码名称",
@@ -144,68 +151,75 @@ export const celuechi_columns = [
         dataIndex: "行业",
         key: "行业",
         scopedSlots: { customRender: '行业' },
+        width: 110
     }
 ];
 
 export const celuechi_data = [
     {
+        id: 0,
         status: "当日选出",
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        现价: 5,
+        涨跌幅: "-8.80",
+        现价: 6,
         行业: "食品饮料"
     },
     {
+        id: 1,
         status: "当日选出",
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        现价: 5,
+        涨跌幅: "+8.80",
+        现价: 6,
         行业: "食品饮料"
     },
     {
+        id: 2,
         status: "在池",
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        现价: 5,
+        涨跌幅: "+8.80",
+        现价: 6,
         行业: "食品饮料"
     },
     {
+        id: 3,
         status: "在池",
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        现价: 5,
+        涨跌幅: "-8.80",
+        现价: 6,
         行业: "食品饮料"
     },
     {
+        id: 4,
         status: "不在池",
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        现价: 5,
+        涨跌幅: "+8.80",
+        现价: 6,
         行业: "食品饮料"
     },
     {
+        id: 5,
         status: "不在池",
         代码名称: {
-            名称: "阿里巴巴1",
+            名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.79%",
-        现价: 5,
+        涨跌幅: "+8.80",
+        现价: 6,
         行业: "食品饮料"
     }
 ];
@@ -215,43 +229,43 @@ export const zhishu = [
         id: 1,
         name: "上证指数",
         value: '3380.18',
-        zhangdie: '+16.78',
-        zhangfu: '+0.50%'
+        zhangdie: '-16.71',
+        zhangdiefu: '-0.50%'
     }, {
         id: 2,
         name: "深证指数",
         value: '3380.28',
-        zhangdie: '+16.78',
-        zhangfu: '+0.50%'
+        zhangdie: '+16.72',
+        zhangdiefu: '+0.51%'
     }, {
         id: 3,
         name: "中小板",
         value: '3380.38',
-        zhangdie: '+16.78',
-        zhangfu: '+0.50%'
+        zhangdie: '+12',
+        zhangdiefu: '+0.52%'
     }, {
         id: 4,
         name: "创业指数",
         value: '3380.48',
-        zhangdie: '+16.78',
-        zhangfu: '+0.50%'
-    }, {
-        id: 5,
-        name: "科创50",
-        value: '3380.58',
-        zhangdie: '+16.78',
-        zhangfu: '+0.50%'
+        zhangdie: '+16.74',
+        zhangdiefu: '+0.53%'
     }, {
         id: 6,
+        name: "科创50",
+        value: '3380.58',
+        zhangdie: '+16.58',
+        zhangdiefu: '+0.54%'
+    }, {
+        id: 7,
         name: "上证50",
         value: '3380.68',
-        zhangdie: '+16.78',
-        zhangfu: '+0.50%'
+        zhangdie: '+16.76',
+        zhangdiefu: '+0.55%'
     },
 ]
 
 export const shichangwendu = {
-    wendu: 70,
+    wendu: 10,
     chart: [
         {
             id: 1,
@@ -267,20 +281,16 @@ export const shichangwendu = {
             type: 1
         }, {
             id: 4,
-            value: 11,
-            type: 1
-        }, {
-            id: 5,
-            value: 11,
+            value: 131,
             type: 1
         }, {
             id: 6,
-            value: 11,
-            type: 2
+            value: 234,
+            type: 1
         }, {
             id: 7,
             value: 11,
-            type: 3
+            type: 2
         }, {
             id: 8,
             value: 11,
@@ -295,43 +305,50 @@ export const shichangwendu = {
             type: 3
         }, {
             id: 11,
-            value: 111,
+            value: 11,
+            type: 3
+        }, {
+            id: 12,
+            value: 123,
             type: 3
         },
     ],
-    hugutongzijin: '-14.98亿',
-    shengutongzijin: '18.68亿',
+    hugutongzijin: -15.98,
+    shengutongzijin: 28.68,
+    die: 1555,
+    zhang: 123,
+    ping: 345,
 };
 export const bankuaihangye = [
     {
         id: 1,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '-3.70',
         gongsi: '天润乳业'
     }, {
         id: 2,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '-3.4',
         gongsi: '天润乳业'
     }, {
         id: 3,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '+3.70',
         gongsi: '天润乳业'
     }, {
         id: 4,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
-        gongsi: '天润乳业'
-    }, {
-        id: 5,
-        hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '+3.70',
         gongsi: '天润乳业'
     }, {
         id: 6,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '+3.70',
+        gongsi: '天润乳业'
+    }, {
+        id: 7,
+        hangye: '食品加工制造',
+        zhangdie: '+3.70',
         gongsi: '天润乳业'
     },
 ]
@@ -340,34 +357,34 @@ export const gainianbankuai = [
     {
         id: 1,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '-3.70',
         gongsi: '天润乳业'
     }, {
         id: 2,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '+3.70',
         gongsi: '天润乳业'
     }, {
         id: 3,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '-4.0',
         gongsi: '天润乳业'
     }, {
         id: 4,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
-        gongsi: '天润乳业'
-    }, {
-        id: 5,
-        hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '+3.70',
         gongsi: '天润乳业'
     }, {
         id: 6,
         hangye: '食品加工制造',
-        zhangdie: '+3.70%',
+        zhangdie: '+3.70',
+        gongsi: '天润乳业'
+    }, {
+        id: 7,
+        hangye: '食品加工制造',
+        zhangdie: '+3.70',
         gongsi: '天润乳业'
     },
 ];
-export const zhangtingfenxi = {};
-export const celuechi = {};
+
+
