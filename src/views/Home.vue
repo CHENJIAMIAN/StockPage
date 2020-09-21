@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="home">
     <div class="search">
       <a-input-search
         size="large"
@@ -314,7 +314,7 @@ import {
 } from "./data.js";
 
 export default {
-  name: "App",
+  name: "Home",
   data() {
     return {
       zhangtingfenxi_columns,
@@ -359,7 +359,7 @@ export default {
   --red-color: #ea3031;
   --green-color: #38a251;
 }
-#app {
+#home {
   font-family: FX-LED;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

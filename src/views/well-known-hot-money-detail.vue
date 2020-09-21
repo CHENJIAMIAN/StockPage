@@ -1,0 +1,128 @@
+<template>
+  <div class="wkhmd">
+    <div class="wkhmd-row1">
+      <div class="name">{{ data.name }}</div>
+      <div class="desc">{{ data.desc }}</div>
+    </div>
+    <div class="wkhmd-row2">
+      <div class="name">常用机构</div>
+      <div class="list">
+        <div
+          class="item"
+          v-for="item in data.commonInstitutions"
+          :key="item.id"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+    </div>
+    <div class="wkhmd-row3">
+      <div v class="name">上榜历史</div>
+      <a-table
+        :pagination="false"
+        :columns="listedHistory_columns"
+        :data-source="listedHistory_data"
+        rowKey="id"
+      >
+        <div slot="代码名称" slot-scope="代码名称">
+          <div class="bigtxt">{{ 代码名称.名称 }}</div>
+          <div>{{ 代码名称.代码 }}</div>
+        </div>
+        <div slot="涨跌幅" slot-scope="涨跌幅">
+          <div
+            :class="{
+              red: Number(涨跌幅) > 0,
+              green: Number(涨跌幅) < 0,
+              gray: Number(涨跌幅) === 0,
+              bignum: true,
+            }"
+          >
+            {{ 涨跌幅 }}%
+          </div>
+        </div>
+        <div slot="现价" slot-scope="现价, record">
+          <div
+            :class="{
+              red: Number(record.涨跌幅) > 0,
+              green: Number(record.涨跌幅) < 0,
+              gray: Number(record.涨跌幅) === 0,
+              bignum: true,
+            }"
+          >
+            {{ 现价 }}
+          </div>
+        </div>
+      </a-table>
+    </div>
+  </div>
+</template>
+<script>
+import {
+  data,
+  listedHistory_columns,
+  listedHistory_data,
+} from "@/views/wellknownhotmoneydetail_data.js";
+export default {
+  data() {
+    return {
+      data,
+      listedHistory_columns,
+      listedHistory_data,
+    };
+  },
+};
+</script>
+<style lang="scss" scoped>
+.wkhmd {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  .name {
+    font-size: 1.5rem;
+    font-family: PingFang SC;
+    font-weight: 800;
+    color: #333333;
+    line-height: 34px;
+    border-bottom: 0.5px solid #80808014;
+  }
+  &-row1 {
+    display: grid;
+    grid-gap: 10px;
+    padding: 20px;
+
+    border-bottom: 10px #f4f8f9 solid;
+
+    .desc {
+      font-size: 1.2rem;
+      font-family: PingFang SC;
+      font-weight: 500;
+      line-height: 34px;
+      color: #555555;
+    }
+  }
+  &-row2 {
+    display: grid;
+    grid-gap: 20px;
+    padding: 20px;
+    border-bottom: 10px #f4f8f9 solid;
+    .list {
+      display: grid;
+      grid-gap: 20px;
+      align-items: center;
+      .item {
+        font-size: 1.2rem;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: #333333;
+        line-height: 34px;
+        border-bottom: 0.5px solid #80808014;
+      }
+    }
+  }
+  &-row3 {
+    display: grid;
+    .name {
+      padding: 20px;
+    }
+  }
+}
+</style>

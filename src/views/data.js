@@ -25,7 +25,6 @@ export const zhangtingfenxi_columns = [
         scopedSlots: { customRender: '概念' },
         width: 80
     },
-
 ];
 
 export const zhangtingfenxi_data = [
