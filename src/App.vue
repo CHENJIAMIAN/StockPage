@@ -85,7 +85,7 @@ export default {
   color: #ababab;
   font-size: 1.1rem;
 }
-
+/* ant-table */
 .ant-table-thead > tr > th {
   background: white;
   border-bottom: 0.5px solid #80808014;
@@ -100,6 +100,21 @@ export default {
   color: #ababab;
   font-size: 1.1rem;
 }
+
+/* ant-tabs */
+/* .ant-tabs-bar.ant-tabs-top-bar > div {
+  display: grid;
+  grid-auto-flow: column;
+}
+.ant-tabs-nav > div {
+  font-size: 1.2rem;
+}*/
+.ant-tabs {
+  border-top: 0.5px solid #80808014;
+}
+.ant-tabs-nav-scroll {
+  text-align: center;
+} 
 </style>
 <style lang="scss" scoped>
 #app {

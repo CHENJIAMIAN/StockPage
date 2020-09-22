@@ -411,11 +411,7 @@ export default {
   display: grid;
   grid-template-rows: 50px 60px 1fr;
   border-bottom: 10px #f4f8f9 solid;
-  ::v-deep {
-    .ant-tabs-nav-scroll {
-      text-align: center;
-    }
-  }
+ 
   &-head {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -605,16 +601,7 @@ export default {
     .ant-input-search-button {
     border-radius: 32px;
   }
-  .ant-tabs-bar.ant-tabs-top-bar > div {
-    display: grid;
-    grid-auto-flow: column;
-  }
-  .ant-tabs-nav > div {
-    font-size: 1.2rem;
-  }
-  .ant-tabs {
-    border-top: 0.5px solid #80808014;
-  }
+
   .ant-progress {
     transform: rotate(-90deg);
     -webkit-clip-path: polygon(100% 100%, 100% 0, 50% 0, 50% 100%);
