@@ -5,7 +5,11 @@
     </div>
     <div class="bottom-nav">
       <a-icon @click="handleRoute('home')" class="home" type="home" />
-      <a-icon @click="handleRoute('solution')" class="solution" type="solution" />
+      <a-icon
+        @click="handleRoute('solution')"
+        class="solution"
+        type="solution"
+      />
       <a-icon @click="handleRoute('check')" class="check" type="check-square" />
       <a-icon @click="handleRoute('user')" class="user" type="user" />
       <div class="txt home">首页</div>
@@ -17,16 +21,32 @@
 </template>
 <script>
 export default {
-  data(){
-
+  data() {},
+  methods: {
+    handleRoute(routeName) {
+      this.$router.push(`/${routeName}`);
+    },
   },
-  methods:{
-    handleRoute(routeName){
-      this.$router.push(`/${routeName}`)
-    }
+};
+</script>
+<style lang="scss">
+::v-deep {
+  .ant-table-thead > tr > th {
+    background: white;
+    border-bottom: 0.5px solid #80808014;
+  }
+  .ant-table-tbody > tr > td {
+    border-bottom: 0.5px solid #80808014;
+  }
+  .ant-table-thead > tr:first-child > th:last-child {
+    text-align: center;
+  }
+  .ant-table-thead > tr > th {
+    color: #ababab;
+    font-size: 1.1rem;
   }
 }
-</script>
+</style>
 <style lang="scss" scoped>
 #app {
   height: 100%;

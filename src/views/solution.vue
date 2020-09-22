@@ -1,3 +1,4 @@
+// 策略池
 <template>
   <div class="solution">
     <div class="block" v-for="item in data" :key="item.id">

@@ -1,5 +1,5 @@
 <template>
-  <div class="zhenduanbaogao">
+  <div class="diagnose-report">
     <div class="head">
       <div class="name">{{ data.name }}</div>
       <div class="code">{{ "(" + data.code + ")" }}</div>
@@ -57,7 +57,7 @@
   </div>
 </template>
 <script>
-import { data } from "./zhenduanbaogao_data.js";
+import { data } from "./diagnosereport_data.js";
 export default {
   data() {
     return {
@@ -151,7 +151,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.zhenduanbaogao {
+.diagnose-report {
   background: #f2f7fb;
   display: grid;
   grid-template-rows: 22rem 50px 15fr auto auto;
@@ -198,10 +198,10 @@ export default {
       top: -80px;
     }
     .circle3 {
-      position: absolute;
+      position: relative;
       border: 88px solid #619df9;
-      top: 33px;
-      right: 9px;
+      top: -34vw;
+      right: -56vw;
     }
     .score-incircle {
       color: dodgerblue;

@@ -311,7 +311,7 @@ import {
   gainianbankuai,
   zhangtingfenxi,
   celuechi,
-} from "./data.js";
+} from "./home_data.js";
 
 export default {
   name: "Home",
@@ -343,7 +343,7 @@ export default {
   mounted() {},
   methods: {
     handleZhenguClick() {
-      this.$router.push("/zhenduanbaogao");
+      this.$router.push("/diagnose_report");
     },
   },
 };
@@ -648,20 +648,6 @@ export default {
 </style>
 <style lang="scss" scoped>
 ::v-deep {
-  .ant-table-thead > tr > th {
-    background: white;
-    border-bottom: 0.5px solid #80808014;
-  }
-  .ant-table-tbody > tr > td {
-    border-bottom: 0.5px solid #80808014;
-  }
-  .ant-table-thead > tr:first-child > th:last-child {
-    text-align: center;
-  }
-  .ant-table-thead > tr > th {
-    color: #ababab;
-    font-size: 1.1rem;
-  }
   .ant-input-search > input {
     border-radius: 32px !important;
   }

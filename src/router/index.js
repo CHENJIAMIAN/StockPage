@@ -1,24 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import home from '../views/home.vue'
 import solution from '@/views/solution.vue'
 import check from '@/views/check.vue'
 import user from '@/views/user.vue'
 import wkhmd from '@/views/well-known-hot-money-detail.vue'
 import wkhm from '@/views/well-known-hot-money.vue'
+import bbgs_celuechi from '@/views/bbgs-celuechi.vue'
+import market_popularity from '@/views/market-popularity.vue'
+import daily_limit_analysis from '@/views/daily-limit-analysis.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'home',
+    component: home
   },
   {
     path: '/home',
-    name: 'Home',
-    component: Home
+    name: 'home',
+    component: home
   },
   {
     path: '/solution',
@@ -46,9 +49,24 @@ const routes = [
     component: wkhm
   },
   {
-    path: '/zhenduanbaogao',
-    name: 'zhenduanbaogao',
-    component: () => import(/* webpackChunkName: "zhenduanbaogao" */ '../views/zhenduanbaogao.vue')
+    path: '/bbgs_celuechi',
+    name: 'bbgs_celuechi',
+    component: bbgs_celuechi
+  },  
+  {
+    path: '/market_popularity',
+    name: 'market_popularity',
+    component: market_popularity
+  },  
+  {
+    path: '/daily_limit_analysis',
+    name: 'daily_limit_analysis',
+    component: daily_limit_analysis
+  },  
+  {
+    path: '/diagnose_report',
+    name: 'diagnose_report',
+    component: () => import(/* webpackChunkName: "diagnose_report" */ '../views/diagnose-report.vue')
   }
 ]
 

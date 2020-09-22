@@ -2,7 +2,7 @@
   <div class="wkhm">
     <div class="wkhm-row1">
       <div class="name">上龙虎榜的知名游资</div>
-      <a-icon type="table" />
+      <img src="../assets/img/rili.png"/>
     </div>
 
     <div class="wkhm-row2">
@@ -93,8 +93,9 @@ export default {
     grid-auto-flow: column;
     padding: 20px;
     align-items: center;
-    .anticon {
+    img,.anticon {
       justify-self: end;
+      width: 25px;
     }
   }
   &-row2 {
