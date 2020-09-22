@@ -17,32 +17,32 @@
       </a-input-search>
     </div>
     <div class="menuicon">
-      <div class="menuicon-cell">
+      <div class="menuicon-cell" @click="handleRoute('market_popularity')">
         <img src="../assets/img/renqi.png" />
         <!-- <div class="renqi menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">人气</div>
       </div>
-      <div class="menuicon-cell">
+      <div class="menuicon-cell" @click="handleRoute('daily_limit_analysis')">
         <img src="../assets/img/zhangting.png" />
         <!-- <div class="zhangting menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">涨停</div>
       </div>
-      <div class="menuicon-cell">
+      <div class="menuicon-cell" @click="handleRoute('longhu')">
         <img src="../assets/img/longhu.png" />
         <!-- <div class="longhu menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">龙虎</div>
       </div>
-      <div class="menuicon-cell">
+      <div class="menuicon-cell" @click="handleRoute('solution')">
         <img src="../assets/img/celue.png" />
         <!-- <div class="celue menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">策略</div>
       </div>
-      <div class="menuicon-cell">
+      <div class="menuicon-cell" @click="handleRoute('wkhm')">
         <img src="../assets/img/youzi.png" />
         <!-- <div class="youzi menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">游资</div>
       </div>
-      <div class="menuicon-cell">
+      <div class="menuicon-cell" @click="handleRoute('my_watchlist')">
         <img src="../assets/img/zixuan.png" />
         <!-- <div class="zixuan menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">自选</div>
@@ -342,13 +342,15 @@ export default {
   },
   mounted() {},
   methods: {
+    handleRoute(routeName) {
+      this.$router.push(`/${routeName}`);
+    },
     handleZhenguClick() {
       this.$router.push("/diagnose_report");
     },
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
 .search {
@@ -411,7 +413,7 @@ export default {
   display: grid;
   grid-template-rows: 50px 60px 1fr;
   border-bottom: 10px #f4f8f9 solid;
- 
+
   &-head {
     display: grid;
     grid-template-columns: 1fr 1fr;

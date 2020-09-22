@@ -10,8 +10,12 @@
         class="solution"
         type="solution"
       />
-      <a-icon @click="handleRoute('check')" class="check" type="check-square" />
-      <a-icon @click="handleRoute('user')" class="user" type="user" />
+      <a-icon
+        @click="handleRoute('my_watchlist')"
+        class="check"
+        type="check-square"
+      />
+      <a-icon class="user" type="user" />
       <div class="txt home">首页</div>
       <div class="txt solution">策略</div>
       <div class="txt check">自选</div>
@@ -87,18 +91,16 @@ export default {
 }
 /* ant-table */
 .ant-table-thead > tr > th {
-  background: white;
+  background: white !important;
   border-bottom: 0.5px solid #80808014;
+  color: #ababab;
+  font-size: 1.1rem;
 }
 .ant-table-tbody > tr > td {
   border-bottom: 0.5px solid #80808014;
 }
 .ant-table-thead > tr:first-child > th:last-child {
   text-align: center;
-}
-.ant-table-thead > tr > th {
-  color: #ababab;
-  font-size: 1.1rem;
 }
 
 /* ant-tabs */
@@ -114,7 +116,7 @@ export default {
 }
 .ant-tabs-nav-scroll {
   text-align: center;
-} 
+}
 </style>
 <style lang="scss" scoped>
 #app {
