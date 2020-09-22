@@ -9,6 +9,7 @@ import wkhm from '@/views/well-known-hot-money.vue'
 import bbgs_celuechi from '@/views/bbgs-celuechi.vue'
 import market_popularity from '@/views/market-popularity.vue'
 import daily_limit_analysis from '@/views/daily-limit-analysis.vue'
+import daily_limit_analysis_detail from "@/views/daily-limit-analysis-detail.vue"
 
 Vue.use(VueRouter)
 
@@ -52,17 +53,22 @@ const routes = [
     path: '/bbgs_celuechi',
     name: 'bbgs_celuechi',
     component: bbgs_celuechi
-  },  
+  },
   {
     path: '/market_popularity',
     name: 'market_popularity',
     component: market_popularity
-  },  
+  },
   {
     path: '/daily_limit_analysis',
     name: 'daily_limit_analysis',
     component: daily_limit_analysis
-  },  
+  },
+  {
+    path: '/daily_limit_analysis_detail',
+    name: 'daily_limit_analysis_detail',
+    component: daily_limit_analysis_detail
+  },
   {
     path: '/diagnose_report',
     name: 'diagnose_report',
