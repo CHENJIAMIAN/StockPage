@@ -349,61 +349,7 @@ export default {
 };
 </script>
 
-<style>
-@font-face {
-  font-family: mFont;
-  src: url("../assets/DIN Medium.ttf");
-}
-:root {
-  --blue-color: #2874e8;
-  --red-color: #ea3031;
-  --green-color: #38a251;
-}
-#home {
-  font-family: FX-LED;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: grid;
-  grid-gap: 20px;
-}
-.green {
-  color: var(--green-color, green);
-}
-.greenbg {
-  background-color: var(--green-color, green);
-}
-.redbg {
-  background-color: var(--red-color, red);
-}
-.red {
-  color: var(--red-color, red);
-}
-.gray {
-  color: var(--gray-color, gray);
-}
-.blue {
-  color: var(--blue-color, #2874e8);
-}
-.graybg {
-  background-color: #ababab;
-}
-.bigtxt {
-  font-size: 1.2rem;
-  color: black;
-}
-.bignum {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-.midnum {
-  font-size: 1rem;
-  font-weight: 600;
-}
-.graytxt {
-  color: #ababab;
-  font-size: 1.1rem;
-}
-</style>
+
 <style lang="scss" scoped>
 .search {
   margin: 15pt;

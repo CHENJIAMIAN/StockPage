@@ -1,15 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// home不可按需引入,否则放在其中的全局样式会失效
 import home from '../views/home.vue'
-import solution from '@/views/solution.vue'
-import check from '@/views/check.vue'
-import user from '@/views/user.vue'
-import wkhmd from '@/views/well-known-hot-money-detail.vue'
-import wkhm from '@/views/well-known-hot-money.vue'
-import bbgs_celuechi from '@/views/bbgs-celuechi.vue'
-import market_popularity from '@/views/market-popularity.vue'
-import daily_limit_analysis from '@/views/daily-limit-analysis.vue'
-import daily_limit_analysis_detail from "@/views/daily-limit-analysis-detail.vue"
+
 
 Vue.use(VueRouter)
 
@@ -27,53 +20,70 @@ const routes = [
   {
     path: '/solution',
     name: 'solution',
-    component: solution
+    component: () => import('@/views/solution.vue')
   },
   {
     path: '/check',
     name: 'check',
-    component: check
+    component: () => import('@/views/check.vue')
   },
   {
     path: '/user',
     name: 'user',
-    component: user
+    component: () => import('@/views/user.vue')
   },
   {
     path: '/wkhmd',
     name: 'wkhmd',
-    component: wkhmd
+    component: () => import('@/views/well-known-hot-money-detail.vue')
   },
   {
     path: '/wkhm',
     name: 'wkhm',
-    component: wkhm
+    component: () => import('@/views/well-known-hot-money.vue')
   },
   {
     path: '/bbgs_celuechi',
     name: 'bbgs_celuechi',
-    component: bbgs_celuechi
+    component: () => import('@/views/bbgs-celuechi.vue')
   },
   {
     path: '/market_popularity',
     name: 'market_popularity',
-    component: market_popularity
+    component: () => import('@/views/market-popularity.vue')
   },
   {
     path: '/daily_limit_analysis',
     name: 'daily_limit_analysis',
-    component: daily_limit_analysis
+    component: () => import('@/views/daily-limit-analysis.vue')
   },
   {
     path: '/daily_limit_analysis_detail',
     name: 'daily_limit_analysis_detail',
-    component: daily_limit_analysis_detail
+    component: () => import('@/views/daily-limit-analysis-detail.vue')
+  },
+  {
+    path: '/my_watchlist',
+    name: 'my_watchlist',
+    component: () => import('@/views/my-watchlist.vue')
+  },
+  {
+    path: '/longhu',
+    name: 'longhu',
+    component: () => import('@/views/longhu.vue')
+  },
+  {
+    path: '/longhu_detail',
+    name: 'longhu_detail',
+    component: () => import('@/views/longhu-detail.vue')
   },
   {
     path: '/diagnose_report',
     name: 'diagnose_report',
-    component: () => import(/* webpackChunkName: "diagnose_report" */ '../views/diagnose-report.vue')
+    component: () => import(/* webpackChunkName: "diagnose_report" */ '@/views/diagnose-report.vue')
   }
+
+
 ]
 
 const router = new VueRouter({
