@@ -16,18 +16,24 @@ export const table_columns = [
         dataIndex: "涨幅",
         key: "涨幅",
         scopedSlots: { customRender: '涨幅' },
+        align: 'right'
     },
     {
         title: "详情",
         dataIndex: "详情",
         key: "详情",
         scopedSlots: { customRender: '详情' },
+        align: 'right'
     },
     {
         title: "连板天",
         dataIndex: "连板天",
         key: "连板天",
+        // customRender: (value, row, index, column) => {
+        //     return '行情'
+        // }
         scopedSlots: { customRender: '连板天' },
+        align: 'right'
     },
 ];
 
@@ -38,9 +44,7 @@ export const table_data = [
             名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨幅: "+8.80",
-        详情: "4天4板",
-        连板天: "4",
+        涨幅: "-8.80",
     },
     {
         id: 1,
@@ -49,9 +53,6 @@ export const table_data = [
             代码: '6003001'
         },
         涨幅: "+8.80",
-        详情: "4天4板",
-        连板天: "4",
-
     },
     {
         id: 2,
@@ -60,9 +61,6 @@ export const table_data = [
             代码: '6003001'
         },
         涨幅: "+8.80",
-        详情: "4天4板",
-        连板天: "4",
-
     },
     {
         id: 3,
@@ -71,9 +69,6 @@ export const table_data = [
             代码: '6003001'
         },
         涨幅: "+8.80",
-        详情: "4天4板",
-        连板天: "4",
-
     },
     {
         id: 4,
@@ -82,9 +77,6 @@ export const table_data = [
             代码: '6003001'
         },
         涨幅: "+8.80",
-        详情: "4天4板",
-        连板天: "4",
-
     },
     {
         id: 5,
@@ -93,8 +85,5 @@ export const table_data = [
             代码: '6003001'
         },
         涨幅: "+8.80",
-        详情: "4天4板",
-        连板天: "4",
-
     }
 ];

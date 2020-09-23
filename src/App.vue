@@ -52,6 +52,9 @@ export default {
   display: grid;
   grid-gap: 20px;
 }
+.black {
+  color: #333333;
+}
 .green {
   color: var(--green-color, green);
 }
@@ -75,7 +78,6 @@ export default {
 }
 .bigtxt {
   font-size: 1.2rem;
-  color: #343434;
 }
 .bignum {
   font-size: 1.5rem;

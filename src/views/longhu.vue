@@ -49,16 +49,27 @@
     <div class="row2">
       <div class="row2-row1">
         <span>历史数据查询</span>
+        <!-- 手机获取的日期是9/23/2020 电脑是2020/9/23 -->
         <a-date-picker
           style="float:right;"
           size="large"
-          :default-value="moment(today, 'YYYY-MM-DD')"
+          :default-value="
+            today.charAt(0) === '2'
+              ? moment(today, 'YYYY-MM-DD')
+              : moment(today, 'MM-DD-YYYY')
+          "
           @change="onDateChange"
         />
       </div>
       <div class="row2-row2">
         <span class="name">上榜个股</span>
-        <span>{{ " " + today }} </span>
+        <span
+          >{{
+            today.charAt(0) === "2"
+              ? moment(today, "YYYY-MM-DD").format("YYYY-MM-DD")
+              : moment(today, "MM-DD-YYYY").format("YYYY-MM-DD")
+          }}
+        </span>
         <span>
           {{ "星期" + "日一二三四五六".charAt(new Date().getDay()) }}</span
         >
@@ -77,17 +88,26 @@
         rowKey="id"
       >
         <div slot="代码名称" slot-scope="代码名称">
-          <div class="bigtxt">{{ 代码名称.名称 }}</div>
+          <div class="bigtxt black">{{ 代码名称.名称 }}</div>
           <div>{{ 代码名称.代码 }}</div>
         </div>
         <div slot="涨幅" slot-scope="涨幅">
-          <div class="bignum red">{{ 涨幅 }}%</div>
+          <div
+            :class="{
+              red: Number(涨幅) > 0,
+              green: Number(涨幅) < 0,
+              gray: Number(涨幅) === 0,
+              bignum: true,
+            }"
+          >
+            {{ 涨幅 }}%
+          </div>
         </div>
         <div slot="详情" slot-scope="详情">
           <a class="bigtxt red" @click="$router.push(`/longhu_detail`)">详情</a>
         </div>
         <div slot="连板天" slot-scope="连板天">
-          <div class="bigtxt blue">行情</div>
+          <a class="bigtxt blue">行情</a>
         </div>
       </a-table>
     </div>
@@ -148,6 +168,7 @@ export default {
       align-self: center;
       font-size: 1.4rem;
       font-weight: 800;
+      border-bottom: 0.5px solid #80808014;
     }
   }
   .row2 {
