@@ -117,6 +117,7 @@ export default {
 .ant-tabs-nav-scroll {
   text-align: center;
 }
+
 </style>
 <style lang="scss" scoped>
 #app {

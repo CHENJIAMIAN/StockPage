@@ -25,12 +25,14 @@
       :data-source="table_data"
       rowKey="id"
     >
-      <div slot="序号" slot-scope="序号">
-        <div class="bigtxt">{{ 序号 }}</div>
-        <div>{{ 序号 }}</div>
+      <div slot="排名" slot-scope="排名">
+        <div class="bigtxt">{{ 排名 }}</div>
+        <div>{{ 排名 }}</div>
       </div>
       <div slot="较昨日" slot-scope="较昨日">
-        <div class="bigtxt">{{ 较昨日 }}</div>
+        <img v-if="较昨日.isUp" src="../assets/img/up.png" width="16px" />
+        <img v-else src="../assets/img/down.png" width="16px" />
+        <span class="bigtxt">{{ 较昨日.value }}</span>
       </div>
       <div slot="代码名称" slot-scope="代码名称">
         <div class="bigtxt">{{ 代码名称.名称 }}</div>
@@ -40,7 +42,16 @@
         <div class="bignum red">{{ 现价 }}</div>
       </div>
       <div slot="涨跌幅" slot-scope="涨跌幅">
-        <div class="bignum red">{{ 涨跌幅 }}%</div>
+        <div
+          :class="{
+            red: Number(涨跌幅) > 0,
+            green: Number(涨跌幅) < 0,
+            gray: Number(涨跌幅) === 0,
+            bignum: true,
+          }"
+        >
+          {{ 涨跌幅 }}%
+        </div>
       </div>
     </a-table>
   </div>
