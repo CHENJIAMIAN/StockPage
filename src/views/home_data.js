@@ -91,7 +91,7 @@ export const zhangtingfenxi_data = [
 ];
 
 
-export const celuechi_columns = [
+export const solution_columns = [
     {
         title: "",
         dataIndex: "status",
@@ -157,7 +157,7 @@ export const celuechi_columns = [
     }
 ];
 
-export const celuechi_data = [
+export const solution_data = [
     {
         id: 0,
         status: "当日选出",

@@ -4,7 +4,9 @@
     <div class="row2">
       <div>
         <span class="bluetxt">两市涨停数：</span>
-        <span class="redtxt">{{ data.count }}只</span>
+        <span class="redtxt" @click="$router.push(`/daily_limit_analysis_detail`)"
+          >{{ data.count }}只</span
+        >
       </div>
       <div>
         <span class="bluetxt">其中，涨幅{{ " " }}</span>

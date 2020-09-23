@@ -84,7 +84,7 @@
           <div class="bignum red">{{ 涨幅 }}%</div>
         </div>
         <div slot="详情" slot-scope="详情">
-          <div class="bigtxt red">详情</div>
+          <a class="bigtxt red" @click="$router.push(`/longhu_detail`)">详情</a>
         </div>
         <div slot="连板天" slot-scope="连板天">
           <div class="bigtxt blue">行情</div>

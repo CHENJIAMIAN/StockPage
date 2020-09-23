@@ -38,9 +38,9 @@ const routes = [
     component: () => import('@/views/well-known-hot-money.vue')
   },
   {
-    path: '/bbgs_celuechi',
-    name: 'bbgs_celuechi',
-    component: () => import('@/views/bbgs-celuechi.vue')
+    path: '/bbgs_solution',
+    name: 'bbgs_solution',
+    component: () => import('@/views/bbgs-solution.vue')
   },
   {
     path: '/market_popularity',

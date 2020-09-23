@@ -11,7 +11,7 @@
           {{ item.代码名称.名称 }}({{ item.代码名称.代码 }})
         </div>
         <div class="row2-quote">{{ item.涨跌幅 }}</div>
-        <div class="row2-more">查看更多</div>
+        <div class="row2-more" @click="$router.push(`/bbgs_solution`)">查看更多</div>
       </div>
     </div>
   </div>

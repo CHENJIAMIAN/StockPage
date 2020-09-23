@@ -26,7 +26,7 @@
   </a-table>
 </template>
 <script>
-import { table_columns, table_data } from "@/views/bbgs_celuechi_data.js";
+import { table_columns, table_data } from "@/views/bbgs_solution_data.js";
 export default {
   data() {
     return { table_columns, table_data };

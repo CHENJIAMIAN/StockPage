@@ -251,16 +251,17 @@
       </a-table>
     </div>
 
-    <div class="celuechi">
-      <div class="celuechi-row1 title-txt">策略池</div>
-      <div class="celuechi-row2">
+    <div class="solution">
+      <div class="solution-row1 title-txt">策略池</div>
+      <solution class="solution-row2"/>
+      <!-- <div class="solution-row2">
         <div class="graytxt">短线收割机</div>
         <div class="more-txt">更多></div>
       </div>
       <a-table
         :pagination="false"
-        :columns="celuechi_columns"
-        :data-source="celuechi_data"
+        :columns="solution_columns"
+        :data-source="solution_data"
         rowKey="id"
       >
         <div slot="代码名称" slot-scope="代码名称">
@@ -294,39 +295,42 @@
         <div slot="行业" slot-scope="行业">
           <div class="bigtxt">{{ 行业 }}</div>
         </div>
-      </a-table>
+      </a-table> -->
     </div>
   </div>
 </template>
 
 <script>
+import solution from "@/views/solution.vue";
 import {
   zhangtingfenxi_columns,
   zhangtingfenxi_data,
-  celuechi_columns,
-  celuechi_data,
+  solution_columns,
+  solution_data,
   zhishu,
   shichangwendu,
   bankuaihangye,
   gainianbankuai,
   zhangtingfenxi,
-  celuechi,
 } from "./home_data.js";
 
 export default {
   name: "Home",
+  components: {
+    solution,
+  },
   data() {
     return {
       zhangtingfenxi_columns,
       zhangtingfenxi_data,
-      celuechi_columns,
-      celuechi_data,
+      solution_columns,
+      solution_data,
       zhishu,
       shichangwendu,
       bankuaihangye,
       gainianbankuai,
       zhangtingfenxi,
-      celuechi,
+      solution,
       sum:
         Math.abs(shichangwendu.zhang) +
         Math.abs(shichangwendu.ping) +
@@ -523,14 +527,14 @@ export default {
     }
   }
 }
-.celuechi {
+.solution {
   display: grid;
-  grid-template-rows: 3rem 4rem auto 1fr;
+  grid-template-rows: auto auto;
   &-row2 {
-    padding-left: 0.8rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
+    // padding-left: 0.8rem;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    // align-items: center;
     border-bottom: 0.5px solid #80808014;
     border-top: 0.5px solid #80808014;
   }

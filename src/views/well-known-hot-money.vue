@@ -2,7 +2,7 @@
   <div class="wkhm">
     <div class="wkhm-row1">
       <div class="name">上龙虎榜的知名游资</div>
-      <img src="../assets/img/rili.png"/>
+      <img src="../assets/img/rili.png" />
     </div>
 
     <div class="wkhm-row2">
@@ -59,7 +59,11 @@
     <div class="wkhm-row3">
       <div class="name">知名游资列表</div>
       <div class="namelist">
-        <div v-for="item in data.personNamelist" :key="item.id">
+        <div
+          v-for="item in data.personNamelist"
+          :key="item.id"
+          @click="$router.push(`/wkhmd`)"
+        >
           {{ item.name }}
         </div>
       </div>
@@ -93,7 +97,8 @@ export default {
     grid-auto-flow: column;
     padding: 20px;
     align-items: center;
-    img,.anticon {
+    img,
+    .anticon {
       justify-self: end;
       width: 25px;
     }
