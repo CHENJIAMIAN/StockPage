@@ -4,18 +4,66 @@
       <router-view />
     </div>
     <div class="bottom-nav">
-      <a-icon @click="handleRoute('home')" class="home" type="home" />
-      <a-icon
+      <img
+        v-if="currRouteName !== 'home'"
+        src="./assets/img/shouye1.png"
+        width="30px"
+        @click="handleRoute('home')"
+      />
+      <img
+        v-else
+        src="./assets/img/shouye2.png"
+        width="30px"
+        @click="handleRoute('home')"
+      />
+      <!-- <a-icon @click="handleRoute('home')" class="home" type="home" /> -->
+      <img
+        v-if="currRouteName !== 'solution'"
+        src="./assets/img/celue1.png"
+        width="30px"
+        @click="handleRoute('solution')"
+      />
+      <img
+        v-else
+        src="./assets/img/celue2.png"
+        width="30px"
+        @click="handleRoute('solution')"
+      />
+      <!-- <a-icon
         @click="handleRoute('solution')"
         class="solution"
         type="solution"
+      /> -->
+      <img
+        v-if="currRouteName !== 'my_watchlist'"
+        src="./assets/img/zx1.png"
+        width="30px"
+        @click="handleRoute('my_watchlist')"
       />
-      <a-icon
+      <img
+        v-else
+        src="./assets/img/zx2.png"
+        width="30px"
+        @click="handleRoute('my_watchlist')"
+      />
+      <!-- <a-icon
         @click="handleRoute('my_watchlist')"
         class="check"
         type="check-square"
+      /> -->
+      <img
+        v-if="currRouteName !== 'user'"
+        src="./assets/img/user1.png"
+        width="30px"
+        @click="handleRoute('user')"
       />
-      <a-icon class="user" type="user" />
+      <img
+        v-else
+        src="./assets/img/user2.png"
+        width="30px"
+        @click="handleRoute('user')"
+      />
+      <!-- <a-icon class="user" type="user" /> -->
       <div class="txt home">首页</div>
       <div class="txt solution">策略</div>
       <div class="txt check">自选</div>
@@ -26,7 +74,20 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      currRouteName: "",
+    };
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(v) {
+        this.currRouteName = v.name;
+      },
+    },
+  },
+  mounted() {
+    console.log();
   },
   methods: {
     handleRoute(routeName) {
