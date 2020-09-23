@@ -1,6 +1,9 @@
 // 龙虎榜详情
 <template>
   <div class="longhu-detail">
+    <div class="row0">
+      {{ data.name + " " + data.market + ":" + data.code }}
+    </div>
     <!-- 头 -->
     <div class="row1">
       <div class="red">
@@ -124,6 +127,14 @@ export default {
 <style lang="scss" scoped>
 .longhu-detail {
   display: grid;
+  .row0 {
+    padding: 1rem;
+    background: #3984f7;
+    font-size: 2rem;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #ffffff;
+  }
   .row1 {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -185,6 +196,7 @@ export default {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 1rem;
+        justify-items: center;
         align-items: center;
         font-size: 1.1rem;
         font-family: DIN Medium;

@@ -1,4 +1,7 @@
 export const data = {
+    name: "特力A",
+    market: "SZ",
+    code: "000025",
     price: 22.08,
     quoteChangePercent: +10.01,
     quoteChangeAmount: 2.01,

@@ -97,6 +97,8 @@ export default {
     grid-auto-flow: column;
     padding: 20px;
     align-items: center;
+    border-bottom: 1px solid #f4f8fb;
+
     img,
     .anticon {
       justify-self: end;
@@ -174,7 +176,7 @@ export default {
     .namelist {
       margin-top: 20px;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr auto;
       font-size: 1.3rem;
       font-family: PingFang SC;
       font-weight: 500;

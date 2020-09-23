@@ -4,7 +4,9 @@
     <div class="row2">
       <div>
         <span class="bluetxt">两市涨停数：</span>
-        <span class="redtxt" @click="$router.push(`/daily_limit_analysis_detail`)"
+        <span
+          class="redtxt"
+          @click="$router.push(`/daily_limit_analysis_detail`)"
           >{{ data.count }}只</span
         >
       </div>
@@ -62,7 +64,6 @@ export default {
   display: grid;
   grid-template-rows: 3rem auto auto;
   align-items: center;
-  padding: 1rem;
 
   font-size: 1.2rem;
   font-family: PingFang SC;
@@ -88,11 +89,13 @@ export default {
     font-weight: 500;
     color: #333333;
     border-bottom: 1px solid #f4f8fb;
+    padding: 1rem;
   }
   .row2 {
     display: grid;
     grid-template-rows: 3rem 1fr 2fr 2fr 3rem;
     align-items: center;
+    padding: 1rem;
     div {
       border-bottom: 1px solid #f4f8fb;
     }
@@ -110,6 +113,7 @@ export default {
     display: grid;
     grid-template-rows: 5rem 1fr;
     align-items: center;
+    padding: 1rem;
     .name {
       font-size: 1.5rem;
       font-family: PingFang SC;
@@ -118,14 +122,17 @@ export default {
     }
     .date {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr auto;
       grid-gap: 1rem;
       align-items: center;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-family: DIN Medium;
-      font-weight: 400;
+      font-weight: 500;
       color: #333333;
       line-height: 34px;
+      div {
+        border-bottom: 1px solid #f4f8fb;
+      }
     }
   }
 }
