@@ -24,32 +24,32 @@
         :data-source="listedHistory_data"
         rowKey="id"
       >
-        <div slot="代码名称" slot-scope="代码名称">
-          <div class="bigtxt">{{ 代码名称.名称 }}</div>
-          <div>{{ 代码名称.代码 }}</div>
+        <div slot="上榜股票" slot-scope="上榜股票">
+          <div class="bigtxt">{{ 上榜股票.名称 }}</div>
+          <div>{{ 上榜股票.代码 }}</div>
         </div>
-        <div slot="涨跌幅" slot-scope="涨跌幅">
+        <div slot="买入" slot-scope="买入">
           <div
             :class="{
-              red: Number(涨跌幅) > 0,
-              green: Number(涨跌幅) < 0,
-              gray: Number(涨跌幅) === 0,
+              red: Number(买入.value) > 0,
+              green: Number(买入.value) < 0,
+              gray: Number(买入.value) === 0,
               bignum: true,
             }"
           >
-            {{ 涨跌幅 }}%
+            {{ 买入.value + 买入.unit }}
           </div>
         </div>
-        <div slot="现价" slot-scope="现价, record">
+        <div slot="卖出" slot-scope="卖出, record">
           <div
             :class="{
-              red: Number(record.涨跌幅) > 0,
-              green: Number(record.涨跌幅) < 0,
-              gray: Number(record.涨跌幅) === 0,
+              red: Number(record.买入.value) > 0,
+              green: Number(record.买入.value) < 0,
+              gray: Number(record.买入.value) === 0,
               bignum: true,
             }"
           >
-            {{ 现价 }}
+            {{ 卖出.value + 卖出.unit }}
           </div>
         </div>
       </a-table>

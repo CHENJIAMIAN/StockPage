@@ -17,8 +17,8 @@ export const data = {
 export const listedHistory_columns = [
     {
         title: "时间",
-        dataIndex: "status",
-        key: "status",
+        dataIndex: "时间",
+        key: "时间",
         customRender: (value, row, index, column) => {
             // text, record, index, column
             column.class = 'bigtxt'
@@ -49,93 +49,131 @@ export const listedHistory_columns = [
             return obj;
         },
         // 在有customRender时失效
-        // scopedSlots: { customRender: 'status' },
+        // scopedSlots: { customRender: '时间' },
     },
     {
         title: "上榜股票",
-        dataIndex: "代码名称",
-        key: "代码名称",
-        scopedSlots: { customRender: '代码名称' },
+        dataIndex: "上榜股票",
+        key: "上榜股票",
+        scopedSlots: { customRender: '上榜股票' },
+        align: 'right'
     },
     {
         title: "买入",
-        dataIndex: "涨跌幅",
-        key: "涨跌幅",
-        scopedSlots: { customRender: '涨跌幅' },
+        dataIndex: "买入",
+        key: "买入",
+        scopedSlots: { customRender: '买入' },
+        align: 'right'
     },
     {
         title: "卖出",
-        dataIndex: "现价",
-        key: "现价",
-        scopedSlots: { customRender: '现价' },
+        dataIndex: "卖出",
+        key: "卖出",
+        scopedSlots: { customRender: '卖出' },
+        align: 'right'
     },
 ];
 
 export const listedHistory_data = [
     {
         id: 0,
-        status: "2020-9-21",
-        代码名称: {
+        时间: "2020-9-21",
+        上榜股票: {
             名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "-8.80",
-        现价: 6,
-        行业: "食品饮料"
+        买入: {
+            value: "+1000",
+            unit: '万'
+        },
+        卖出: {
+            value: "+1000",
+            unit: '万'
+        },
     },
     {
         id: 1,
-        status: "2020-9-21",
-        代码名称: {
+        时间: "2020-9-21",
+        上榜股票: {
             名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.80",
-        现价: 6,
-        行业: "食品饮料"
+        买入: {
+            value: "-1000",
+            unit: '万'
+        },
+        卖出: {
+            value: "+1000",
+            unit: '万'
+        },
+
     },
     {
         id: 2,
-        status: "2020-9-20",
-        代码名称: {
+        时间: "2020-9-20",
+        上榜股票: {
             名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.80",
-        现价: 6,
-        行业: "食品饮料"
+        买入: {
+            value: "-1000",
+            unit: '万'
+        },
+        卖出: {
+            value: "+1000",
+            unit: '万'
+        },
+
     },
     {
         id: 3,
-        status: "2020-9-20",
-        代码名称: {
+        时间: "2020-9-20",
+        上榜股票: {
             名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "-8.80",
-        现价: 6,
-        行业: "食品饮料"
+        买入: {
+            value: "-1000",
+            unit: '万'
+        },
+        卖出: {
+            value: "+1000",
+            unit: '万'
+        },
+
     },
     {
         id: 4,
-        status: "2020-9-18",
-        代码名称: {
+        时间: "2020-9-18",
+        上榜股票: {
             名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.80",
-        现价: 6,
-        行业: "食品饮料"
+        买入: {
+            value: "-1000",
+            unit: '万'
+        },
+        卖出: {
+            value: "+1000",
+            unit: '万'
+        },
+
     },
     {
         id: 5,
-        status: "2020-9-18",
-        代码名称: {
+        时间: "2020-9-18",
+        上榜股票: {
             名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨跌幅: "+8.80",
-        现价: 6,
-        行业: "食品饮料"
+        买入: {
+            value: "-1000",
+            unit: '万'
+        },
+        卖出: {
+            value: "+1000",
+            unit: '万'
+        },
+
     }
 ];

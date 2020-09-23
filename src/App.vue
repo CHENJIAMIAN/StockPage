@@ -75,11 +75,11 @@ export default {
 }
 .bigtxt {
   font-size: 1.2rem;
-  /* color: black; */
+  color: #343434;
 }
 .bignum {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 500;
 }
 .midnum {
   font-size: 1rem;
@@ -93,7 +93,7 @@ export default {
 .ant-table-thead > tr > th {
   background: white !important;
   border-bottom: 0.5px solid #80808014;
-  color: #ababab;
+  color: #ababab !important;
   font-size: 1.1rem;
 }
 .ant-table-tbody > tr > td {
