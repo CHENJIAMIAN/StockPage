@@ -40,20 +40,25 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+::v-deep {
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 16px 0;
+  }
+}
 .daily-limit-analysis-detail {
   display: grid;
-  grid-template-rows: 2rem auto;
+  grid-template-rows: auto auto;
   align-items: center;
   padding: 1rem;
-  grid-gap: 1rem;
 
   .row1 {
-    padding-left: 1rem;
+    border-bottom: 1px solid #f4f8fb;
     font-size: 1.5rem;
     font-family: DIN Medium;
     font-weight: 400;
     color: #333333;
-    line-height: 34px;
+    line-height: 4rem;
   }
 }
 </style>

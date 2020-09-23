@@ -4,25 +4,27 @@ export const table_columns = [
         dataIndex: "代码名称",
         key: "代码名称",
         scopedSlots: { customRender: '代码名称' },
-        width: 110
     },
     {
         title: "涨幅",
         dataIndex: "涨幅",
         key: "涨幅",
         scopedSlots: { customRender: '涨幅' },
+        align: 'right'
     },
     {
         title: "几天几板",
         dataIndex: "几天几板",
         key: "几天几板",
         scopedSlots: { customRender: '几天几板' },
+        align: 'right'
     },
     {
         title: "连板天",
         dataIndex: "连板天",
         key: "连板天",
         scopedSlots: { customRender: '连板天' },
+        align: 'right'
     },
     {
         title: "短线主题",
@@ -58,7 +60,7 @@ export const table_columns = [
             return obj;
         },
         // scopedSlots: { customRender: '短线主题' },
-
+        align: 'right'
     },
 ];
 

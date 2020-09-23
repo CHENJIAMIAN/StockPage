@@ -10,20 +10,20 @@
           >{{ data.count }}只</span
         >
       </div>
-      <div>
+      <div class="border-bottom">
         <span class="bluetxt">其中，涨幅{{ " " }}</span>
         <span class="redtxt">20%（{{ data.increase20Percent }}）</span>
         <span class="bluetxt">涨幅：</span>
         <span class="redtxt">10%（{{ data.increase10Percent }}）</span>
       </div>
-      <div>
+      <div class="border-bottom">
         <span class="bluetxt">热点题材：</span>
         <template v-for="item in data.hotTopics">
           <span :key="item.id">{{ item.name }}</span>
           <span class="redtxt" :key="item.id">（{{ item.count }}）</span>
         </template>
       </div>
-      <div>
+      <div class="border-bottom">
         <span class="bluetxt">今日最高：</span>
         <span>{{ data.highest.name }}</span>
         <span class="redtxt">{{
@@ -34,7 +34,7 @@
       <div class="more">查看更多涨停分析 ></div>
     </div>
     <div class="row3">
-      <div class="name">历史涨停版分析</div>
+      <div class="name border-bottom">历史涨停版分析</div>
       <div class="date">
         <div v-for="(item, index) in historyDates" :key="index">
           {{ item }}
@@ -96,9 +96,7 @@ export default {
     grid-template-rows: 3rem 1fr 2fr 2fr 3rem;
     align-items: center;
     padding: 1rem;
-    div {
-      border-bottom: 1px solid #f4f8fb;
-    }
+
     .more {
       text-align: center;
       font-size: 1.1rem;
