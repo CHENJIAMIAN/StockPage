@@ -12,16 +12,43 @@
         <div>{{ 代码名称.代码 }}</div>
       </div>
       <div slot="涨幅" slot-scope="涨幅">
-        <div class="bignum red">{{ 涨幅 }}%</div>
+        <div
+          :class="{
+            red: Number(涨幅) > 0,
+            green: Number(涨幅) < 0,
+            gray: Number(涨幅) === 0,
+            bignum: true,
+          }"
+        >
+          {{ 涨幅 }}%
+        </div>
       </div>
       <div slot="选入时间" slot-scope="选入时间">
-        <div class="bigtxt">{{ 选入时间 }}</div>
+        <div class="bigtxt gray">{{ 选入时间 }}</div>
       </div>
-      <div slot="进入价格" slot-scope="进入价格">
-        <div class="bignum red">{{ 进入价格 }}</div>
+      <div slot="进入价格" slot-scope="进入价格, record">
+        <div
+          :class="{
+            red: Number(record.涨幅) > 0,
+            green: Number(record.涨幅) < 0,
+            gray: Number(record.涨幅) === 0,
+            bignum: true,
+          }"
+        >
+          {{ 进入价格 }}
+        </div>
       </div>
-      <div slot="现价" slot-scope="现价">
-        <div class="bignum red">{{ 现价 }}</div>
+      <div slot="现价" slot-scope="现价, record">
+        <div
+          :class="{
+            red: Number(record.涨幅) > 0,
+            green: Number(record.涨幅) < 0,
+            gray: Number(record.涨幅) === 0,
+            bignum: true,
+          }"
+        >
+          {{ 现价 }}
+        </div>
       </div>
       <div slot="操作" slot-scope="操作">
         <a-switch
@@ -42,36 +69,38 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+::v-deep {
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 16px 5px;
+  }
+  // ant switch样式修改
+  .ant-switch {
+    height: 40px;
+    width: 44px;
+    border: 1px solid #3984f7;
+    border-radius: 4px;
+    background: transparent;
+  }
+  .ant-switch-checked .ant-switch-inner {
+    color: white;
+  }
+  .ant-switch-checked {
+    background-color: #1890ff;
+  }
+  .ant-switch:after,
+  .ant-switch-checked:after {
+    display: none;
+  }
+  .ant-switch-inner {
+    margin-right: 5px;
+    margin-left: 5px;
+    color: #3984f7;
+    font-size: 0.8rem;
+  }
+}
 .daily-limit-analysis-detail {
   display: grid;
   align-items: center;
-
-  ::v-deep {
-    // ant switch样式修改
-    .ant-switch {
-      height: 50px;
-      width: 50px;
-      width: 56px;
-      border: 2px solid #3984f7;
-      border-radius: 4px;
-      background: transparent;
-    }
-    .ant-switch-checked .ant-switch-inner {
-      color: white;
-    }
-    .ant-switch-checked {
-      background-color: #1890ff;
-    }
-    .ant-switch:after,
-    .ant-switch-checked:after {
-      display: none;
-    }
-    .ant-switch-inner {
-      margin-right: 9px;
-      margin-left: 9px;
-      color: #3984f7;
-      font-size: 1rem;
-    }
-  }
 }
 </style>

@@ -4,25 +4,27 @@ export const table_columns = [
         dataIndex: "代码名称",
         key: "代码名称",
         scopedSlots: { customRender: '代码名称' },
-        width: 110
     },
     {
         title: "选入时间",
         dataIndex: "选入时间",
         key: "选入时间",
         scopedSlots: { customRender: '选入时间' },
+        align: 'right'
     },
     {
         title: "进入价格",
         dataIndex: "进入价格",
         key: "进入价格",
         scopedSlots: { customRender: '进入价格' },
+        align: 'right'
     },
     {
         title: "涨幅",
         dataIndex: "涨幅",
         key: "涨幅",
         scopedSlots: { customRender: '涨幅' },
+        align: 'right'
     },
     {
         title: "现价",
@@ -30,12 +32,14 @@ export const table_columns = [
         key: "现价",
         scopedSlots: { customRender: '现价' },
 
+        align: 'right'
     },
     {
         title: "操作",
         dataIndex: "操作",
         key: "操作",
         scopedSlots: { customRender: '操作' },
+        align: 'center'
     },
 ];
 
@@ -46,7 +50,7 @@ export const table_data = [
             名称: "阿里巴巴",
             代码: '6003001'
         },
-        涨幅: "+8.80",
+        涨幅: "-8.80",
         选入时间: "2020-09-20",
         进入价格: "4.32",
         现价: "4.32",
