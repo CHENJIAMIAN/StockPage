@@ -15,12 +15,12 @@
           :show-arrow="!false"
           :filter-option="false"
           :not-found-content="null"
-          @search="handleSearch"
-          @change="handleChange"
+          @search="handleSearch1"
+          @change="handleChange1"
         >
           <a-icon slot="suffixIcon" type="search" />
-          <a-select-option v-for="d in searchOptions1" :key="d.value">
-            {{ d.text }}
+          <a-select-option v-for="d in searchOptions1" :key="d.key">
+            {{ d.value }}
           </a-select-option>
         </a-select>
       </div>
@@ -36,12 +36,12 @@
           :show-arrow="!false"
           :filter-option="false"
           :not-found-content="null"
-          @search="handleSearch"
-          @change="handleChange"
+          @search="handleSearch2"
+          @change="handleChange2"
         >
           <a-icon slot="suffixIcon" type="search" />
-          <a-select-option v-for="d in searchOptions2" :key="d.value">
-            {{ d.text }}
+          <a-select-option v-for="d in searchOptions2" :key="d.key">
+            {{ d.value }}
           </a-select-option>
         </a-select>
       </div>
@@ -103,8 +103,12 @@
             {{ 涨幅 }}%
           </div>
         </div>
-        <div slot="详情" slot-scope="详情">
-          <a class="bigtxt red" @click="$router.push(`/longhu_detail`)">详情</a>
+        <div slot="详情" slot-scope="详情, record">
+          <a
+            class="bigtxt red"
+            @click="$router.push(`/longhu_detail/` + record.id)"
+            >详情</a
+          >
         </div>
         <div slot="连板天" slot-scope="连板天">
           <a class="bigtxt blue">行情</a>
@@ -131,14 +135,41 @@ export default {
       searchValue2: undefined, //undefined才会显示placeholder
     };
   },
+  created() {},
   methods: {
     moment,
     onDateChange(date, dateString) {
       console.log(date, dateString);
+      // 根据选择date的值去获取 table_data 表数据
+      this.table_data = [];
     },
-    handleSearch(value) {},
-    handleChange(value) {
-      this.searchValue = value;
+    // 获取数据
+    fetchSearchOptions1() {
+      this.searchOptions1 = new Array(10).fill().map((i) => {
+        return { key: Math.random(), value: Math.random() };
+      });
+    },
+    handleSearch1(value) {
+      this.fetchSearchOptions1();
+    },
+    handleChange1(value) {
+      this.searchValue1 = value;
+      // 根据选择的值去获取 table_data 表数据
+      this.table_data = [];
+    },
+    // 获取数据
+    fetchSearchOptions2() {
+      this.searchOptions2 = new Array(10).fill().map((i) => {
+        return { key: Math.random(), value: Math.random() };
+      });
+    },
+    handleSearch2(value) {
+      this.fetchSearchOptions2();
+    },
+    handleChange2(value) {
+      this.searchValue2 = value;
+      // 根据选择的值去获取 table_data 表数据
+      this.table_data = [];
     },
   },
 };

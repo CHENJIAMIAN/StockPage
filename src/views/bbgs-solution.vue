@@ -31,6 +31,10 @@ export default {
   data() {
     return { table_columns, table_data };
   },
+  created() {
+    // 根据id去获取数据
+    this.$route.params.id;
+  },
 };
 </script>
 <style lang="scss" scoped></style>

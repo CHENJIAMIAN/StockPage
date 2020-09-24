@@ -1,9 +1,20 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    :style="{
+      'grid-template-rows': isNavRoute ? '1fr' : '66px 1fr',
+    }"
+  >
+    <a-page-header
+      v-if="!isNavRoute"
+      style="background: #3A84F7;color: #FFFFFF;"
+      :title="$router.currentRoute.meta.title || navTitle || '无'"
+      @back="back"
+    />
     <div class="body">
-      <router-view />
+      <router-view @title="gotTitle" />
     </div>
-    <div class="bottom-nav">
+    <div class="bottom-nav" v-if="isNavRoute">
       <img
         v-if="currRouteName !== 'home'"
         src="./assets/img/shouye1.png"
@@ -48,7 +59,7 @@
       />
       <!-- <a-icon
         @click="handleRoute('my_watchlist')"
-        class="check"
+        class="my_watchlist"
         type="check-square"
       /> -->
       <img
@@ -64,10 +75,24 @@
         @click="handleRoute('user')"
       />
       <!-- <a-icon class="user" type="user" /> -->
-      <div class="txt home">首页</div>
-      <div class="txt solution">策略</div>
-      <div class="txt check">自选</div>
-      <div class="txt user">我的</div>
+      <div :class="['txt', 'home', currRouteName == 'home' && 'blue']">
+        首页
+      </div>
+      <div :class="['txt', 'solution', currRouteName == 'solution' && 'blue']">
+        策略
+      </div>
+      <div
+        :class="[
+          'txt',
+          'my_watchlist',
+          currRouteName == 'my_watchlist' && 'blue',
+        ]"
+      >
+        自选
+      </div>
+      <div :class="['txt', 'user', currRouteName == 'user' && 'blue']">
+        我的
+      </div>
     </div>
   </div>
 </template>
@@ -75,7 +100,9 @@
 export default {
   data() {
     return {
+      navTitle: "",
       currRouteName: "",
+      navRoutes: ["home", "solution", "my_watchlist", "user"],
     };
   },
   watch: {
@@ -86,10 +113,19 @@ export default {
       },
     },
   },
-  mounted() {
-    console.log();
+  computed: {
+    isNavRoute() {
+      return this.navRoutes.includes(this.currRouteName);
+    },
   },
+  mounted() {},
   methods: {
+    gotTitle(title) {
+      this.navTitle = title;
+    },
+    back() {
+      window.history.back();
+    },
     handleRoute(routeName) {
       this.$router.push(`/${routeName}`);
     },
@@ -97,8 +133,11 @@ export default {
 };
 </script>
 <style>
+body {
+  font-family: DIN Medium;
+}
 @font-face {
-  font-family: mFont;
+  font-family: DIN Medium;
   src: url("./assets/DIN Medium.ttf");
 }
 :root {
@@ -107,7 +146,7 @@ export default {
   --green-color: #38a251;
 }
 #home {
-  font-family: FX-LED;
+  font-family: DIN Medium;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: grid;
@@ -143,10 +182,12 @@ export default {
 .bignum {
   font-size: 1.5rem;
   font-weight: 500;
+  font-family: DIN Medium;
 }
 .midnum {
   font-size: 1rem;
   font-weight: 600;
+  font-family: DIN Medium;
 }
 .graytxt {
   color: #ababab;
@@ -181,13 +222,19 @@ export default {
 .ant-tabs-nav-scroll {
   text-align: center;
 }
+.ant-page-header-back-button,
+.ant-page-header-heading-title,
+.ant-page-header-heading-sub-title {
+  color: white !important;
+}
 </style>
 <style lang="scss" scoped>
 #app {
+  display: grid;
+  grid-template-rows: 1fr;
   height: 100%;
   $navHei: 65px;
   .body {
-    height: calc(100% - #{$navHei});
     overflow: auto;
   }
   .bottom-nav {

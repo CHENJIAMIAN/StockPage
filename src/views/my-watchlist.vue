@@ -50,11 +50,12 @@
           {{ 现价 }}
         </div>
       </div>
-      <div slot="操作" slot-scope="操作">
+      <div slot="操作" slot-scope="操作, record">
         <a-switch
           checked-children="取消自选"
           un-checked-children="添加自选"
-          default-checked
+          :default-checked="操作"
+          @change="onChange(record.id, $event)"
         />
       </div>
     </a-table>
@@ -65,6 +66,12 @@ import { table_columns, table_data, date } from "@/views/mywatchlist_data.js";
 export default {
   data() {
     return { table_columns, table_data, date };
+  },
+  methods: {
+    onChange(id, checked) {
+      console.log(`a-switch to ${checked}`, id);
+      // 此处请求自选或取消自选的接口
+    },
   },
 };
 </script>

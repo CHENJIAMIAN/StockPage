@@ -31,11 +31,14 @@
 import {
   table_columns,
   table_data,
-  date,
 } from "@/views/dailylimitanalysisdetail_data.js";
 export default {
   data() {
-    return { table_columns, table_data, date };
+    return { table_columns, table_data, date: "" };
+  },
+  created() {
+    // 根据 date 去获取数据
+    this.date = this.$route.params.date;
   },
 };
 </script>

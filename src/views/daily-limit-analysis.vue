@@ -4,11 +4,7 @@
     <div class="row2">
       <div>
         <span class="bluetxt">两市涨停数：</span>
-        <span
-          class="redtxt"
-          @click="$router.push(`/daily_limit_analysis_detail`)"
-          >{{ data.count }}只</span
-        >
+        <span class="redtxt">{{ data.count }}只</span>
       </div>
       <div class="border-bottom">
         <span class="bluetxt">其中，涨幅{{ " " }}</span>
@@ -20,7 +16,7 @@
         <span class="bluetxt">热点题材：</span>
         <template v-for="item in data.hotTopics">
           <span :key="item.id">{{ item.name }}</span>
-          <span class="redtxt" :key="item.id">（{{ item.count }}）</span>
+          <span class="redtxt">（{{ item.count }}）</span>
         </template>
       </div>
       <div class="border-bottom">
@@ -31,12 +27,21 @@
         }}</span>
         <span>连板</span>
       </div>
-      <div class="more">查看更多涨停分析 ></div>
+      <div
+        class="more"
+        @click="$router.push(`/daily_limit_analysis_detail/` + data.date)"
+      >
+        查看更多涨停分析 >
+      </div>
     </div>
     <div class="row3">
       <div class="name border-bottom">历史涨停版分析</div>
       <div class="date">
-        <div v-for="(item, index) in historyDates" :key="index">
+        <div
+          v-for="(item, index) in historyDates"
+          :key="index"
+          @click="$router.push(`/daily_limit_analysis_detail/` + item)"
+        >
           {{ item }}
         </div>
       </div>

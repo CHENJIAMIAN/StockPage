@@ -62,7 +62,7 @@
         <div
           v-for="item in data.personNamelist"
           :key="item.id"
-          @click="$router.push(`/wkhmd`)"
+          @click="$router.push('/wkhmd/' + item.id)"
         >
           {{ item.name }}
         </div>

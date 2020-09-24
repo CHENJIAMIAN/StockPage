@@ -1,9 +1,9 @@
 // 龙虎榜详情
 <template>
   <div class="longhu-detail">
-    <div class="row0">
+    <!-- <div class="row0">
       {{ data.name + " " + data.market + ":" + data.code }}
-    </div>
+    </div> -->
     <!-- 头 -->
     <div class="row1">
       <div class="red">
@@ -113,6 +113,7 @@ export default {
     };
   },
   mounted() {
+    this.$emit("title", data.name + " " + data.market + ":" + data.code);
     // 基于准备好的dom，初始化echarts实例
     var myChart = this.$echarts.init(document.getElementById("main"));
     // 指定图表的配置项和数据

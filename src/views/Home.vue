@@ -53,7 +53,7 @@
         <img src="../assets/img/laba.png" />
         {{ new Date().toLocaleDateString() }}复盘总结
       </div>
-      <div class="notify-col2">更多 ></div>
+      <div class="notify-col2">更多➔</div>
     </div>
     <div class="zhishu">
       <div class="zhishu-cell" :key="obj.id" v-for="obj in zhishu">
@@ -167,7 +167,7 @@
     <div class="bankuaihangye">
       <div class="bankuaihangye-head">
         <div class="title-txt">板块行业</div>
-        <div class="more-txt">更多></div>
+        <div class="more-txt">更多➔</div>
       </div>
       <div class="bankuaihangye-content">
         <div
@@ -194,7 +194,7 @@
     <div class="gainianbankuai bankuaihangye">
       <div class="bankuaihangye-head">
         <div class="title-txt">概念板块</div>
-        <div class="more-txt">更多></div>
+        <div class="more-txt">更多➔</div>
       </div>
       <div class="bankuaihangye-content">
         <div
@@ -221,7 +221,7 @@
     <div class="zhangtingfenxi">
       <div class="zhangtingfenxi-head">
         <div class="title-txt">涨停分析</div>
-        <div class="more-txt">更多></div>
+        <div class="more-txt">更多➔</div>
       </div>
       <a-tabs default-active-key="1" size="large">
         <a-tab-pane key="1" tab="昨日涨停(100)">昨日涨停(100)</a-tab-pane>
@@ -253,10 +253,10 @@
 
     <div class="solution">
       <div class="solution-row1 title-txt">策略池</div>
-      <solution class="solution-row2"/>
+      <solution class="solution-row2" />
       <!-- <div class="solution-row2">
         <div class="graytxt">短线收割机</div>
-        <div class="more-txt">更多></div>
+        <div class="more-txt">更多➔</div>
       </div>
       <a-table
         :pagination="false"
@@ -406,7 +406,7 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 20px 10px;
-    grid-gap: 5px;
+    grid-gap: 20px 5px;
     &-cell {
       display: grid;
       grid-template-rows: 1fr 1fr 1fr;
@@ -436,6 +436,7 @@ export default {
 .menuicon {
   text-align: center;
   display: grid;
+  grid-gap: 20px 0px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   &-cell {
     display: grid;
