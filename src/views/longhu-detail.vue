@@ -1,9 +1,9 @@
 // 龙虎榜详情
 <template>
   <div class="longhu-detail">
-    <!-- <div class="row0">
+     <div class="row0">
       {{ data.name + " " + data.market + ":" + data.code }}
-    </div> -->
+    </div>
     <!-- 头 -->
     <div class="row1">
       <div class="red">
@@ -100,6 +100,7 @@
 <script>
 import { data } from "@/views/longhudetail_data.js";
 import theOption from "@/views/klinechart_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return {
@@ -112,6 +113,17 @@ export default {
       ),
     };
   },
+
+  created() {
+    var stockCode=this.$route.params.id
+    var baseUrl = global_url.baseUrl
+    fetch(baseUrl+"/api/rank/rankDetail.do?stockCode="+stockCode)
+        .then((r) => r.json())
+        .then((r) => {
+          this.data=r.obj
+        });
+  },
+
   mounted() {
     this.$emit("title", data.name + " " + data.market + ":" + data.code);
     // 基于准备好的dom，初始化echarts实例

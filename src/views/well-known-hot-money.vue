@@ -62,7 +62,7 @@
         <div
           v-for="item in data.personNamelist"
           :key="item.id"
-          @click="$router.push('/wkhmd/' + item.id)"
+          @click="$router.push('/wkhmd/' + item.idleFundId)"
         >
           {{ item.name }}
         </div>
@@ -72,12 +72,23 @@
 </template>
 <script>
 import { data } from "@/views/wellknownhotmoney_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return {
       data,
     };
   },
+  created() {
+    var baseUrl = global_url.baseUrl
+    fetch(baseUrl+"/api/idle/idleList.do")
+        .then((r) => r.json())
+        .then((r) => {
+          console.log(r.obj)
+          this.data = r.obj
+        });
+  },
+
 };
 </script>
 <style lang="scss" scoped>

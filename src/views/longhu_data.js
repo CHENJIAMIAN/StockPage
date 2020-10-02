@@ -6,16 +6,16 @@ export const data = {
 export const table_columns = [
     {
         title: "代码名称",
-        dataIndex: "代码名称",
-        key: "代码名称",
-        scopedSlots: { customRender: '代码名称' },
+        dataIndex: "codeName",
+        key: "codeName",
+        scopedSlots: { customRender: 'codeName' },
         width: 110
     },
     {
         title: "涨幅",
-        dataIndex: "涨幅",
-        key: "涨幅",
-        scopedSlots: { customRender: '涨幅' },
+        dataIndex: "zhangfu",
+        key: "zhangfu",
+        scopedSlots: { customRender: 'zhangfu' },
         align: 'right'
     },
     {
@@ -40,50 +40,50 @@ export const table_columns = [
 export const table_data = [
     {
         id: 0,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "-8.80",
+        zhangfu: "+8.80",
     },
     {
         id: 1,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
+        zhangfu: "+8.80",
     },
     {
         id: 2,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
+        zhangfu: "+8.80",
     },
     {
         id: 3,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
+        zhangfu: "+8.80",
     },
     {
         id: 4,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
+        zhangfu: "+8.80",
     },
     {
         id: 5,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
+        zhangfu: "+8.80",
     }
 ];

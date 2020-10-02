@@ -62,6 +62,7 @@ import {
   listedHistory_columns,
   listedHistory_data,
 } from "@/views/wellknownhotmoneydetail_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return {
@@ -72,7 +73,13 @@ export default {
   },
   created() {
     // 根据id去获取数据
-    this.$route.params.id;
+    var idleFundId = this.$route.params.id;
+    var baseUrl = global_url.baseUrl
+    fetch(baseUrl+"/api/idle/idleFundOrgList.do?idleFundId="+idleFundId)
+        .then((r) => r.json())
+        .then((r) => {
+          this.data = r.obj
+        });
   },
 };
 </script>

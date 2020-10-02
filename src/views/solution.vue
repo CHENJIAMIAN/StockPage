@@ -8,12 +8,12 @@
       </div>
       <div class="row2">
         <div class="row2-name">
-          {{ item.代码名称.名称 }}({{ item.代码名称.代码 }})
+          {{ item.codeName.name }}({{ item.codeName.code }})
         </div>
-        <div class="row2-quote">{{ item.涨跌幅 }}</div>
+        <div class="row2-quote">{{ item.zhangdiefu }}</div>
         <div
           class="row2-more"
-          @click="$router.push(`/bbgs_solution/` + item.id)"
+          @click="$router.push(`/bbgs_solution/` + item.strategyId)"
         >
           查看更多
         </div>
@@ -23,11 +23,22 @@
 </template>
 <script>
 import { data } from "@/views/solution_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return {
       data,
     };
+  },
+  created() {
+    var baseUrl = global_url.baseUrl
+    fetch(baseUrl+"/api/strategy/strategies.do")
+        .then((r) => r.json())
+        .then((r) => {
+          // console.log(r.rows)
+          this.data = r.rows
+          // this.table_data = r.rows
+        });
   },
 };
 </script>

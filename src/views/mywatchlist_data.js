@@ -1,44 +1,44 @@
 export const table_columns = [
     {
         title: "代码名称",
-        dataIndex: "代码名称",
-        key: "代码名称",
-        scopedSlots: { customRender: '代码名称' },
+        dataIndex: "codeName",
+        key: "codeName",
+        scopedSlots: { customRender: 'codeName' },
     },
     {
         title: "选入时间",
-        dataIndex: "选入时间",
-        key: "选入时间",
-        scopedSlots: { customRender: '选入时间' },
+        dataIndex: "selectDate",
+        key: "selectDate",
+        scopedSlots: { customRender: 'selectDate' },
         align: 'right'
     },
     {
         title: "进入价格",
-        dataIndex: "进入价格",
-        key: "进入价格",
-        scopedSlots: { customRender: '进入价格' },
+        dataIndex: "selectPrice",
+        key: "selectPrice",
+        scopedSlots: { customRender: 'selectPrice' },
         align: 'right'
     },
     {
         title: "涨幅",
-        dataIndex: "涨幅",
-        key: "涨幅",
-        scopedSlots: { customRender: '涨幅' },
+        dataIndex: "zhangfu",
+        key: "zhangfu",
+        scopedSlots: { customRender: 'zhangfu' },
         align: 'right'
     },
     {
         title: "现价",
-        dataIndex: "现价",
-        key: "现价",
-        scopedSlots: { customRender: '现价' },
+        dataIndex: "nowPrice",
+        key: "nowPrice",
+        scopedSlots: { customRender: 'nowPrice' },
 
         align: 'right'
     },
     {
         title: "操作",
-        dataIndex: "操作",
-        key: "操作",
-        scopedSlots: { customRender: '操作' },
+        dataIndex: "operation",
+        key: "operation",
+        scopedSlots: { customRender: 'operation' },
         align: 'center'
     },
 ];
@@ -46,75 +46,75 @@ export const table_columns = [
 export const table_data = [
     {
         id: 0,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "-8.80",
-        选入时间: "2020-09-20",
-        进入价格: "4.32",
-        现价: "4.32",
-        操作: false
+        zhangfu: "-8.80",
+        selectDate: "2020-09-20",
+        selectPrice: "4.32",
+        nowPrice: "4.32",
+        operation: false
     },
     {
         id: 1,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        选入时间: "2020-09-20",
-        进入价格: "4.32",
-        现价: "4.32",
-        操作: true
+        zhangfu: "-8.80",
+        selectDate: "2020-09-20",
+        selectPrice: "4.32",
+        nowPrice: "4.32",
+        operation: true
     },
     {
         id: 2,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        选入时间: "2020-09-20",
-        进入价格: "4.32",
-        现价: "4.32",
-        操作: true
+        zhangfu: "-8.80",
+        selectDate: "2020-09-20",
+        selectPrice: "4.32",
+        nowPrice: "4.32",
+        operation: false
     },
     {
         id: 3,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        选入时间: "2020-09-20",
-        进入价格: "4.32",
-        现价: "4.32",
-        操作: true
+        zhangfu: "-8.80",
+        selectDate: "2020-09-20",
+        selectPrice: "4.32",
+        nowPrice: "4.32",
+        operation: false
     },
     {
         id: 4,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        选入时间: "2020-09-20",
-        进入价格: "4.32",
-        现价: "4.32",
-        操作: true
+        zhangfu: "-8.80",
+        selectDate: "2020-09-20",
+        selectPrice: "4.32",
+        nowPrice: "4.32",
+        operation: false
     },
     {
         id: 5,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        codeName: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        选入时间: "2020-09-20",
-        进入价格: "4.32",
-        现价: "4.32",
-        操作: true
+        zhangfu: "-8.80",
+        selectDate: "2020-09-20",
+        selectPrice: "4.32",
+        nowPrice: "4.32",
+        operation: true
     }
 ];
 

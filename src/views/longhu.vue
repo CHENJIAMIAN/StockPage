@@ -87,26 +87,26 @@
         :data-source="table_data"
         rowKey="id"
       >
-        <div slot="代码名称" slot-scope="代码名称">
-          <div class="bigtxt black">{{ 代码名称.名称 }}</div>
-          <div>{{ 代码名称.代码 }}</div>
+        <div slot="codeName" slot-scope="codeName">
+          <div class="bigtxt black">{{ codeName.name }}</div>
+          <div>{{ codeName.code }}</div>
         </div>
-        <div slot="涨幅" slot-scope="涨幅">
+        <div slot="zhangfu" slot-scope="zhangfu">
           <div
             :class="{
-              red: Number(涨幅) > 0,
-              green: Number(涨幅) < 0,
-              gray: Number(涨幅) === 0,
+              red: Number(zhangfu) > 0,
+              green: Number(zhangfu) < 0,
+              gray: Number(zhangfu) === 0,
               bignum: true,
             }"
           >
-            {{ 涨幅 }}%
+            {{ zhangfu }}%
           </div>
         </div>
         <div slot="详情" slot-scope="详情, record">
           <a
             class="bigtxt red"
-            @click="$router.push(`/longhu_detail/` + record.id)"
+            @click="$router.push(`/longhu_detail/` + record.codeName.code)"
             >详情</a
           >
         </div>
@@ -121,7 +121,7 @@
 <script>
 import moment from "moment";
 import { data, table_columns, table_data } from "@/views/longhu_data.js";
-
+import global_url from "../App.vue"
 export default {
   data() {
     return {
@@ -135,7 +135,14 @@ export default {
       searchValue2: undefined, //undefined才会显示placeholder
     };
   },
-  created() {},
+  created() {
+    var baseUrl = global_url.baseUrl
+    fetch(baseUrl+"/api/rank/rankList.do")
+        .then((r) => r.json())
+        .then((r) => {
+          this.table_data = r.rows
+        });
+  },
   methods: {
     moment,
     onDateChange(date, dateString) {

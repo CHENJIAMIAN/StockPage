@@ -50,6 +50,7 @@
 </template>
 <script>
 import { data } from "@/views/dailylimitanalysis_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return {
@@ -61,6 +62,15 @@ export default {
           .replace(/(-)\d-/, (v1, v2, index) => v1.replace("-", "-0"))
       ),
     };
+  },
+  created() {
+    var baseUrl = global_url.baseUrl
+    fetch(baseUrl+"/api/replay/statistic.do")
+        .then((r) => r.json())
+        .then((r) => {
+          console.log(r.obj)
+          this.data = r.obj
+        });
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="diagnose-report">
+  <div class="zhenduanbaogao">
     <div class="head">
       <div class="name">{{ data.name }}</div>
       <div class="code">{{ "(" + data.code + ")" }}</div>
@@ -52,19 +52,20 @@
           <div class="zhengu-grid-content">{{ obj.content }}</div>
         </div>
       </div>
-
       <div class="iframe-class" >
         <iframe :src="html_src" ref="iframe" width="100%"></iframe>
       </div>
-
     </div>
-
     <div class="riskTip">{{ data.riskTip }}</div>
+
+
   </div>
+
 </template>
 <script>
-import { data } from "./diagnosereport_data.js";
-import global_baseUrl from "../App.vue"
+import { data,
+} from "./zhenduanbaogao_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return {
@@ -73,8 +74,9 @@ export default {
     };
   },
   created() {
+
     var code = this.$route.params.code;
-    var baseUrl = global_baseUrl.baseUrl;
+    var baseUrl = global_url.baseUrl;
     // var baseUrl = "http://client.lemengsc.com/admin";
     if (typeof code == 'undefined'){
       code="002277"
@@ -94,10 +96,6 @@ export default {
 
         });
 
-    // fetch("http://120.79.39.244:53689/gis/hengli/tileset.json")
-    //   .then((r) => r.json())
-    //   .then((r) => {
-    //   });
   },
   mounted() {
     // 基于准备好的dom，初始化echarts实例
@@ -180,7 +178,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.diagnose-report {
+.zhenduanbaogao {
+  font-family: mFont;
   background: #f2f7fb;
   display: grid;
   grid-template-rows: 22rem 50px 15fr auto auto;
@@ -227,10 +226,10 @@ export default {
       top: -80px;
     }
     .circle3 {
-      position: relative;
+      position: absolute;
       border: 88px solid #619df9;
-      top: -34vw;
-      right: -56vw;
+      top: 33px;
+      right: 9px;
     }
     .score-incircle {
       color: dodgerblue;
@@ -342,16 +341,13 @@ export default {
         }
       }
     }
-
     .iframe-class{
       padding: 1rem 0.1rem 0.5rem 0.1rem;
       display: grid;
       grid-gap: 20px;
       position: relative;
     }
-
   }
-
   .riskTip {
     font-size: 0.8rem;
     color: gray;

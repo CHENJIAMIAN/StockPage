@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // home不可按需引入,否则放在其中的全局样式会失效
-import home from '../views/home.vue'
+import home from '../views/Home.vue'
 
 
 Vue.use(VueRouter)

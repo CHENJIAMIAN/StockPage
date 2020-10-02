@@ -1,9 +1,15 @@
+export const zhangtingtongji = {
+    zuorizhangtingshu: "100",
+    jinrilianban: "25",
+    zuigaolianban: "6"
+};
+
 export const zhangtingfenxi_columns = [
     {
         title: "代码名称",
-        dataIndex: "nameCode",
-        key: "nameCode",
-        scopedSlots: { customRender: 'nameCode' },
+        dataIndex: "namecode",
+        key: "namecode",
+        scopedSlots: { customRender: 'namecode' },
         width: 110
     },
     {
@@ -20,78 +26,84 @@ export const zhangtingfenxi_columns = [
     },
     {
         title: "概念",
-        dataIndex: "subject",
-        key: "subject",
-        scopedSlots: { customRender: 'subject' },
-        width: 80
+        dataIndex: "gainian",
+        key: "gainian",
+        scopedSlots: { customRender: 'gainian' },
+        width: 110
     },
+
 ];
 
 export const zhangtingfenxi_data = [
     {
         id: 0,
-        nameCode: {
+        namecode: {
             name: "阿里巴巴",
             code: '6003001'
         },
         zhangdiefu: "+8.80",
         lianbantianshu: 6,
-        subject: "食品饮料"
+        gainian: "食品饮料"
     },
     {
         id: 1,
-        nameCode: {
+        namecode: {
             name: "阿里巴巴",
             code: '6003001'
         },
         zhangdiefu: "+8.80",
         lianbantianshu: 6,
-        subject: "食品饮料"
+        gainian: "食品饮料"
     },
     {
         id: 2,
-        nameCode: {
+        namecode: {
             name: "阿里巴巴",
             code: '6003001'
         },
         zhangdiefu: "+8.80",
         lianbantianshu: 6,
-        subject: "食品饮料"
+        gainian: "食品饮料"
     },
     {
         id: 3,
-        nameCode: {
+        namecode: {
             name: "阿里巴巴",
             code: '6003001'
         },
         zhangdiefu: "+8.80",
         lianbantianshu: 6,
-        subject: "食品饮料"
+        gainian: "食品饮料"
     },
     {
         id: 4,
-        nameCode: {
+        namecode: {
             name: "阿里巴巴",
             code: '6003001'
         },
         zhangdiefu: "+8.80",
         lianbantianshu: 6,
-        subject: "食品饮料"
+        gainian: "食品饮料"
     },
     {
         id: 5,
-        nameCode: {
+        namecode: {
             name: "阿里巴巴",
             code: '6003001'
         },
         zhangdiefu: "+8.80",
         lianbantianshu: 6,
-        subject: "食品饮料"
+        gainian: "食品饮料"
     }
 ];
 
 
-export const solution_columns = [
+export const celue = {
+    name: "短线xxx",
+    description: "策略描述"
+};
+
+export const celuechi_columns = [
     {
         title: "",
         dataIndex: "status",
@@ -131,98 +143,98 @@ export const solution_columns = [
     },
     {
         title: "代码名称",
-        dataIndex: "代码名称",
-        key: "代码名称",
-        scopedSlots: { customRender: '代码名称' },
+        dataIndex: "namecode",
+        key: "namecode",
+        scopedSlots: { customRender: 'namecode' },
         width: 110
     },
     {
         title: "涨跌幅",
-        dataIndex: "涨跌幅",
-        key: "涨跌幅",
-        scopedSlots: { customRender: '涨跌幅' },
+        dataIndex: "zhangdiefu",
+        key: "zhangdiefu",
+        scopedSlots: { customRender: 'zhangdiefu' },
     },
     {
         title: "现价",
-        dataIndex: "现价",
-        key: "现价",
-        scopedSlots: { customRender: '现价' },
+        dataIndex: "xianjia",
+        key: "xianjia",
+        scopedSlots: { customRender: 'xianjia' },
     },
     {
         title: "行业",
-        dataIndex: "行业",
-        key: "行业",
-        scopedSlots: { customRender: '行业' },
-        width: 80
+        dataIndex: "hangye",
+        key: "hangye",
+        scopedSlots: { customRender: 'hangye' },
+        width: 110
     }
 ];
 
-export const solution_data = [
+export const celuechi_data = [
     {
         id: 0,
         status: "当日选出",
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        namecode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨跌幅: "-8.80",
-        现价: 6,
-        行业: "食品饮料"
+        zhangdiefu: "-8.80",
+        xianjia: 6,
+        hangye: "食品饮料"
     },
     {
         id: 1,
         status: "当日选出",
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        namecode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨跌幅: "+8.80",
-        现价: 6,
-        行业: "食品饮料"
+        zhangdiefu: "+8.80",
+        xianjia: 6,
+        hangye: "食品饮料"
     },
     {
         id: 2,
         status: "在池",
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        namecode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨跌幅: "+8.80",
-        现价: 6,
-        行业: "食品饮料"
+        zhangdiefu: "+8.80",
+        xianjia: 6,
+        hangye: "食品饮料"
     },
     {
         id: 3,
         status: "在池",
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        namecode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨跌幅: "-8.80",
-        现价: 6,
-        行业: "食品饮料"
+        zhangdiefu: "-8.80",
+        xianjia: 6,
+        hangye: "食品饮料"
     },
     {
         id: 4,
         status: "不在池",
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        namecode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨跌幅: "+8.80",
-        现价: 6,
-        行业: "食品饮料"
+        zhangdiefu: "+8.80",
+        xianjia: 6,
+        hangye: "食品饮料"
     },
     {
         id: 5,
         status: "不在池",
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        namecode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨跌幅: "+8.80",
-        现价: 6,
-        行业: "食品饮料"
+        zhangdiefu: "+8.80",
+        xianjia: 6,
+        hangye: "食品饮料"
     }
 ];
 
@@ -268,15 +280,12 @@ export const zhishu = [
 
 export const shichangwendu = {
     wendu: 10,
+    suggest:"宜适中仓位",
     chart: [
         {
             id: 1,
             value: 11,
             type: 1,//1跌2平3涨
-        }, {
-            id: 2,
-            value: 21,
-            type: 1
         }, {
             id: 3,
             value: 11,
@@ -286,13 +295,17 @@ export const shichangwendu = {
             value: 131,
             type: 1
         }, {
-            id: 6,
+            id: 5,
             value: 234,
             type: 1
+        },  {
+            id: 6,
+            value: 11,
+            type: 2
         }, {
             id: 7,
             value: 11,
-            type: 2
+            type: 3
         }, {
             id: 8,
             value: 11,
@@ -302,16 +315,8 @@ export const shichangwendu = {
             value: 11,
             type: 3
         }, {
-            id: 10,
-            value: 11,
-            type: 3
-        }, {
             id: 11,
             value: 11,
-            type: 3
-        }, {
-            id: 12,
-            value: 123,
             type: 3
         },
     ],

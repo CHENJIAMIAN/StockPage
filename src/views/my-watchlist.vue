@@ -7,54 +7,54 @@
       :data-source="table_data"
       rowKey="id"
     >
-      <div slot="代码名称" slot-scope="代码名称">
-        <div class="bigtxt">{{ 代码名称.名称 }}</div>
-        <div>{{ 代码名称.代码 }}</div>
+      <div slot="codeName" slot-scope="codeName">
+        <div class="bigtxt">{{ codeName.name }}</div>
+        <div>{{ codeName.code }}</div>
       </div>
-      <div slot="涨幅" slot-scope="涨幅">
+      <div slot="zhangfu" slot-scope="zhangfu">
         <div
           :class="{
-            red: Number(涨幅) > 0,
-            green: Number(涨幅) < 0,
-            gray: Number(涨幅) === 0,
+            red: Number(zhangfu) > 0,
+            green: Number(zhangfu) < 0,
+            gray: Number(zhangfu) === 0,
             bignum: true,
           }"
         >
-          {{ 涨幅 }}%
+          {{ zhangfu }}%
         </div>
       </div>
-      <div slot="选入时间" slot-scope="选入时间">
-        <div class="bigtxt gray">{{ 选入时间 }}</div>
+      <div slot="selectDate" slot-scope="selectDate">
+        <div class="bigtxt gray">{{ selectDate }}</div>
       </div>
-      <div slot="进入价格" slot-scope="进入价格, record">
+      <div slot="selectPrice" slot-scope="selectPrice, record">
         <div
           :class="{
-            red: Number(record.涨幅) > 0,
-            green: Number(record.涨幅) < 0,
-            gray: Number(record.涨幅) === 0,
+            red: Number(record.selectPrice) > 0,
+            green: Number(record.selectPrice) < 0,
+            gray: Number(record.selectPrice) === 0,
             bignum: true,
           }"
         >
-          {{ 进入价格 }}
+          {{ selectPrice }}
         </div>
       </div>
-      <div slot="现价" slot-scope="现价, record">
+      <div slot="现价" slot-scope="nowPrice, record">
         <div
           :class="{
-            red: Number(record.涨幅) > 0,
-            green: Number(record.涨幅) < 0,
-            gray: Number(record.涨幅) === 0,
+            red: Number(record.nowPrice) > 0,
+            green: Number(record.nowPrice) < 0,
+            gray: Number(record.nowPrice) === 0,
             bignum: true,
           }"
         >
           {{ 现价 }}
         </div>
       </div>
-      <div slot="操作" slot-scope="操作, record">
+      <div slot="operation" slot-scope="operation, record">
         <a-switch
           checked-children="取消自选"
           un-checked-children="添加自选"
-          :default-checked="操作"
+          :default-checked="operation"
           @change="onChange(record.id, $event)"
         />
       </div>
@@ -63,9 +63,19 @@
 </template>
 <script>
 import { table_columns, table_data, date } from "@/views/mywatchlist_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return { table_columns, table_data, date };
+  },
+  created() {
+    var baseUrl = global_url.baseUrl
+    fetch(baseUrl+"/api/user/select.do?userId="+1)
+        .then((r) => r.json())
+        .then((r) => {
+          this.table_data = r.rows
+          // this.table_data = r.rows
+        });
   },
   methods: {
     onChange(id, checked) {

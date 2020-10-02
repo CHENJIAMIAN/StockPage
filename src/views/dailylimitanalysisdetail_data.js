@@ -1,35 +1,35 @@
 export const table_columns = [
     {
         title: "代码名称",
-        dataIndex: "代码名称",
-        key: "代码名称",
-        scopedSlots: { customRender: '代码名称' },
+        dataIndex: "nameCode",
+        key: "nameCode",
+        scopedSlots: { customRender: 'nameCode' },
     },
     {
         title: "涨幅",
-        dataIndex: "涨幅",
-        key: "涨幅",
-        scopedSlots: { customRender: '涨幅' },
+        dataIndex: "zhangdiefu",
+        key: "zhangdiefu",
+        scopedSlots: { customRender: 'zhangdiefu' },
         align: 'right'
     },
     {
         title: "几天几板",
-        dataIndex: "几天几板",
-        key: "几天几板",
-        scopedSlots: { customRender: '几天几板' },
+        dataIndex: "jitianjiban",
+        key: "jitianjiban",
+        scopedSlots: { customRender: 'jitianjiban' },
         align: 'right'
     },
     {
         title: "连板天",
-        dataIndex: "连板天",
-        key: "连板天",
-        scopedSlots: { customRender: '连板天' },
+        dataIndex: "lianbantianshu",
+        key: "lianbantianshu",
+        scopedSlots: { customRender: 'lianbantianshu' },
         align: 'right'
     },
     {
         title: "短线主题",
-        dataIndex: "短线主题",
-        key: "短线主题",
+        dataIndex: "subject",
+        key: "subject",
         customRender: (value, row, index, column) => {
             // text, record, index, column
             column.class = 'bigtxt'
@@ -38,24 +38,24 @@ export const table_columns = [
                 attrs: {}
             };
             if (index === 0) {
-                obj.attrs.rowSpan = 2;
+                obj.attrs.rowSpan = 1;
             }
             if (index === 1) {
-                obj.attrs.rowSpan = 0;
+                obj.attrs.rowSpan = 1;
             }
             //
             if (index === 2) {
-                obj.attrs.rowSpan = 2;
+                obj.attrs.rowSpan = 1;
             }
             if (index === 3) {
-                obj.attrs.rowSpan = 0;
+                obj.attrs.rowSpan = 1;
             }
             //
             if (index === 4) {
-                obj.attrs.rowSpan = 2;
+                obj.attrs.rowSpan = 1;
             }
             if (index === 5) {
-                obj.attrs.rowSpan = 0;
+                obj.attrs.rowSpan = 1;
             }
             return obj;
         },
@@ -67,69 +67,69 @@ export const table_columns = [
 export const table_data = [
     {
         id: 0,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        几天几板: "4天4板",
-        连板天: "4",
-        短线主题: "国防军工",
+        zhangdiefu: "+8.80",
+        jitianjiban: "4天4板",
+        lianbantianshu: "4",
+        subject: "国防军工",
     },
     {
         id: 1,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        几天几板: "4天4板",
-        连板天: "4",
-        短线主题: "国防军工",
+        zhangdiefu: "+8.80",
+        jitianjiban: "4天4板",
+        lianbantianshu: "4",
+        subject: "国防军工",
     },
     {
         id: 2,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        几天几板: "4天4板",
-        连板天: "4",
-        短线主题: "国防军工",
+        zhangdiefu: "+8.80",
+        jitianjiban: "4天4板",
+        lianbantianshu: "4",
+        subject: "国防军工",
     },
     {
         id: 3,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        几天几板: "4天4板",
-        连板天: "4",
-        短线主题: "国防军工",
+        zhangdiefu: "+8.80",
+        jitianjiban: "4天4板",
+        lianbantianshu: "4",
+        subject: "国防军工",
     },
     {
         id: 4,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        几天几板: "4天4板",
-        连板天: "4",
-        短线主题: "国防军工",
+        zhangdiefu: "+8.80",
+        jitianjiban: "4天4板",
+        lianbantianshu: "4",
+        subject: "国防军工",
     },
     {
         id: 5,
-        代码名称: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        涨幅: "+8.80",
-        几天几板: "4天4板",
-        连板天: "4",
-        短线主题: "国防军工",
+        zhangdiefu: "+8.80",
+        jitianjiban: "4天4板",
+        lianbantianshu: "4",
+        subject: "国防军工",
     }
 ];
 

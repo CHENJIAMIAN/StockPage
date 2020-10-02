@@ -6,27 +6,28 @@
     :data-source="table_data"
     rowKey="id"
   >
-    <div slot="序号" slot-scope="序号">
-      <div class="bigtxt">{{ 序号 }}</div>
-      <div>{{ 序号 }}</div>
+    <div slot="id" slot-scope="id">
+      <div class="bigtxt">{{ id }}</div>
+      <div>{{ id }}</div>
     </div>
-    <div slot="代码名称" slot-scope="代码名称">
-      <div class="bigtxt">{{ 代码名称.名称 }}</div>
-      <div>{{ 代码名称.代码 }}</div>
+    <div slot="codeName" slot-scope="codeName">
+      <div class="bigtxt">{{ codeName.name }}</div>
+      <div>{{ codeName.code }}</div>
     </div>
-    <div slot="涨跌幅" slot-scope="涨跌幅">
-      <div class="bignum red">{{ 涨跌幅 }}%</div>
+    <div slot="zhangdiefu" slot-scope="zhangdiefu">
+      <div class="bignum red">{{ zhangdiefu }}%</div>
     </div>
-    <div slot="现价" slot-scope="现价">
-      <div class="bignum red">{{ 现价 }}</div>
+    <div slot="xianjia" slot-scope="xianjia">
+      <div class="bignum red">{{ xianjia }}</div>
     </div>
-    <div slot="入选时间" slot-scope="入选时间">
-      <div class="bigtxt">{{ 入选时间 }}</div>
+    <div slot="selectDate" slot-scope="selectDate">
+      <div class="bigtxt">{{ selectDate }}</div>
     </div>
   </a-table>
 </template>
 <script>
 import { table_columns, table_data } from "@/views/bbgs_solution_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return { table_columns, table_data };
@@ -34,6 +35,17 @@ export default {
   created() {
     // 根据id去获取数据
     this.$route.params.id;
+
+    var baseUrl = global_url.baseUrl
+    var strategyId = this.$route.params.id
+    fetch(baseUrl+"/api/strategy/strategyList.do?strategyId="+strategyId)
+        .then((r) => r.json())
+        .then((r) => {
+          console.log(r.rows)
+          this.table_data = r.rows
+          // this.table_data = r.rows
+        });
+
   },
 };
 </script>

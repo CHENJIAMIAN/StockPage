@@ -97,7 +97,12 @@
   </div>
 </template>
 <script>
+
+// const baseUrl = "http://127.0.0.1:8888/admin";
+const baseUrl = "http://client.lemengsc.com/admin";
+
 export default {
+  baseUrl,
   data() {
     return {
       navTitle: "",

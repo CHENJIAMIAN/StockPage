@@ -8,21 +8,21 @@
       :data-source="table_data"
       rowKey="id"
     >
-      <div slot="代码名称" slot-scope="代码名称">
-        <div class="bigtxt">{{ 代码名称.名称 }}</div>
-        <div>{{ 代码名称.代码 }}</div>
+      <div slot="nameCode" slot-scope="nameCode">
+        <div class="bigtxt">{{ nameCode.name }}</div>
+        <div>{{ nameCode.code }}</div>
       </div>
-      <div slot="涨幅" slot-scope="涨幅">
-        <div class="bignum red">{{ 涨幅 }}%</div>
+      <div slot="zhangdiefu" slot-scope="zhangdiefu">
+        <div class="bignum red">{{ zhangdiefu }}%</div>
       </div>
-      <div slot="几天几板" slot-scope="几天几板">
-        <div class="bigtxt">{{ 几天几板 }}</div>
+      <div slot="jitianjiban" slot-scope="jitianjiban">
+        <div class="bigtxt">{{ jitianjiban }}</div>
       </div>
-      <div slot="连板天" slot-scope="连板天">
-        <div class="bigtxt">{{ 连板天 }}</div>
+      <div slot="lianbantianshu" slot-scope="lianbantianshu">
+        <div class="bigtxt">{{ lianbantianshu }}</div>
       </div>
-      <div slot="短线主题" slot-scope="短线主题">
-        <div class="bigtxt">{{ 短线主题 }}</div>
+      <div slot="subject" slot-scope="subject">
+        <div class="bigtxt">{{ subject }}</div>
       </div>
     </a-table>
   </div>
@@ -32,12 +32,20 @@ import {
   table_columns,
   table_data,
 } from "@/views/dailylimitanalysisdetail_data.js";
+import global_url from "../App.vue"
 export default {
   data() {
     return { table_columns, table_data, date: "" };
   },
   created() {
     // 根据 date 去获取数据
+    var baseUrl = global_url.baseUrl
+    fetch(baseUrl+"/api/replay/replayList.do")
+        .then((r) => r.json())
+        .then((r) => {
+          console.log(r.obj)
+          this.table_data = r.obj
+        });
     this.date = this.$route.params.date;
   },
 };
