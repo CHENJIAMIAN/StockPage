@@ -158,7 +158,7 @@ export default {
             line-height: 34px;
           }
           &-amount {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-family: DIN Medium;
             font-weight: 400;
             color: #ea3031;

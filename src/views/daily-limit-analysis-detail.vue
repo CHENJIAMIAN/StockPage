@@ -2,29 +2,39 @@
 <template>
   <div class="daily-limit-analysis-detail">
     <div class="row1">{{ date }}</div>
-    <a-table
-      :pagination="false"
-      :columns="table_columns"
-      :data-source="table_data"
-      rowKey="id"
+    <div
+      v-infinite-scroll="handleInfiniteOnLoad"
+      class="demo-infinite-container"
+      :infinite-scroll-disabled="busy"
+      :infinite-scroll-distance="10"
     >
-      <div slot="nameCode" slot-scope="nameCode">
-        <div class="bigtxt">{{ nameCode.name }}</div>
-        <div>{{ nameCode.code }}</div>
+      <a-table
+        :pagination="false"
+        :columns="table_columns"
+        :data-source="table_data"
+        rowKey="id"
+      >
+        <div slot="nameCode" slot-scope="nameCode">
+          <div class="bigtxt">{{ nameCode.name }}</div>
+          <div>{{ nameCode.code }}</div>
+        </div>
+        <div slot="zhangdiefu" slot-scope="zhangdiefu">
+          <div class="bignum red">{{ zhangdiefu }}%</div>
+        </div>
+        <div slot="jitianjiban" slot-scope="jitianjiban">
+          <div class="bigtxt">{{ jitianjiban }}</div>
+        </div>
+        <div slot="lianbantianshu" slot-scope="lianbantianshu">
+          <div class="bigtxt">{{ lianbantianshu }}</div>
+        </div>
+        <div slot="subject" slot-scope="subject">
+          <div class="bigtxt">{{ subject }}</div>
+        </div>
+      </a-table>
+      <div v-if="loading && !busy" class="demo-loading-container">
+        <a-spin />
       </div>
-      <div slot="zhangdiefu" slot-scope="zhangdiefu">
-        <div class="bignum red">{{ zhangdiefu }}%</div>
-      </div>
-      <div slot="jitianjiban" slot-scope="jitianjiban">
-        <div class="bigtxt">{{ jitianjiban }}</div>
-      </div>
-      <div slot="lianbantianshu" slot-scope="lianbantianshu">
-        <div class="bigtxt">{{ lianbantianshu }}</div>
-      </div>
-      <div slot="subject" slot-scope="subject">
-        <div class="bigtxt">{{ subject }}</div>
-      </div>
-    </a-table>
+    </div>
   </div>
 </template>
 <script>
@@ -32,21 +42,40 @@ import {
   table_columns,
   table_data,
 } from "@/views/dailylimitanalysisdetail_data.js";
-import global_url from "../App.vue"
+import global_url from "../App.vue";
 export default {
   data() {
-    return { table_columns, table_data, date: "" };
+    return {
+      loading: false,
+      busy: false,
+      table_columns,
+      table_data: [],
+      date: "",
+    };
   },
   created() {
     // 根据 date 去获取数据
-    var baseUrl = global_url.baseUrl
-    fetch(baseUrl+"/api/replay/replayList.do")
+    var baseUrl = global_url.baseUrl;
+    fetch(baseUrl + "/api/replay/replayList.do")
+      .then((r) => r.json())
+      .then((r) => {
+        console.log(r.obj);
+        this.table_data = r.obj;
+      });
+    this.date = this.$route.params.date;
+  },
+  methods: {
+    handleInfiniteOnLoad() {
+      const data = this.table_data;
+      this.loading = true;
+      var baseUrl = global_url.baseUrl;
+      fetch(baseUrl + "/api/replay/replayList.do")
         .then((r) => r.json())
         .then((r) => {
-          console.log(r.obj)
-          this.table_data = r.obj
+          this.table_data = data.concat(r.obj);
+          this.loading = false;
         });
-    this.date = this.$route.params.date;
+    },
   },
 };
 </script>
@@ -71,5 +100,16 @@ export default {
     color: #333333;
     line-height: 4rem;
   }
+}
+
+.demo-infinite-container {
+  overflow: auto;
+  height: calc(100vh - 163px);
+}
+.demo-loading-container {
+  position: absolute;
+  bottom: 40px;
+  width: calc(100% - 1rem);
+  text-align: center;
 }
 </style>

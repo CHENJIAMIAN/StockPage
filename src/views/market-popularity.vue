@@ -19,64 +19,88 @@
         {{ d.text }}
       </a-select-option>
     </a-select>
-    <a-table
-      :pagination="false"
-      :columns="table_columns"
-      :data-source="table_data"
-      rowKey="id"
+    <div
+      v-infinite-scroll="handleInfiniteOnLoad"
+      class="demo-infinite-container"
+      :infinite-scroll-disabled="busy"
+      :infinite-scroll-distance="10"
     >
-      <div slot="id" slot-scope="id">
-        <div class="bigtxt">{{ id }}</div>
-        <div>{{ id }}</div>
-      </div>
-      <div slot="jiaozuori" slot-scope="jiaozuori">
-        <img v-if="jiaozuori.isUp" src="../assets/img/up.png" width="16px" />
-        <img v-else src="../assets/img/down.png" width="16px" />
-        <span class="bigtxt">{{ jiaozuori.value }}</span>
-      </div>
-      <div slot="codeName" slot-scope="codeName">
-        <div class="bigtxt">{{ codeName.name }}</div>
-        <div>{{ codeName.code }}</div>
-      </div>
-      <div slot="xianjia" slot-scope="xianjia">
-        <div class="bignum red">{{ xianjia }}</div>
-      </div>
-      <div slot="zhangdiefu" slot-scope="zhangdiefu">
-        <div
-          :class="{
-            red: Number(zhangdiefu) > 0,
-            green: Number(zhangdiefu) < 0,
-            gray: Number(zhangdiefu) === 0,
-            bignum: true,
-          }"
-        >
-          {{ zhangdiefu }}%
+      <a-table
+        :pagination="false"
+        :columns="table_columns"
+        :data-source="table_data"
+        rowKey="id"
+      >
+        <div slot="id" slot-scope="id">
+          <div class="bigtxt">{{ id }}</div>
+          <div>{{ id }}</div>
         </div>
+        <div slot="jiaozuori" slot-scope="jiaozuori">
+          <img v-if="jiaozuori.isUp" src="../assets/img/up.png" width="16px" />
+          <img v-else src="../assets/img/down.png" width="16px" />
+          <span class="bigtxt">{{ jiaozuori.value }}</span>
+        </div>
+        <div slot="codeName" slot-scope="codeName">
+          <div class="bigtxt">{{ codeName.name }}</div>
+          <div>{{ codeName.code }}</div>
+        </div>
+        <div slot="xianjia" slot-scope="xianjia">
+          <div class="bignum red">{{ xianjia }}</div>
+        </div>
+        <div slot="zhangdiefu" slot-scope="zhangdiefu">
+          <div
+            :class="{
+              red: Number(zhangdiefu) > 0,
+              green: Number(zhangdiefu) < 0,
+              gray: Number(zhangdiefu) === 0,
+              bignum: true,
+            }"
+          >
+            {{ zhangdiefu }}%
+          </div>
+        </div>
+      </a-table>
+      <div v-if="loading && !busy" class="demo-loading-container">
+        <a-spin />
       </div>
-    </a-table>
+    </div>
   </div>
 </template>
 <script>
 import { table_columns, table_data } from "@/views/marketpopularity_data.js";
-import global_url from "../App.vue"
+
+import global_url from "../App.vue";
 export default {
   data() {
     return {
+      loading: false,
+      busy: false,
       table_columns,
-      table_data,
+      table_data: [],
       searchOptions: [],
       searchValue: undefined, //undefined才会显示placeholder
     };
   },
   created() {
-    var baseUrl = global_url.baseUrl
-    fetch(baseUrl+"/api/popular/popularList.do")
+    var baseUrl = global_url.baseUrl;
+    fetch(baseUrl + "/api/popular/popularList.do")
       .then((r) => r.json())
       .then((r) => {
-        this.table_data = r.rows
+        this.table_data = r.rows;
       });
   },
   methods: {
+    handleInfiniteOnLoad() {
+      const data = this.table_data;
+      this.loading = true;
+      var baseUrl = global_url.baseUrl;
+      fetch(baseUrl + "/api/popular/popularList.do")
+        .then((r) => r.json())
+        .then((r) => {
+          this.table_data = data.concat(r.rows);
+          this.loading = false;
+        });
+    },
     handleSearch(value) {},
     handleChange(value) {
       this.searchValue = value;
@@ -84,4 +108,15 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.demo-infinite-container {
+  overflow: auto;
+  height: calc(100vh - 126px);
+}
+.demo-loading-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+}
+</style>

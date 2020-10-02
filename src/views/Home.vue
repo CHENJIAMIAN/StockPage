@@ -2,47 +2,69 @@
   <div id="home">
     <div class="search">
       <a-input-search
-          size="large"
-          placeholder=" 请输入名称或代码：如友阿股份"
-          v-model="searchKey"
-          ref="searchInput"
-          v-on:keyup="whenInput($event)"
-          v-on:blur="closeHintsBox()"
-          @search="handleZhenguClick"
+        size="large"
+        placeholder=" 请输入名称或代码：如友阿股份"
+        v-model="searchKey"
+        ref="searchInput"
+        v-on:keyup="whenInput($event)"
+        v-on:blur="closeHintsBox()"
+        @search="handleZhenguClick"
       >
         <a-icon
-            slot="prefix"
-            type="search"
-            :style="{ fontSize: '1.3rem', color: '#c6c4c7' }"
+          slot="prefix"
+          type="search"
+          :style="{ fontSize: '1.3rem', color: '#c6c4c7' }"
         />
         <a-button shape="round" type="primary" slot="enterButton">
           <a-icon type="medicine-box" :style="{ fontSize: '1.2rem' }" /> 诊股
         </a-button>
       </a-input-search>
-      <div class="hintsbox" v-if="showHintsBox">
-        <ul class="hintslist">
-          <li v-for="(item,index) in hints" ref="hint" class="hint" v-on:click="fillInput(index)" v-cloak>{{item.name}}  ----  {{item.code}}</li>
-        </ul>
+      <div
+        class="hintsbox ant-select-dropdown--single ant-select-dropdown-placement-bottomLeft"
+        v-show="showHintsBox"
+      >
+        <div
+          tabindex="-1"
+          style="overflow: auto; transform: translateZ(0px);"
+          class="ant-select-dropdown-content"
+        >
+          <ul
+            class="hintslist ant-select-dropdown-menu ant-select-dropdown-menu-vertical ant-select-dropdown-menu-root"
+          >
+            <li
+              :key="item.code"
+              v-for="(item, index) in hints"
+              ref="hint"
+              class="hint ant-select-dropdown-menu-item"
+              v-on:click="fillInput(index)"
+              v-cloak
+            >
+              <span>{{ item.name }}</span>
+              <span style="float: right;margin-right: 30vw;">{{
+                item.code
+              }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
-
     </div>
 
-<!--    <div class="search">-->
-<!--      <a-input-search-->
-<!--        size="large"-->
-<!--        placeholder=" 请输入名称或代码：如友阿股份"-->
-<!--        @search="handleZhenguClick"-->
-<!--      >-->
-<!--        <a-icon-->
-<!--          slot="prefix"-->
-<!--          type="search"-->
-<!--          :style="{ fontSize: '1.3rem', color: '#c6c4c7' }"-->
-<!--        />-->
-<!--        <a-button shape="round" type="primary" slot="enterButton">-->
-<!--          <a-icon type="medicine-box" :style="{ fontSize: '1.2rem' }" /> 诊股-->
-<!--        </a-button>-->
-<!--      </a-input-search>-->
-<!--    </div>-->
+    <!--    <div class="search">-->
+    <!--      <a-input-search-->
+    <!--        size="large"-->
+    <!--        placeholder=" 请输入名称或代码：如友阿股份"-->
+    <!--        @search="handleZhenguClick"-->
+    <!--      >-->
+    <!--        <a-icon-->
+    <!--          slot="prefix"-->
+    <!--          type="search"-->
+    <!--          :style="{ fontSize: '1.3rem', color: '#c6c4c7' }"-->
+    <!--        />-->
+    <!--        <a-button shape="round" type="primary" slot="enterButton">-->
+    <!--          <a-icon type="medicine-box" :style="{ fontSize: '1.2rem' }" /> 诊股-->
+    <!--        </a-button>-->
+    <!--      </a-input-search>-->
+    <!--    </div>-->
     <div class="menuicon">
       <div class="menuicon-cell" @click="handleRoute('market_popularity')">
         <img src="../assets/img/renqi.png" />
@@ -112,84 +134,84 @@
       </div>
     </div>
 
-<!--    <div class="shichangwendu">-->
-<!--      <div class="shichangwendu-row1">-->
-<!--        <div class="shichangwendu-row1-col1 title-txt">市场温度</div>-->
-<!--        <div class="shichangwendu-row1-col2">-->
-<!--          <div class="relative">-->
-<!--            <a-progress-->
-<!--              class="absolute"-->
-<!--              :width="80"-->
-<!--              type="circle"-->
-<!--              :strokeWidth="10"-->
-<!--              :percent="shichangwendu.wendu / 2"-->
-<!--            >-->
-<!--              <template #format="percent">-->
-<!--                <span>{{ shichangwendu.wendu + "℃" }}</span>-->
-<!--              </template>-->
-<!--            </a-progress>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="shichangwendu-row1-col3">-->
-<!--          <div>{{ new Date().toLocaleDateString().replace(/\//g, "-") }}</div>-->
-<!--          <div>持仓建议：适宜中仓位</div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="shichangwendu-row2">-->
-<!--        <div class="relative" :key="obj.id" v-for="obj in shichangwendu.chart">-->
-<!--          <div class="zhuzi1">-->
-<!--            <div>{{ obj.value }}</div>-->
-<!--            <div-->
-<!--              :style="{ height: (obj.value / maxValueInChart) * 150 + 'px' }"-->
-<!--              :class="{-->
-<!--                'zhuzi1-bg': true,-->
-<!--                greenbg: obj.type === 1,-->
-<!--                graybg: obj.type === 2,-->
-<!--                redbg: obj.type === 3,-->
-<!--              }"-->
-<!--            ></div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="justify-self-center">跌停</div>-->
-<!--        <div class="justify-self-center">>7</div>-->
-<!--        <div class="justify-self-center">4~7</div>-->
-<!--        <div class="justify-self-center">2~4</div>-->
-<!--        <div class="justify-self-center">0~2</div>-->
-<!--        <div class="justify-self-center">平</div>-->
-<!--        <div class="justify-self-center">0~2</div>-->
-<!--        <div class="justify-self-center">2~4</div>-->
-<!--        <div class="justify-self-center">4~7</div>-->
-<!--        <div class="justify-self-center">>7</div>-->
-<!--        <div class="justify-self-center">涨停</div>-->
-<!--      </div>-->
-<!--      <div-->
-<!--        class="shichangwendu-row3"-->
-<!--        :style="{-->
-<!--          'grid-template-columns':-->
-<!--            ' 1rem ' +-->
-<!--            Math.abs(shichangwendu.die) / this.sum +-->
-<!--            'fr 2px ' +-->
-<!--            Math.abs(shichangwendu.ping) / this.sum +-->
-<!--            'fr 2px ' +-->
-<!--            Math.abs(shichangwendu.zhang) / this.sum +-->
-<!--            'fr 1rem',-->
-<!--        }"-->
-<!--      >-->
-<!--        <img src="../assets/img/down.png" />-->
-<!--        <div class="greenbg"></div>-->
-<!--        <div></div>-->
-<!--        <div class="graybg"></div>-->
-<!--        <div></div>-->
-<!--        <div class="redbg"></div>-->
-<!--        <img src="../assets/img/up.png" />-->
-<!--      </div>-->
-<!--      <div class="shichangwendu-row4">-->
-<!--        <div class="">泸股通资金</div>-->
-<!--        <div class="green">{{ shichangwendu.hugutongzijin }}亿</div>-->
-<!--        <div class="">深股通资金</div>-->
-<!--        <div class="red">{{ shichangwendu.shengutongzijin }}亿</div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="shichangwendu">-->
+    <!--      <div class="shichangwendu-row1">-->
+    <!--        <div class="shichangwendu-row1-col1 title-txt">市场温度</div>-->
+    <!--        <div class="shichangwendu-row1-col2">-->
+    <!--          <div class="relative">-->
+    <!--            <a-progress-->
+    <!--              class="absolute"-->
+    <!--              :width="80"-->
+    <!--              type="circle"-->
+    <!--              :strokeWidth="10"-->
+    <!--              :percent="shichangwendu.wendu / 2"-->
+    <!--            >-->
+    <!--              <template #format="percent">-->
+    <!--                <span>{{ shichangwendu.wendu + "℃" }}</span>-->
+    <!--              </template>-->
+    <!--            </a-progress>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="shichangwendu-row1-col3">-->
+    <!--          <div>{{ new Date().toLocaleDateString().replace(/\//g, "-") }}</div>-->
+    <!--          <div>持仓建议：适宜中仓位</div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="shichangwendu-row2">-->
+    <!--        <div class="relative" :key="obj.id" v-for="obj in shichangwendu.chart">-->
+    <!--          <div class="zhuzi1">-->
+    <!--            <div>{{ obj.value }}</div>-->
+    <!--            <div-->
+    <!--              :style="{ height: (obj.value / maxValueInChart) * 150 + 'px' }"-->
+    <!--              :class="{-->
+    <!--                'zhuzi1-bg': true,-->
+    <!--                greenbg: obj.type === 1,-->
+    <!--                graybg: obj.type === 2,-->
+    <!--                redbg: obj.type === 3,-->
+    <!--              }"-->
+    <!--            ></div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="justify-self-center">跌停</div>-->
+    <!--        <div class="justify-self-center">>7</div>-->
+    <!--        <div class="justify-self-center">4~7</div>-->
+    <!--        <div class="justify-self-center">2~4</div>-->
+    <!--        <div class="justify-self-center">0~2</div>-->
+    <!--        <div class="justify-self-center">平</div>-->
+    <!--        <div class="justify-self-center">0~2</div>-->
+    <!--        <div class="justify-self-center">2~4</div>-->
+    <!--        <div class="justify-self-center">4~7</div>-->
+    <!--        <div class="justify-self-center">>7</div>-->
+    <!--        <div class="justify-self-center">涨停</div>-->
+    <!--      </div>-->
+    <!--      <div-->
+    <!--        class="shichangwendu-row3"-->
+    <!--        :style="{-->
+    <!--          'grid-template-columns':-->
+    <!--            ' 1rem ' +-->
+    <!--            Math.abs(shichangwendu.die) / this.sum +-->
+    <!--            'fr 2px ' +-->
+    <!--            Math.abs(shichangwendu.ping) / this.sum +-->
+    <!--            'fr 2px ' +-->
+    <!--            Math.abs(shichangwendu.zhang) / this.sum +-->
+    <!--            'fr 1rem',-->
+    <!--        }"-->
+    <!--      >-->
+    <!--        <img src="../assets/img/down.png" />-->
+    <!--        <div class="greenbg"></div>-->
+    <!--        <div></div>-->
+    <!--        <div class="graybg"></div>-->
+    <!--        <div></div>-->
+    <!--        <div class="redbg"></div>-->
+    <!--        <img src="../assets/img/up.png" />-->
+    <!--      </div>-->
+    <!--      <div class="shichangwendu-row4">-->
+    <!--        <div class="">泸股通资金</div>-->
+    <!--        <div class="green">{{ shichangwendu.hugutongzijin }}亿</div>-->
+    <!--        <div class="">深股通资金</div>-->
+    <!--        <div class="red">{{ shichangwendu.shengutongzijin }}亿</div>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
     <div class="shichangwendu">
       <div class="shichangwendu-row1">
@@ -197,11 +219,11 @@
         <div class="shichangwendu-row1-col2">
           <div class="relative">
             <a-progress
-                class="absolute"
-                :width="80"
-                type="circle"
-                :strokeWidth="10"
-                :percent="shichangwendu.wendu / 2"
+              class="absolute"
+              :width="80"
+              type="circle"
+              :strokeWidth="10"
+              :percent="shichangwendu.wendu / 2"
             >
               <template #format="percent">
                 <span>{{ shichangwendu.wendu + "℃" }}</span>
@@ -211,7 +233,7 @@
         </div>
         <div class="shichangwendu-row1-col3">
           <div>{{ new Date().toLocaleDateString().replace(/\//g, "-") }}</div>
-          <div>持仓建议：{{shichangwendu.suggest}}</div>
+          <div>持仓建议：{{ shichangwendu.suggest }}</div>
         </div>
       </div>
       <div class="shichangwendu-row2">
@@ -219,8 +241,8 @@
           <div class="zhuzi1">
             <div>{{ obj.value }}</div>
             <div
-                :style="{ height: (obj.value / maxValueInChart) * 150 + 'px' }"
-                :class="{
+              :style="{ height: (obj.value / maxValueInChart) * 150 + 'px' }"
+              :class="{
                 'zhuzi1-bg': true,
                 greenbg: obj.type === 1,
                 graybg: obj.type === 2,
@@ -240,8 +262,8 @@
         <div class="justify-self-center">涨停</div>
       </div>
       <div
-          class="shichangwendu-row3"
-          :style="{
+        class="shichangwendu-row3"
+        :style="{
           'grid-template-columns':
             ' 1rem ' +
             Math.abs(shichangwendu.die) / this.sum +
@@ -263,24 +285,26 @@
       <div class="shichangwendu-row4">
         <div class="">沪股通资金</div>
         <div
-            :class="{
+          :class="{
             red: Number(shichangwendu.hugutongzijin) > 0,
             green: Number(shichangwendu.hugutongzijin) < 0,
-            gray: Number(shichangwendu.hugutongzijin) === 0
+            gray: Number(shichangwendu.hugutongzijin) === 0,
           }"
         >
           <!--        <div class="green">-->
-          {{ shichangwendu.hugutongzijin }}亿</div>
+          {{ shichangwendu.hugutongzijin }}亿
+        </div>
         <div class="">深股通资金</div>
         <div
-            :class="{
+          :class="{
             red: Number(shichangwendu.shengutongzijin) > 0,
             green: Number(shichangwendu.shengutongzijin) < 0,
-            gray: Number(shichangwendu.shengutongzijin) === 0
+            gray: Number(shichangwendu.shengutongzijin) === 0,
           }"
         >
           <!--        <div class="red">-->
-          {{ shichangwendu.shengutongzijin }}亿</div>
+          {{ shichangwendu.shengutongzijin }}亿
+        </div>
       </div>
     </div>
 
@@ -369,19 +393,19 @@
           <div class="bigtxt">{{ subject }}</div>
         </div>
 
-<!--        <div slot="代码名称" slot-scope="代码名称">-->
-<!--          <div class="bigtxt">{{ 代码名称.名称 }}</div>-->
-<!--          <div>{{ 代码名称.代码 }}</div>-->
-<!--        </div>-->
-<!--        <div slot="涨跌幅" slot-scope="涨跌幅">-->
-<!--          <div class="bignum red">{{ 涨跌幅 }}%</div>-->
-<!--        </div>-->
-<!--        <div slot="连扳天数" slot-scope="连扳天数">-->
-<!--          <div class="bignum red">{{ 连扳天数 }}</div>-->
-<!--        </div>-->
-<!--        <div slot="概念" slot-scope="概念">-->
-<!--          <div class="bigtxt">{{ 概念 }}</div>-->
-<!--        </div>-->
+        <!--        <div slot="代码名称" slot-scope="代码名称">-->
+        <!--          <div class="bigtxt">{{ 代码名称.名称 }}</div>-->
+        <!--          <div>{{ 代码名称.代码 }}</div>-->
+        <!--        </div>-->
+        <!--        <div slot="涨跌幅" slot-scope="涨跌幅">-->
+        <!--          <div class="bignum red">{{ 涨跌幅 }}%</div>-->
+        <!--        </div>-->
+        <!--        <div slot="连扳天数" slot-scope="连扳天数">-->
+        <!--          <div class="bignum red">{{ 连扳天数 }}</div>-->
+        <!--        </div>-->
+        <!--        <div slot="概念" slot-scope="概念">-->
+        <!--          <div class="bigtxt">{{ 概念 }}</div>-->
+        <!--        </div>-->
       </a-table>
     </div>
 
@@ -436,7 +460,7 @@
 
 <script>
 import solution from "@/views/solution.vue";
-import  global_url from "../App.vue";
+import global_url from "../App.vue";
 import {
   zhangtingfenxi_columns,
   zhangtingfenxi_data,
@@ -456,12 +480,10 @@ export default {
   },
   data() {
     return {
-
-      searchKey:"",
+      searchKey: "",
       hints: [],
       showHintsBox: false,
       activeNo: -1,
-
 
       zhangtingfenxi_columns,
       zhangtingfenxi_data,
@@ -481,50 +503,47 @@ export default {
     };
   },
   created() {
-
     // var baseUrl = "http://client.lemengsc.com/admin";
     var baseUrl = global_url.baseUrl;
 
     //涨停分析返回数据
 
     fetch(baseUrl + "/home/replay.do")
-        .then((r) => r.json())
-        .then((r) => {
-          this.zhangtingfenxi_data = r.obj;
-        });
+      .then((r) => r.json())
+      .then((r) => {
+        this.zhangtingfenxi_data = r.obj;
+      });
 
     //市场指数
     fetch(baseUrl + "/home/summary.do")
-        .then((r) => r.json())
-        .then((r) => {
-          this.zhishu = r.obj;
-        });
+      .then((r) => r.json())
+      .then((r) => {
+        this.zhishu = r.obj;
+      });
 
     // 市场温度
     fetch(baseUrl + "/home/marketTemperature.do")
-        .then((r) => r.json())
-        .then((r) => {
-          this.shichangwendu = r.obj;
-          this.sum = Math.abs(r.obj.zhang) + Math.abs(r.obj.ping) + Math.abs(r.obj.die);
-          this.maxValueInChart = Math.max(...r.obj.chart.map((i) => i.value));
-        });
+      .then((r) => r.json())
+      .then((r) => {
+        this.shichangwendu = r.obj;
+        this.sum =
+          Math.abs(r.obj.zhang) + Math.abs(r.obj.ping) + Math.abs(r.obj.die);
+        this.maxValueInChart = Math.max(...r.obj.chart.map((i) => i.value));
+      });
 
     //行业板块
     fetch(baseUrl + "/home/business.do")
-        .then((r) => r.json())
-        .then((r) => {
-          this.bankuaihangye = r.obj;
-
-        });
-
+      .then((r) => r.json())
+      .then((r) => {
+        this.bankuaihangye = r.obj;
+      });
 
     //概念板块
     fetch(baseUrl + "/home/concept.do")
-        .then((r) => r.json())
-        .then((r) => {
-          this.gainianbankuai = r.obj;
-        });
-
+      .then((r) => r.json())
+      .then((r) => {
+        this.gainianbankuai = r.obj;
+      });
 
     //策略名称
     // fetch(baseUrl+"/strategy/strategies.do")
@@ -536,20 +555,19 @@ export default {
     //     });
 
     fetch(baseUrl + "/home/strategy.do")
-        .then((r) => r.json())
-        .then((r) => {
-          // console.log(r.obj)
-          this.celue= r.obj;
-        });
-
+      .then((r) => r.json())
+      .then((r) => {
+        // console.log(r.obj)
+        this.celue = r.obj;
+      });
 
     //策略池
     fetch(baseUrl + "/home/strategyList.do")
-        .then((r) => r.json())
-        .then((r) => {
-          // console.log(r.obj)
-          this.celuechi_data= r.obj;
-        });
+      .then((r) => r.json())
+      .then((r) => {
+        // console.log(r.obj)
+        this.celuechi_data = r.obj;
+      });
   },
   mounted() {},
   methods: {
@@ -557,31 +575,28 @@ export default {
       this.$router.push(`/${routeName}`);
     },
 
-
     handleZhenguClick() {
       var code = this.searchKey;
-      console.log(code)
-      if (typeof code == 'undefined'){
+      console.log(code);
+      if (typeof code == "undefined") {
         this.$refs.searchInput.focus();
         return;
       }
       // this.$router.push({name:"zhenduanbaogao", params:{"code": code}});
 
       // this.$router.push("/diagnose_report");
-      this.$router.push({name:"diagnose_report", params:{"code": code}});
+      this.$router.push({ name: "diagnose_report", params: { code: code } });
     },
 
     //-------------------------------
     //用户输入的时候
     whenInput: function($event) {
-
       var len = this.hints.length;
 
       //Down键事件
-      if($event.keyCode == 40) {
-
+      if ($event.keyCode == 40) {
         //划到最后一项的时候
-        if(this.activeNo >= len - 1) {
+        if (this.activeNo >= len - 1) {
           console.log("到底了");
           return;
         }
@@ -591,9 +606,8 @@ export default {
       }
 
       //Up键事件
-      if($event.keyCode == 38) {
-
-        if(this.activeNo <= 0) {
+      if ($event.keyCode == 38) {
+        if (this.activeNo <= 0) {
           console.log("到顶了");
           return;
         }
@@ -603,16 +617,20 @@ export default {
       }
 
       //按Enter键
-      if($event.keyCode == 13) {
+      if ($event.keyCode == 13) {
         this.fillInput(this.activeNo);
       }
 
-      if(!this.searchKey) {
+      if (!this.searchKey) {
         this.closeHintsBox();
         return;
       }
 
-      if($event.keyCode !== 38 && $event.keyCode !== 40 && $event.keyCode !== 13) {
+      if (
+        $event.keyCode !== 38 &&
+        $event.keyCode !== 40 &&
+        $event.keyCode !== 13
+      ) {
         this.getHintsList();
       }
 
@@ -630,15 +648,13 @@ export default {
     getHintsList: function() {
       // var baseUrl = "http://client.lemengsc.com/admin";
       var baseUrl = global_url.baseUrl;
-      fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode="+this.searchKey)
-          .then((r) => r.json())
-          .then((r) => {
-            this.hints  = r.obj;
-
-          });
+      fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + this.searchKey)
+        .then((r) => r.json())
+        .then((r) => {
+          this.hints = r.obj || [];
+        });
       // var arr = [{name:"1",code:"11"},
       //   {name:"2",code:"22"}, {name:"3",code:"33"}, {name:"4",code:"44"}]; //模拟后台返回的数据
-
 
       this.showHintsBox = true;
     },
@@ -652,30 +668,29 @@ export default {
 
     //关闭候选框
     closeHintsBox: function() {
-      setTimeout(function() {
+      setTimeout(() => {
         // this.hints = [];
         this.showHintsBox = false;
         this.activeNo = -1;
-      }, 80)
-    }
+      }, 280);
+    },
   },
 
   watch: {
     activeNo: function(val, oldVal) {
-      console.log(val, oldVal)
-      if(val != -1) {
+      console.log(val, oldVal);
+      if (val != -1) {
         //这里可以替换成你想要执行的任意事件
-        for(var i = 0; i < this.hints.length; i++) {
+        for (var i = 0; i < this.hints.length; i++) {
           this.$refs.hint[i].style.backgroundColor = "#fff";
         }
         this.$refs.hint[val].style.backgroundColor = "#DDD8E5";
-        this.searchKey = this.hints[val].code
+        this.searchKey = this.hints[val].code;
       }
     },
   },
 
   //-------------------------------
-
 };
 </script>
 
