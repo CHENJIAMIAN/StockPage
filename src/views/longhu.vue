@@ -19,8 +19,8 @@
           @change="handleChange1"
         >
           <a-icon slot="suffixIcon" type="search" />
-          <a-select-option v-for="d in searchOptions1" :key="d.key">
-            {{ d.value }}
+          <a-select-option v-for="d in searchOptions1" :key="d.code">
+            {{ d.code }} -- {{d.name}}
           </a-select-option>
         </a-select>
       </div>
@@ -80,6 +80,12 @@
       <span class="more">更多 ></span>
     </div>
     <div class="row4">
+      <div
+          v-infinite-scroll="handleInfiniteOnLoad"
+          class="demo-infinite-container"
+          :infinite-scroll-disabled="busy"
+          :infinite-scroll-distance="10"
+      >
       <a-table
         :showHeader="false"
         :pagination="false"
@@ -114,6 +120,10 @@
           <a class="bigtxt blue">行情</a>
         </div>
       </a-table>
+      <div v-if="loading && !busy" class="demo-loading-container">
+        <a-spin />
+      </div>
+      </div>
     </div>
   </div>
 </template>
@@ -128,7 +138,11 @@ export default {
       today: new Date().toLocaleDateString().replace(/\//g, "-"),
       data,
       table_columns,
-      table_data,
+      table_data:[],
+      current_page:0,
+      totalPage:1,
+      loading: false,
+      busy: false,
       searchOptions1: [],
       searchOptions2: [],
       searchValue1: undefined, //undefined才会显示placeholder
@@ -148,21 +162,38 @@ export default {
     onDateChange(date, dateString) {
       console.log(date, dateString);
       // 根据选择date的值去获取 table_data 表数据
-      this.table_data = [];
+      // this.table_data = [];
+      var baseUrl = global_url.baseUrl
+      fetch(baseUrl+"/api/rank/rankList.do?createDate="+dateString)
+          .then((r) => r.json())
+          .then((r) => {
+            this.table_data = r.rows
+          });
     },
     // 获取数据
-    fetchSearchOptions1() {
-      this.searchOptions1 = new Array(10).fill().map((i) => {
-        return { key: Math.random(), value: Math.random() };
-      });
+    fetchSearchOptions1(value) {
+
+      var baseUrl = global_url.baseUrl;
+
+      fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + value)
+          .then((r) => r.json())
+          .then((r) => {
+            console.log( r.obj)
+            this.searchOptions1 = r.obj || [];
+          });
+      // this.searchOptions1 = new Array(10).fill().map((i) => {
+      //   return { key: Math.random(), value: Math.random() };
+      // });
     },
     handleSearch1(value) {
-      this.fetchSearchOptions1();
+      this.fetchSearchOptions1(value);
     },
     handleChange1(value) {
       this.searchValue1 = value;
       // 根据选择的值去获取 table_data 表数据
-      this.table_data = [];
+      // this.table_data = [];
+
+      this.$router.push({ name: "longhu_detail", params: { id: this.searchValue1 } });
     },
     // 获取数据
     fetchSearchOptions2() {
@@ -178,6 +209,31 @@ export default {
       // 根据选择的值去获取 table_data 表数据
       this.table_data = [];
     },
+
+    handleInfiniteOnLoad() {
+      const data = this.table_data;
+      this.loading = true;
+      var that = this
+      const next_page = that.current_page +1;
+      // console.log(next_page+"--"+that.current_page)
+      var baseUrl = global_url.baseUrl;
+      fetch(baseUrl+"/api/rank/rankList.do?pageNo="+next_page+"&pageSize=10")
+          .then((r) => r.json())
+          .then((r) => {
+            if (next_page<=r.totalPage){
+              this.table_data = data.concat(r.rows);
+              this.loading = false;
+              that.current_page=r.pageNo
+              that.totalPage = r.totalPage
+            }else{
+              console.log(r.pageNo+"--"+r.totalPage)
+              this.loading = false;
+            }
+
+          });
+
+    },
+
   },
 };
 </script>
@@ -250,6 +306,16 @@ export default {
   }
   .row4 {
     display: grid;
+  }
+  .demo-infinite-container {
+    overflow: auto;
+    height: calc(100vh - 126px);
+  }
+  .demo-loading-container {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

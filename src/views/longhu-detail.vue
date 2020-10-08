@@ -120,6 +120,7 @@ export default {
     fetch(baseUrl+"/api/rank/rankDetail.do?stockCode="+stockCode)
         .then((r) => r.json())
         .then((r) => {
+          console.log(r.obj)
           this.data=r.obj
         });
   },

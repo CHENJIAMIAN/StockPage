@@ -3,13 +3,13 @@ export const table_columns = [
         title: "排名",
         dataIndex: "id",
         key: "id",
-        customRender: (value, row, index, column) => {
-            // text, record, index, column
-            if (index < 10) return '0' + (index + 1);
-            else return index + 1;
-        },
+        // customRender: (value, row, index, column) => {
+        //     // text, record, index, column
+        //     if (index < 10) return '0' + (index + 1);
+        //     else return index + 1;
+        // },
         // 在有customRender时失效
-        // scopedSlots: { customRender: 'status' },
+        // scopedSlots: { customRender: 'id' },
     },
     {
         title: "较昨日",

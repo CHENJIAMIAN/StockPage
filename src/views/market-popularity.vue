@@ -15,8 +15,8 @@
       @change="handleChange"
     >
       <a-icon slot="suffixIcon" type="search" />
-      <a-select-option v-for="d in searchOptions" :key="d.value">
-        {{ d.text }}
+      <a-select-option v-for="d in searchOptions" :key="d.code">
+        {{ d.code }} -- {{d.name}}
       </a-select-option>
     </a-select>
     <div
@@ -79,31 +79,62 @@ export default {
       table_data: [],
       searchOptions: [],
       searchValue: undefined, //undefined才会显示placeholder
+      current_page:0,
+      totalPage:1,
+
     };
   },
   created() {
-    var baseUrl = global_url.baseUrl;
-    fetch(baseUrl + "/api/popular/popularList.do")
-      .then((r) => r.json())
-      .then((r) => {
-        this.table_data = r.rows;
-      });
+    // var baseUrl = global_url.baseUrl;
+    // fetch(baseUrl + "/api/popular/popularList.do?pageSize=10")
+    //   .then((r) => r.json())
+    //   .then((r) => {
+    //     this.table_data = r.rows;
+    //     this.current_page = r.pageNo;
+    //     this.totalPage = r.totalPage
+    //   });
   },
   methods: {
     handleInfiniteOnLoad() {
       const data = this.table_data;
       this.loading = true;
+      var that = this
+      const next_page = that.current_page +1;
+      // console.log(next_page+"--"+that.current_page)
       var baseUrl = global_url.baseUrl;
-      fetch(baseUrl + "/api/popular/popularList.do")
+      fetch(baseUrl + "/api/popular/popularList.do?pageNo="+next_page+"&pageSize=10")
         .then((r) => r.json())
         .then((r) => {
-          this.table_data = data.concat(r.rows);
-          this.loading = false;
+          if (next_page<=r.totalPage){
+            this.table_data = data.concat(r.rows);
+            this.loading = false;
+            that.current_page=r.pageNo
+            that.totalPage = r.totalPage
+          }else{
+            console.log(r.pageNo+"--"+r.totalPage)
+            this.loading = false;
+          }
         });
     },
-    handleSearch(value) {},
+    handleSearch(value) {
+      console.log("handleSearch"+value)
+      fetch(global_url.baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + value)
+          .then((r) => r.json())
+          .then((r) => {
+            // console.log(r.obj)
+            this.searchOptions = r.obj;
+          });
+    },
     handleChange(value) {
       this.searchValue = value;
+      console.log("handleChange"+value)
+      fetch(global_url.baseUrl + "/api/popular/popular.do?stockCode="+value)
+          .then((r) => r.json())
+          .then((r) => {
+            this.table_data = r.rows;
+            this.current_page = r.pageNo;
+            this.totalPage = r.totalPage
+          });
     },
   },
 };

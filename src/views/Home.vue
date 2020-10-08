@@ -470,7 +470,7 @@ import {
   shichangwendu,
   bankuaihangye,
   gainianbankuai,
-  zhangtingfenxi,
+  // zhangtingfenxi,
 } from "./home_data.js";
 
 export default {
@@ -493,7 +493,7 @@ export default {
       shichangwendu,
       bankuaihangye,
       gainianbankuai,
-      zhangtingfenxi,
+      // zhangtingfenxi,
       solution,
       sum:
         Math.abs(shichangwendu.zhang) +
