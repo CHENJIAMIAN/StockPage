@@ -8,7 +8,13 @@
     <div class="row1">
       <div class="red">
         <div class="price">{{ data.price }}</div>
-        <div class="quote">
+<!--        <div class="quote">-->
+        <div :class="{
+            red: Number(data.quoteChangePercent) > 0,
+            green: Number(data.quoteChangePercent) < 0,
+            gray: Number(data.quoteChangePercent) === 0,
+            bignum: true,
+          }">
           <span style="padding-right:1rem;"
             >{{ data.quoteChangePercent }}%</span
           >
@@ -35,35 +41,50 @@
     </div>
     <!-- 图表 -->
     <div class="row2">
+      <!-- -->
+<!--      <div class="iframe-class" >-->
+<!--        -->
+<!--&lt;!&ndash;        <iframe :src="html_src" ref="iframe" width="100%"></iframe>&ndash;&gt;-->
+<!--      </div>-->
+
+
       <a-tabs default-active-key="2" size="small">
-        <a-tab-pane key="1" tab="新闻公告"></a-tab-pane>
-        <a-tab-pane key="2" tab="龙虎榜">
+        <a-tab-pane key="1" tab="分时">
+          <div class="chart">
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+            <img :src="minute_img_src" ref="img" width="100%" />
+          </div>
+
+        </a-tab-pane>
+        <a-tab-pane key="2" tab="日K">
           <div class="longhu">
-            <!-- <div class="head">
-              <img src="../assets/img/jx.png" />
-              <div>日K</div>
-              <img src="../assets/img/ma5.png" />
-              <div>MA5</div>
-              <img src="../assets/img/ma10.png" />
-              <div>MA10</div>
-              <img src="../assets/img/ma20.png" />
-              <div>MA20</div>
-              <img src="../assets/img/ma30.png" />
-              <div>MA30</div>
-            </div> -->
+<!--            <div class="head">-->
+<!--              <img src="../assets/img/jx.png" />-->
+<!--              <div>日K</div>-->
+<!--              <img src="../assets/img/ma5.png" />-->
+<!--              <div>MA5</div>-->
+<!--              <img src="../assets/img/ma10.png" />-->
+<!--              <div>MA10</div>-->
+<!--              <img src="../assets/img/ma20.png" />-->
+<!--              <div>MA20</div>-->
+<!--              <img src="../assets/img/ma30.png" />-->
+<!--              <div>MA30</div>-->
+<!--            </div>-->
             <div class="chart">
               <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-              <div id="main" style="width: 100%;height:300px;"></div>
+<!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="day_img_src" ref="img" width="100%" />
             </div>
-            <div class="date">
-              <div
-                :class="{ blue: index === 0 }"
-                v-for="(item, index) in historyDates"
-                :key="index"
-              >
-                {{ item }}
-              </div>
-            </div>
+<!--            <div class="date">-->
+<!--              <div-->
+<!--                :class="{ blue: index === 0 }"-->
+<!--                v-for="(item, index) in historyDates"-->
+<!--                :key="index"-->
+<!--              >-->
+<!--                {{ item }}-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </a-tab-pane>
         <a-tab-pane key="3" tab="股东"></a-tab-pane>
@@ -105,6 +126,9 @@ export default {
   data() {
     return {
       data,
+      html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
+      minute_img_src:"http://img1.money.126.net/chart/hs/time/540x360/1002277.png",
+      day_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
       historyDates: new Array(6).fill().map((i, index) =>
         new Date(+new Date() - index * 1000 * 60 * 60 * 24)
           .toLocaleDateString()
@@ -122,17 +146,24 @@ export default {
         .then((r) => {
           console.log(r.obj)
           this.data=r.obj
+          var stockSource = 0
+          if (r.obj.market == 'SZ'){
+            stockSource = 1
+          }
+          this.minute_img_src="http://img1.money.126.net/chart/hs/time/540x360/"+stockSource+""+r.obj.code+".png"
+          this.day_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+stockSource+""+r.obj.code+".png"
+
         });
   },
 
   mounted() {
     this.$emit("title", data.name + " " + data.market + ":" + data.code);
     // 基于准备好的dom，初始化echarts实例
-    var myChart = this.$echarts.init(document.getElementById("main"));
+    // var myChart = this.$echarts.init(document.getElementById("main"));
     // 指定图表的配置项和数据
-    let option = theOption; //import的命名不能与本地变量名重复,否则本地变量会覆盖掉import的变量
+    // let option = theOption; //import的命名不能与本地变量名重复,否则本地变量会覆盖掉import的变量
     // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+    // myChart.setOption(option);
   },
   methods: {},
 };

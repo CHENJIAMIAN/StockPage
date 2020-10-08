@@ -1,15 +1,15 @@
 export const table_columns = [
     {
         title: "排名",
-        dataIndex: "id",
-        key: "id",
+        dataIndex: "rank",
+        key: "rank",
         // customRender: (value, row, index, column) => {
         //     // text, record, index, column
         //     if (index < 10) return '0' + (index + 1);
         //     else return index + 1;
         // },
         // 在有customRender时失效
-        // scopedSlots: { customRender: 'id' },
+        scopedSlots: { customRender: 'rank' },
     },
     {
         title: "较昨日",
@@ -43,7 +43,7 @@ export const table_columns = [
 
 export const table_data = [
     {
-        id: 0,
+        rank: 0,
         codeName: {
             name: "阿里巴巴",
             code: '6003001'
@@ -56,7 +56,7 @@ export const table_data = [
         }
     },
     {
-        id: 1,
+        rank: 1,
         codeName: {
             name: "阿里巴巴",
             code: '6003001'
@@ -69,7 +69,7 @@ export const table_data = [
         }
     },
     {
-        id: 2,
+        rank: 2,
         codeName: {
             name: "阿里巴巴",
             code: '6003001'
@@ -82,7 +82,7 @@ export const table_data = [
         }
     },
     {
-        id: 3,
+        rank: 3,
         codeName: {
             name: "阿里巴巴",
             code: '6003001'
@@ -95,7 +95,7 @@ export const table_data = [
         }
     },
     {
-        id: 4,
+        rank: 4,
         codeName: {
             name: "阿里巴巴",
             code: '6003001'
@@ -108,7 +108,7 @@ export const table_data = [
         }
     },
     {
-        id: 5,
+        rank: 5,
         codeName: {
             name: "阿里巴巴",
             code: '6003001'

@@ -31,9 +31,9 @@
         :data-source="table_data"
         rowKey="id"
       >
-        <div slot="id" slot-scope="id">
-          <div class="bigtxt">{{ id }}</div>
-          <div>{{ id }}</div>
+        <div slot="rank" slot-scope="rank">
+          <div class="bigtxt">{{ rank }}</div>
+<!--          <div>{{ rank }}</div>-->
         </div>
         <div slot="jiaozuori" slot-scope="jiaozuori">
           <img v-if="jiaozuori.isUp" src="../assets/img/up.png" width="16px" />

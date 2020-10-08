@@ -54,7 +54,27 @@
       </div>
 
       <div class="iframe-class" >
-        <iframe :src="html_src" ref="iframe" width="100%"></iframe>
+        <a-tabs default-active-key="2" size="small">
+          <a-tab-pane key="1" tab="分时">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="minute_img_src" ref="img" width="100%" />
+            </div>
+
+          </a-tab-pane>
+          <a-tab-pane key="2" tab="日K">
+            <div class="longhu">
+              <div class="chart">
+                <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+                <img :src="day_img_src" ref="img" width="100%" />
+              </div>
+
+            </div>
+          </a-tab-pane>
+        </a-tabs>
+<!--        <iframe :src="html_src" ref="iframe" width="100%"></iframe>-->
       </div>
 
     </div>
@@ -69,6 +89,8 @@ export default {
   data() {
     return {
       data,
+      minute_img_src:"http://img1.money.126.net/chart/hs/time/540x360/1002277.png",
+      day_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
       html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
     };
   },
@@ -87,9 +109,12 @@ export default {
             this.html_src="http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0"
           }else{
             this.data = r.obj;
+            this.minute_img_src="http://img1.money.126.net/chart/hs/time/540x360/"+r.obj.stockSource+""+r.obj.code+".png"
+            this.day_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+r.obj.stockSource+""+r.obj.code+".png"
+
             // http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0
-            this.html_src="http://m.money.163.com/stock/"+r.obj.stockSource+""+r.obj.code+
-                ".html?from=singlemessage&isappinstalled=0"
+            // this.html_src="http://m.money.163.com/stock/"+r.obj.stockSource+""+r.obj.code+
+            //     ".html?from=singlemessage&isappinstalled=0"
           }
 
         });
