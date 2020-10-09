@@ -1,9 +1,9 @@
 // 龙虎榜详情
 <template>
   <div class="longhu-detail">
-     <div class="row0">
+     <!-- <div class="row0">
       {{ data.name + " " + data.market + ":" + data.code }}
-    </div>
+    </div> -->
     <!-- 头 -->
     <div class="row1">
       <div class="red">
@@ -146,6 +146,8 @@ export default {
         .then((r) => {
           console.log(r.obj)
           this.data=r.obj
+          this.$emit("title", this.data.name + " " + this.data.market + ":" + this.data.code);
+
           var stockSource = 0
           if (r.obj.market == 'SZ'){
             stockSource = 1
@@ -157,7 +159,6 @@ export default {
   },
 
   mounted() {
-    this.$emit("title", data.name + " " + data.market + ":" + data.code);
     // 基于准备好的dom，初始化echarts实例
     // var myChart = this.$echarts.init(document.getElementById("main"));
     // 指定图表的配置项和数据
