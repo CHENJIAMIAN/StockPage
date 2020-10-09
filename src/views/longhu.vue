@@ -20,7 +20,7 @@
         >
           <a-icon slot="suffixIcon" type="search" />
           <a-select-option v-for="d in searchOptions1" :key="d.code">
-            {{ d.code }} -- {{d.name}}
+            {{ d.code }} -- {{ d.name }}
           </a-select-option>
         </a-select>
       </div>
@@ -81,48 +81,49 @@
     </div>
     <div class="row4">
       <div
-          v-infinite-scroll="handleInfiniteOnLoad"
-          class="demo-infinite-container"
-          :infinite-scroll-disabled="busy"
-          :infinite-scroll-distance="10"
+        v-infinite-scroll="handleInfiniteOnLoad"
+        class="demo-infinite-container"
+        :infinite-scroll-disabled="busy"
+        :infinite-scroll-distance="10"
       >
-      <a-table
-        :showHeader="false"
-        :pagination="false"
-        :columns="table_columns"
-        :data-source="table_data"
-        rowKey="id"
-      >
-        <div slot="codeName" slot-scope="codeName">
-          <div class="bigtxt black">{{ codeName.name }}</div>
-          <div>{{ codeName.code }}</div>
-        </div>
-        <div slot="zhangfu" slot-scope="zhangfu">
-          <div
-            :class="{
-              red: Number(zhangfu) > 0,
-              green: Number(zhangfu) < 0,
-              gray: Number(zhangfu) === 0,
-              bignum: true,
-            }"
-          >
-            {{ zhangfu }}%
+        <a-table
+          :showHeader="false"
+          :pagination="false"
+          :columns="table_columns"
+          :data-source="table_data"
+          rowKey="id"
+        >
+          <div slot="codeName" slot-scope="codeName">
+            <div class="bigtxt black">{{ codeName.name }}</div>
+            <div>{{ codeName.code }}</div>
           </div>
+          <div slot="zhangfu" slot-scope="zhangfu">
+            <div
+              :class="{
+                red: Number(zhangfu) > 0,
+                green: Number(zhangfu) < 0,
+                gray: Number(zhangfu) === 0,
+                bignum: true,
+              }"
+            >
+              {{ zhangfu }}%
+            </div>
+          </div>
+          <div slot="详情" slot-scope="详情, record">
+            <a
+              class="bigtxt red"
+              @click="$router.push(`/longhu_detail/` + record.codeName.code)"
+              >详情</a
+            >
+          </div>
+          <div slot="连板天" slot-scope="连板天">
+            <a class="bigtxt blue">行情</a>
+          </div>
+        </a-table>
+        <div v-if="loading && !busy" class="demo-loading-container">
+          <a-spin />
         </div>
-        <div slot="详情" slot-scope="详情, record">
-          <a
-            class="bigtxt red"
-            @click="$router.push(`/longhu_detail/` + record.codeName.code)"
-            >详情</a
-          >
-        </div>
-        <div slot="连板天" slot-scope="连板天">
-          <a class="bigtxt blue">行情</a>
-        </div>
-      </a-table>
-      <div v-if="loading && !busy" class="demo-loading-container">
-        <a-spin />
-      </div>
+        <div v-show="alreadyBottom" style="text-align: center;">到底啦</div>
       </div>
     </div>
   </div>
@@ -131,16 +132,17 @@
 <script>
 import moment from "moment";
 import { data, table_columns, table_data } from "@/views/longhu_data.js";
-import global_url from "../App.vue"
+import global_url from "../App.vue";
 export default {
   data() {
     return {
+      alreadyBottom: false,
       today: new Date().toLocaleDateString().replace(/\//g, "-"),
       data,
       table_columns,
-      table_data:[],
-      current_page:0,
-      totalPage:1,
+      table_data: [],
+      current_page: 0,
+      totalPage: 1,
       loading: false,
       busy: false,
       searchOptions1: [],
@@ -150,12 +152,12 @@ export default {
     };
   },
   created() {
-    var baseUrl = global_url.baseUrl
-    fetch(baseUrl+"/api/rank/rankList.do")
-        .then((r) => r.json())
-        .then((r) => {
-          this.table_data = r.rows
-        });
+    var baseUrl = global_url.baseUrl;
+    fetch(baseUrl + "/api/rank/rankList.do")
+      .then((r) => r.json())
+      .then((r) => {
+        this.table_data = r.rows;
+      });
   },
   methods: {
     moment,
@@ -163,24 +165,23 @@ export default {
       console.log(date, dateString);
       // 根据选择date的值去获取 table_data 表数据
       // this.table_data = [];
-      var baseUrl = global_url.baseUrl
-      fetch(baseUrl+"/api/rank/rankList.do?createDate="+dateString)
-          .then((r) => r.json())
-          .then((r) => {
-            this.table_data = r.rows
-          });
+      var baseUrl = global_url.baseUrl;
+      fetch(baseUrl + "/api/rank/rankList.do?createDate=" + dateString)
+        .then((r) => r.json())
+        .then((r) => {
+          this.table_data = r.rows;
+        });
     },
     // 获取数据
     fetchSearchOptions1(value) {
-
       var baseUrl = global_url.baseUrl;
 
       fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + value)
-          .then((r) => r.json())
-          .then((r) => {
-            console.log( r.obj)
-            this.searchOptions1 = r.obj || [];
-          });
+        .then((r) => r.json())
+        .then((r) => {
+          console.log(r.obj);
+          this.searchOptions1 = r.obj || [];
+        });
       // this.searchOptions1 = new Array(10).fill().map((i) => {
       //   return { key: Math.random(), value: Math.random() };
       // });
@@ -193,7 +194,10 @@ export default {
       // 根据选择的值去获取 table_data 表数据
       // this.table_data = [];
 
-      this.$router.push({ name: "longhu_detail", params: { id: this.searchValue1 } });
+      this.$router.push({
+        name: "longhu_detail",
+        params: { id: this.searchValue1 },
+      });
     },
     // 获取数据
     fetchSearchOptions2() {
@@ -213,27 +217,27 @@ export default {
     handleInfiniteOnLoad() {
       const data = this.table_data;
       this.loading = true;
-      var that = this
-      const next_page = that.current_page +1;
+      var that = this;
+      const next_page = that.current_page + 1;
       // console.log(next_page+"--"+that.current_page)
       var baseUrl = global_url.baseUrl;
-      fetch(baseUrl+"/api/rank/rankList.do?pageNo="+next_page+"&pageSize=10")
-          .then((r) => r.json())
-          .then((r) => {
-            if (next_page<=r.totalPage){
-              this.table_data = data.concat(r.rows);
-              this.loading = false;
-              that.current_page=r.pageNo
-              that.totalPage = r.totalPage
-            }else{
-              console.log(r.pageNo+"--"+r.totalPage)
-              this.loading = false;
-            }
-
-          });
-
+      fetch(
+        baseUrl + "/api/rank/rankList.do?pageNo=" + next_page + "&pageSize=10"
+      )
+        .then((r) => r.json())
+        .then((r) => {
+          if (next_page <= r.totalPage) {
+            this.table_data = data.concat(r.rows);
+            this.loading = false;
+            that.current_page = r.pageNo;
+            that.totalPage = r.totalPage;
+          } else {
+            console.log(r.pageNo + "--" + r.totalPage);
+            this.loading = false;
+            this.alreadyBottom = true;
+          }
+        });
     },
-
   },
 };
 </script>

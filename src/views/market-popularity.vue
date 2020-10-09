@@ -16,7 +16,7 @@
     >
       <a-icon slot="suffixIcon" type="search" />
       <a-select-option v-for="d in searchOptions" :key="d.code">
-        {{ d.code }} -- {{d.name}}
+        {{ d.code }} -- {{ d.name }}
       </a-select-option>
     </a-select>
     <div
@@ -33,7 +33,7 @@
       >
         <div slot="rank" slot-scope="rank">
           <div class="bigtxt">{{ rank }}</div>
-<!--          <div>{{ rank }}</div>-->
+          <!--          <div>{{ rank }}</div>-->
         </div>
         <div slot="jiaozuori" slot-scope="jiaozuori">
           <img v-if="jiaozuori.isUp" src="../assets/img/up.png" width="16px" />
@@ -63,6 +63,7 @@
       <div v-if="loading && !busy" class="demo-loading-container">
         <a-spin />
       </div>
+      <div v-show="alreadyBottom" style="text-align: center;">到底啦</div>
     </div>
   </div>
 </template>
@@ -73,15 +74,15 @@ import global_url from "../App.vue";
 export default {
   data() {
     return {
+      alreadyBottom: false,
       loading: false,
       busy: false,
       table_columns,
       table_data: [],
       searchOptions: [],
       searchValue: undefined, //undefined才会显示placeholder
-      current_page:0,
-      totalPage:1,
-
+      current_page: 0,
+      totalPage: 1,
     };
   },
   created() {
@@ -98,43 +99,49 @@ export default {
     handleInfiniteOnLoad() {
       const data = this.table_data;
       this.loading = true;
-      var that = this
-      const next_page = that.current_page +1;
+      var that = this;
+      const next_page = that.current_page + 1;
       // console.log(next_page+"--"+that.current_page)
       var baseUrl = global_url.baseUrl;
-      fetch(baseUrl + "/api/popular/popularList.do?pageNo="+next_page+"&pageSize=10")
+      fetch(
+        baseUrl +
+          "/api/popular/popularList.do?pageNo=" +
+          next_page +
+          "&pageSize=10"
+      )
         .then((r) => r.json())
         .then((r) => {
-          if (next_page<=r.totalPage){
+          if (next_page <= r.totalPage) {
             this.table_data = data.concat(r.rows);
             this.loading = false;
-            that.current_page=r.pageNo
-            that.totalPage = r.totalPage
-          }else{
-            console.log(r.pageNo+"--"+r.totalPage)
+            that.current_page = r.pageNo;
+            that.totalPage = r.totalPage;
+          } else {
+            console.log(r.pageNo + "--" + r.totalPage);
             this.loading = false;
+            this.alreadyBottom = true;
           }
         });
     },
     handleSearch(value) {
-      console.log("handleSearch"+value)
+      console.log("handleSearch" + value);
       fetch(global_url.baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + value)
-          .then((r) => r.json())
-          .then((r) => {
-            // console.log(r.obj)
-            this.searchOptions = r.obj;
-          });
+        .then((r) => r.json())
+        .then((r) => {
+          // console.log(r.obj)
+          this.searchOptions = r.obj;
+        });
     },
     handleChange(value) {
       this.searchValue = value;
-      console.log("handleChange"+value)
-      fetch(global_url.baseUrl + "/api/popular/popular.do?stockCode="+value)
-          .then((r) => r.json())
-          .then((r) => {
-            this.table_data = r.rows;
-            this.current_page = r.pageNo;
-            this.totalPage = r.totalPage
-          });
+      console.log("handleChange" + value);
+      fetch(global_url.baseUrl + "/api/popular/popular.do?stockCode=" + value)
+        .then((r) => r.json())
+        .then((r) => {
+          this.table_data = r.rows;
+          this.current_page = r.pageNo;
+          this.totalPage = r.totalPage;
+        });
     },
   },
 };
