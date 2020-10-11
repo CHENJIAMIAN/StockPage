@@ -54,7 +54,7 @@
       </div>
 
       <div class="iframe-class" >
-        <a-tabs default-active-key="2" size="small">
+        <a-tabs default-active-key="1" size="small">
           <a-tab-pane key="1" tab="分时">
             <div class="chart">
               <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
@@ -63,12 +63,52 @@
             </div>
 
           </a-tab-pane>
-          <a-tab-pane key="2" tab="日K">
+          <a-tab-pane key="2" tab="日K(1月)">
             <div class="longhu">
               <div class="chart">
                 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
                 <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
-                <img :src="day_img_src" ref="img" width="100%" />
+                <img :src="day_month_img_src" ref="img" width="100%" />
+              </div>
+
+            </div>
+          </a-tab-pane>
+          <a-tab-pane key="3" tab="日K(1季)">
+            <div class="longhu">
+              <div class="chart">
+                <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+                <img :src="season_img_src" ref="img" width="100%" />
+              </div>
+
+            </div>
+          </a-tab-pane>
+          <a-tab-pane key="4" tab="日K(半年)">
+            <div class="longhu">
+              <div class="chart">
+                <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+                <img :src="half_year_img_src" ref="img" width="100%" />
+              </div>
+
+            </div>
+          </a-tab-pane>
+          <a-tab-pane key="5" tab="周K">
+            <div class="longhu">
+              <div class="chart">
+                <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+                <img :src="week_img_src" ref="img" width="100%" />
+              </div>
+
+            </div>
+          </a-tab-pane>
+          <a-tab-pane key="6" tab="月K">
+            <div class="longhu">
+              <div class="chart">
+                <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+                <img :src="month_img_src" ref="img" width="100%" />
               </div>
 
             </div>
@@ -90,7 +130,11 @@ export default {
     return {
       data,
       minute_img_src:"http://img1.money.126.net/chart/hs/time/540x360/1002277.png",
-      day_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
+      day_month_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
+      season_img_src:"http://img1.money.126.net/chart/hs/kline/day/90/1002277.png",
+      half_year_img_src:"http://img1.money.126.net/chart/hs/kline/day/180/1002277.png",
+      week_img_src:"http://img1.money.126.net/chart/hs/kline/week/1002277.png",
+      month_img_src:"http://img1.money.126.net/chart/hs/kline/month/1002277.png",
       html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
     };
   },
@@ -111,6 +155,10 @@ export default {
             this.data = r.obj;
             this.minute_img_src="http://img1.money.126.net/chart/hs/time/540x360/"+r.obj.stockSource+""+r.obj.code+".png"
             this.day_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+r.obj.stockSource+""+r.obj.code+".png"
+            this.season_img_src="http://img1.money.126.net/chart/hs/kline/day/90/"+r.obj.stockSource+""+r.obj.code+".png"
+            this.half_year_img_src="http://img1.money.126.net/chart/hs/kline/day/180/"+r.obj.stockSource+""+r.obj.code+".png"
+            this.week_img_src="http://img1.money.126.net/chart/hs/kline/week/"+r.obj.stockSource+""+r.obj.code+".png"
+            this.month_img_src="http://img1.money.126.net/chart/hs/kline/month/"+r.obj.stockSource+""+r.obj.code+".png"
 
             // http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0
             // this.html_src="http://m.money.163.com/stock/"+r.obj.stockSource+""+r.obj.code+

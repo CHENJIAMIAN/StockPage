@@ -99,23 +99,21 @@ export default {
     handleInfiniteOnLoad() {
       const data = this.table_data;
       this.loading = true;
-      var that = this;
-      const next_page = that.current_page + 1;
-      // console.log(next_page+"--"+that.current_page)
-      var baseUrl = global_url.baseUrl;
+      const next_page = this.current_page + 1;
       fetch(
-        baseUrl +
+          global_url.baseUrl +
           "/api/popular/popularList.do?pageNo=" +
           next_page +
           "&pageSize=10"
       )
         .then((r) => r.json())
         .then((r) => {
+          console.log(r.pageNo + "--" + r.totalPage);
           if (next_page <= r.totalPage) {
             this.table_data = data.concat(r.rows);
             this.loading = false;
-            that.current_page = r.pageNo;
-            that.totalPage = r.totalPage;
+            this.current_page = r.pageNo;
+            this.totalPage = r.totalPage;
           } else {
             console.log(r.pageNo + "--" + r.totalPage);
             this.loading = false;

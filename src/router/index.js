@@ -114,6 +114,22 @@ const routes = [
     meta: {
       title: "诊断报告"
     }
+  },
+  {
+    path: '/review_summary',
+    name: 'review_summary',
+    component: () => import('@/views/review-summary.vue'),
+    meta: {
+      title: "复盘总结"
+    }
+  },
+  {
+    path: '/business_fund',
+    name: 'business_fund',
+    component: () => import('@/views/business-fund.vue'),
+    meta: {
+      title: "板块行业"
+    }
   }
 
 
