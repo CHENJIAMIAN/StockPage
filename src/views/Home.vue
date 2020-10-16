@@ -365,7 +365,7 @@
     <div class="zhangtingfenxi">
       <div class="zhangtingfenxi-head">
         <div class="title-txt">涨停分析</div>
-        <div class="more-txt" @click="handleRoute('longhu')">更多➔</div>
+        <div class="more-txt" @click="handleRoute('daily_limit_analysis')">更多➔</div>
       </div>
       <a-tabs default-active-key="1" size="large">
         <a-tab-pane key="1" tab="昨日涨停(100)">昨日涨停(100)</a-tab-pane>

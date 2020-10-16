@@ -1,4 +1,4 @@
-// 步步高升策略
+<!--// 步步高升策略-->
 <template>
   <div
     v-infinite-scroll="handleInfiniteOnLoad"
@@ -17,8 +17,10 @@
         <div>{{ id }}</div>
       </div>
       <div slot="codeName" slot-scope="codeName">
-        <div class="bigtxt">{{ codeName.name }}</div>
-        <div>{{ codeName.code }}</div>
+        <a @click="$router.push(`/stock_detail/` + codeName.code)">
+          <div class="bigtxt">{{ codeName.name }}</div>
+          <div>{{ codeName.code }}</div>
+        </a>
       </div>
       <div slot="zhangdiefu" slot-scope="zhangdiefu">
         <div
@@ -72,6 +74,21 @@ export default {
     //     // this.table_data = r.rows
     //   });
   },
+
+  beforeCreate () {
+    var solution_id = this.$route.params.id
+    if(solution_id==1){
+      document.title = "短线收割机"
+    }else if(solution_id==2){
+      document.title = "步步高升"
+    }else if (solution_id==3){
+      document.title = "金牛角"
+    }else{
+      document.title = "策略池"
+    }
+
+  },
+
   methods: {
     handleInfiniteOnLoad() {
       const data = this.table_data;

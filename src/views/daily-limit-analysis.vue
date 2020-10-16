@@ -68,6 +68,7 @@ export default {
     fetch(baseUrl+"/api/replay/statistic.do")
         .then((r) => r.json())
         .then((r) => {
+          console.log(r.obj)
           this.data = r.obj
         });
   },

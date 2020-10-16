@@ -8,21 +8,24 @@ export const data = {
                     id: 0,
                     name: "天山生物",
                     zhangdiefu: '-0.50%',
-                    sale: "-80",
+                    buyamt:"0.00",
+                    saleamt:"0.00",
                     unit: "亿"
                 },
                 {
                     id: 1,
                     name: "天山生物",
                     zhangdiefu: '+0.50%',
-                    sale: "+80",
+                    buyamt:"0.00",
+                    saleamt:"0.00",
                     unit: "亿"
                 },
                 {
                     id: 2,
                     name: "天山生物",
                     zhangdiefu: '-0.50%',
-                    sale: "-80",
+                    buyamt:"0.00",
+                    saleamt:"0.00",
                     unit: "亿"
                 }
             ]
@@ -35,21 +38,24 @@ export const data = {
                     id: 0,
                     name: "天山生物",
                     zhangdiefu: '-0.50%',
-                    sale: "-80",
+                    buyamt:"0.00",
+                    saleamt:"0.00",
                     unit: "亿"
                 },
                 {
                     id: 1,
                     name: "天山生物",
                     zhangdiefu: '+0.50%',
-                    sale: "+80",
+                    buyamt:"0.00",
+                    saleamt:"0.00",
                     unit: "亿"
                 },
                 {
                     id: 2,
                     name: "天山生物",
                     zhangdiefu: '-0.50%',
-                    sale: "-80",
+                    buyamt:"0.00",
+                    saleamt:"0.00",
                     unit: "亿"
                 }
             ]

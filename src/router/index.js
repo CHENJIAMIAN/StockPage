@@ -130,6 +130,14 @@ const routes = [
     meta: {
       title: "板块行业"
     }
+  },
+  {
+    path: '/stock_detail/:id',
+    name: 'stock_detail',
+    component: () => import('@/views/stock-detail.vue'),
+    meta: {
+
+    }
   }
 
 

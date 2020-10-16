@@ -94,8 +94,10 @@
           rowKey="id"
         >
           <div slot="codeName" slot-scope="codeName">
-            <div class="bigtxt black">{{ codeName.name }}</div>
-            <div>{{ codeName.code }}</div>
+            <a @click="$router.push(`/stock_detail/` + codeName.code)">
+              <div class="bigtxt ">{{ codeName.name }}</div>
+              <div>{{ codeName.code }}</div>
+            </a>
           </div>
           <div slot="zhangfu" slot-scope="zhangfu">
             <div

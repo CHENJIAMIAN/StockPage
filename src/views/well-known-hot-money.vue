@@ -22,33 +22,48 @@
             <div class="block-row-square-type">
               <span
                 :class="{
-                  red: Number(item.sale) > 0,
-                  green: Number(item.sale) < 0,
-                  gray: Number(item.sale) === 0,
+                  red: Number(item.zhangdiefu) > 0,
+                  green: Number(item.zhangdiefu) < 0,
+                  gray: Number(item.zhangdiefu) === 0,
                 }"
               >
-                {{ item.zhangdiefu }}
+                {{ item.zhangdiefu }}%
               </span>
             </div>
             <div class="block-row-square-amount">
               <span
                 :class="{
-                  red: Number(item.sale) > 0,
-                  green: Number(item.sale) < 0,
-                  gray: Number(item.sale) === 0,
+                  red: Number(item.buyamt) > 0,
+                  green: Number(item.buyamt) < 0,
+                  gray: Number(item.buyamt) === 0,
                   tag: true,
                 }"
-                >{{ item.sale > 0 ? "买入" : "卖出" }}</span
+                >{{"买入" }}</span
               >
               <span
                 :class="{
-                  red: Number(item.sale) > 0,
-                  green: Number(item.sale) < 0,
-                  gray: Number(item.sale) === 0,
+                  red: Number(item.buyamt) > 0,
+                  gray: Number(item.buyamt) === 0,
                 }"
                 style="background:unset;"
               >
-                {{ item.sale }}{{ item.unit }}
+                {{ item.buyamt }}{{ item.unit }}
+              </span>
+              <span
+                  :class="{
+                  green: Number(item.saleamt) > 0,
+                  gray: Number(item.saleamt) === 0,
+                  tag: true,
+                }"
+              >{{ "卖出" }}</span >
+                <span
+                    :class="{
+                  green: Number(item.saleamt) > 0,
+                  gray: Number(item.saleamt) === 0,
+                }"
+                    style="background:unset;"
+                >
+                {{ item.saleamt }}{{ item.unit }}
               </span>
             </div>
           </div>

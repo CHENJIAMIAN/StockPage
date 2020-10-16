@@ -1,6 +1,6 @@
 // 龙虎榜详情
 <template>
-  <div class="longhu-detail">
+  <div class="stock-detail">
      <!-- <div class="row0">
       {{ data.name + " " + data.market + ":" + data.code }}
     </div> -->
@@ -23,20 +23,28 @@
       </div>
       <div class="row1-col2">
         <div class="row1-col2-row1">
-          <span>总值:</span>
-          <span>{{ data.totalValue + data.totalValueUnit }}</span>
-          <span style="padding-left:1rem;">主营:</span>
-          <span>{{ data.mainBusiness }}</span>
+          <span>今开：</span>
+          <span class="red">{{ data.openPrice }} </span>
+          <span style="padding-left:1rem;">最高：</span>
+          <span class="red">{{ data.highest }}</span>
+          <span>最低：</span>
+          <span class="red">{{ data.lowest }} </span>
+          <span>成交量：</span>
+          <span >{{ data.tradeover }} 万手 </span>
+          <span>市盈：</span>
+          <span>{{ data.priceEarningRatio }} </span>
+          <span>市净：</span>
+          <span>{{ data.priceBookRatio }}</span>
         </div>
-        <div class="row1-col2-row2">
-          <span>流值:</span>
-          <span>{{ data.circulationValue + data.circulationValueUnit }}</span>
-          <span style="padding-left:1rem;">牛散:</span>
-          <span class="blue" :key="item.id" v-for="item in data.awesomeRetail">
-            {{ item.name }}
-          </span>
-          <span class="more blue">更多</span>
-        </div>
+<!--        <div class="row1-col2-row2">-->
+<!--          <span>流值:</span>-->
+<!--          <span>{{ data.circulationValue + data.circulationValueUnit }}</span>-->
+<!--          <span style="padding-left:1rem;">牛散:</span>-->
+<!--          <span class="blue" :key="item.id" v-for="item in data.awesomeRetail">-->
+<!--            {{ item.name }}-->
+<!--          </span>-->
+<!--          <span class="more blue">更多</span>-->
+<!--        </div>-->
       </div>
     </div>
     <!-- 图表 -->
@@ -58,116 +66,106 @@
 
         </a-tab-pane>
         <a-tab-pane key="2" tab="日K">
-          <div class="longhu">
-<!--            <div class="head">-->
-<!--              <img src="../assets/img/jx.png" />-->
-<!--              <div>日K</div>-->
-<!--              <img src="../assets/img/ma5.png" />-->
-<!--              <div>MA5</div>-->
-<!--              <img src="../assets/img/ma10.png" />-->
-<!--              <div>MA10</div>-->
-<!--              <img src="../assets/img/ma20.png" />-->
-<!--              <div>MA20</div>-->
-<!--              <img src="../assets/img/ma30.png" />-->
-<!--              <div>MA30</div>-->
-<!--            </div>-->
+          <div class="stock">
             <div class="chart">
-              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-<!--              <div id="main" style="width: 100%;height:300px;"></div>-->
-              <img :src="day_img_src" ref="img" width="100%" />
+              <img :src="day_month_img_src" ref="img" width="100%" />
             </div>
-<!--            <div class="date">-->
-<!--              <div-->
-<!--                :class="{ blue: index === 0 }"-->
-<!--                v-for="(item, index) in historyDates"-->
-<!--                :key="index"-->
-<!--              >-->
-<!--                {{ item }}-->
-<!--              </div>-->
-<!--            </div>-->
           </div>
         </a-tab-pane>
-        <a-tab-pane key="3" tab="股东"></a-tab-pane>
-        <a-tab-pane key="4" tab="互动"></a-tab-pane>
-        <a-tab-pane key="5" tab="财务"></a-tab-pane>
-        <a-tab-pane key="6" tab="主营"></a-tab-pane>
+        <a-tab-pane key="3" tab="日K(1季)">
+          <div class="longhu">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="season_img_src" ref="img" width="100%" />
+            </div>
+
+          </div>
+        </a-tab-pane>
+        <a-tab-pane key="4" tab="日K(半年)">
+          <div class="longhu">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="half_year_img_src" ref="img" width="100%" />
+            </div>
+
+          </div>
+        </a-tab-pane>
+        <a-tab-pane key="5" tab="周K">
+          <div class="longhu">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="week_img_src" ref="img" width="100%" />
+            </div>
+
+          </div>
+        </a-tab-pane>
+        <a-tab-pane key="6" tab="月K">
+          <div class="longhu">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="month_img_src" ref="img" width="100%" />
+            </div>
+
+          </div>
+        </a-tab-pane>
       </a-tabs>
     </div>
     <!-- 蓝条 -->
-    <div class="detail">
-      <div class="grid"
-           v-for="rankDetail in data.stockRankDetail"
-           :key="rankDetail.id">
-          <div class="row3">{{ rankDetail.msg }}</div>
-          <div class="row4">
-            <div class="grid"
-                 v-for="buyAndSell in rankDetail.maximumBuyAndSell"
-                 :key="buyAndSell.id">
-                <div class="name">{{ buyAndSell.name }}</div>
-                <div class="item" v-for="item in buyAndSell.list" :key="item.id">
-                  <div>
-                    <span class="blue">{{ item.name }}</span>
-                    <span class="gray">历史</span>
-                  </div>
-                  <div class="buy-sale">
-                    <div class="red">{{ item.buy + item.buyUnit }}</div>
-                    <div class="green">{{ item.sale + item.saleUnit }}</div>
-                  </div>
-                </div>
-            </div>
-          </div>
-
-      </div>
-
-    </div>
-<!--    <div class="row3">{{ data.msg }}</div>-->
-    <!-- 买入 卖出 -->
-<!--    <div class="row4">-->
-<!--      <div-->
-<!--        class="grid"-->
-<!--        v-for="maximumBuyAndSell in data.maximumBuyAndSell"-->
-<!--        :key="maximumBuyAndSell.id"-->
-<!--      >-->
-<!--        <div class="name">{{ maximumBuyAndSell.name }}</div>-->
-<!--        <div class="item" v-for="item in maximumBuyAndSell.list" :key="item.id">-->
-<!--          <div>-->
-<!--            <span class="blue">{{ item.name }}</span>-->
-<!--            <span class="gray">历史</span>-->
+<!--    <div class="detail">-->
+<!--      <div class="grid"-->
+<!--           v-for="rankDetail in data.stockRankDetail"-->
+<!--           :key="rankDetail.id">-->
+<!--          <div class="row3">{{ rankDetail.msg }}</div>-->
+<!--          <div class="row4">-->
+<!--            <div class="grid"-->
+<!--                 v-for="buyAndSell in rankDetail.maximumBuyAndSell"-->
+<!--                 :key="buyAndSell.id">-->
+<!--                <div class="name">{{ buyAndSell.name }}</div>-->
+<!--                <div class="item" v-for="item in buyAndSell.list" :key="item.id">-->
+<!--                  <div>-->
+<!--                    <span class="blue">{{ item.name }}</span>-->
+<!--                    <span class="gray">历史</span>-->
+<!--                  </div>-->
+<!--                  <div class="buy-sale">-->
+<!--                    <div class="red">{{ item.buy + item.buyUnit }}</div>-->
+<!--                    <div class="green">{{ item.sale + item.saleUnit }}</div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--            </div>-->
 <!--          </div>-->
-<!--          <div class="buy-sale">-->
-<!--            <div class="red">{{ item.buy + item.buyUnit }}</div>-->
-<!--            <div class="green">{{ item.sale + item.saleUnit }}</div>-->
-<!--          </div>-->
-<!--        </div>-->
 <!--      </div>-->
 <!--    </div>-->
+
   </div>
 </template>
 
 <script>
-import { data } from "@/views/longhudetail_data.js";
+import { data } from "@/views/stockdetail_data.js";
 import theOption from "@/views/klinechart_data.js";
 import global_url from "../App.vue"
 export default {
   data() {
     return {
       data,
-      html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
       minute_img_src:"http://img1.money.126.net/chart/hs/time/540x360/1002277.png",
-      day_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
-      historyDates: new Array(6).fill().map((i, index) =>
-        new Date(+new Date() - index * 1000 * 60 * 60 * 24)
-          .toLocaleDateString()
-          .replace(/\//g, "-")
-          .replace(/(-)\d-/, (v1, v2, index) => v1.replace("-", "-0"))
-      ),
+      day_month_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
+      season_img_src:"http://img1.money.126.net/chart/hs/kline/day/90/1002277.png",
+      half_year_img_src:"http://img1.money.126.net/chart/hs/kline/day/180/1002277.png",
+      week_img_src:"http://img1.money.126.net/chart/hs/kline/week/1002277.png",
+      month_img_src:"http://img1.money.126.net/chart/hs/kline/month/1002277.png",
+      html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
     };
   },
 
   created() {
     var stockCode=this.$route.params.id
+    console.log(stockCode)
     var baseUrl = global_url.baseUrl
-    fetch(baseUrl+"/api/rank/rankDetail.do?stockCode="+stockCode)
+    fetch(baseUrl+"/api/stockDetail/stockDetail.do?stockCode="+stockCode)
         .then((r) => r.json())
         .then((r) => {
           console.log(r.obj)
@@ -178,8 +176,15 @@ export default {
           if (r.obj.market == 'SZ'){
             stockSource = 1
           }
+
+
           this.minute_img_src="http://img1.money.126.net/chart/hs/time/540x360/"+stockSource+""+r.obj.code+".png"
-          this.day_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+stockSource+""+r.obj.code+".png"
+          this.day_month_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+stockSource+""+r.obj.code+".png"
+          this.season_img_src="http://img1.money.126.net/chart/hs/kline/day/90/"+stockSource+""+r.obj.code+".png"
+          this.half_year_img_src="http://img1.money.126.net/chart/hs/kline/day/180/"+stockSource+""+r.obj.code+".png"
+          this.week_img_src="http://img1.money.126.net/chart/hs/kline/week/"+stockSource+""+r.obj.code+".png"
+          this.month_img_src="http://img1.money.126.net/chart/hs/kline/month/"+stockSource+""+r.obj.code+".png"
+          console.log(this.minute_img_src)
 
         });
   },
@@ -197,7 +202,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.longhu-detail {
+.stock-detail {
   display: grid;
   .row0 {
     padding: 1rem;
@@ -250,7 +255,7 @@ export default {
   .row2 {
     display: grid;
     padding: 1rem;
-    .longhu {
+    .stock {
       display: grid;
       grid-template-rows: 1fr auto;
       // grid-template-rows: auto 1fr auto;

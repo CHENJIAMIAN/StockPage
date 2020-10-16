@@ -41,8 +41,10 @@
           <span class="bigtxt">{{ jiaozuori.value }}</span>
         </div>
         <div slot="codeName" slot-scope="codeName">
-          <div class="bigtxt">{{ codeName.name }}</div>
-          <div>{{ codeName.code }}</div>
+          <a @click="$router.push(`/stock_detail/` + codeName.code)">
+            <div class="bigtxt">{{ codeName.name }}</div>
+            <div>{{ codeName.code }}</div>
+          </a>
         </div>
         <div slot="xianjia" slot-scope="xianjia">
           <div class="bignum red">{{ xianjia }}</div>
