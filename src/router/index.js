@@ -101,7 +101,7 @@ const routes = [
     }
   },
   {
-    path: '/longhu_detail/:id',
+    path: '/longhu_detail',
     name: 'longhu_detail',
     component: () => import('@/views/longhu-detail.vue'),
     meta: {
@@ -129,6 +129,14 @@ const routes = [
     component: () => import('@/views/business-fund.vue'),
     meta: {
       title: "板块行业"
+    }
+  },
+  {
+    path: '/concept_fund',
+    name: 'concept_fund',
+    component: () => import('@/views/concept-fund.vue'),
+    meta: {
+      title: "概念行业"
     }
   },
   {

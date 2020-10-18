@@ -165,9 +165,14 @@ export default {
   },
 
   created() {
-    var stockCode=this.$route.params.id
+    var stockCode=this.$route.query.code
+    var createDate= this.$route.query.createDate
+    if (createDate == null || createDate == 'undefined'){
+      createDate = ""
+    }
+    console.log(this.$route.query)
     var baseUrl = global_url.baseUrl
-    fetch(baseUrl+"/api/rank/rankDetail.do?stockCode="+stockCode)
+    fetch(baseUrl+"/api/rank/rankDetail.do?stockCode="+stockCode+"&createDate="+createDate)
         .then((r) => r.json())
         .then((r) => {
           console.log(r.obj)

@@ -18,7 +18,9 @@
             v-for="item in personObj.stocks"
             :key="item.id"
           >
-            <div class="block-row-square-name">{{ item.name }}</div>
+
+              <div class="block-row-square-name"><a @click="$router.push(`/stock_detail/` + item.code)">{{ item.name }}</a></div>
+
             <div class="block-row-square-type">
               <span
                 :class="{

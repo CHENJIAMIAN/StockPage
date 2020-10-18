@@ -1,5 +1,5 @@
 <template>
-  <div class="business-fund">
+  <div class="concept-fund">
   <div
       v-infinite-scroll="handleInfiniteOnLoad"
       class="demo-infinite-container"
@@ -88,19 +88,17 @@ export default {
 
       fetch(
           global_url.baseUrl +
-          "/api/businessFund/business.do?pageNo=" +
+          "/api/conceptFund/concept.do?pageNo=" +
           next_page +
           "&pageSize=10"
       )
           .then((r) => r.json())
           .then((r) => {
-            console.log(r.pageNo + "--" + r.totalPage);
             if (next_page <= r.totalPage) {
               this.table_data = data.concat(r.rows);
               this.loading = false;
               this.current_page = r.pageNo;
               this.totalPage = r.totalPage;
-              console.log(this.loading +" "+this.busy)
             } else {
               console.log(r.pageNo + "--" + r.totalPage);
               this.loading = false;
@@ -115,7 +113,7 @@ export default {
 <style lang="scss" scoped>
 .demo-infinite-container {
   overflow: auto;
-  height: calc(100vh - 77px);
+  height: calc(100vh - 70px);
 }
 .demo-loading-container {
   position: absolute;

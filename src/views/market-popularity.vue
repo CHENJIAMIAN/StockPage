@@ -128,7 +128,6 @@ export default {
       fetch(global_url.baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + value)
         .then((r) => r.json())
         .then((r) => {
-          // console.log(r.obj)
           this.searchOptions = r.obj;
         });
     },
@@ -142,6 +141,7 @@ export default {
           this.current_page = r.pageNo;
           this.totalPage = r.totalPage;
         });
+      this.searchValue=[]
     },
   },
 };

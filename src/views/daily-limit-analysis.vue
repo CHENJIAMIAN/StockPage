@@ -71,6 +71,15 @@ export default {
           console.log(r.obj)
           this.data = r.obj
         });
+
+    fetch(baseUrl+"/api/replay/replayDistinctDate.do")
+        .then((r) => r.json())
+        .then((r) => {
+          console.log(r.obj)
+          this.historyDates = r.obj
+        });
+
+
   },
 };
 </script>

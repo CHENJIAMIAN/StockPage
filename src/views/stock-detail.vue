@@ -184,7 +184,6 @@ export default {
           this.half_year_img_src="http://img1.money.126.net/chart/hs/kline/day/180/"+stockSource+""+r.obj.code+".png"
           this.week_img_src="http://img1.money.126.net/chart/hs/kline/week/"+stockSource+""+r.obj.code+".png"
           this.month_img_src="http://img1.money.126.net/chart/hs/kline/month/"+stockSource+""+r.obj.code+".png"
-          console.log(this.minute_img_src)
 
         });
   },

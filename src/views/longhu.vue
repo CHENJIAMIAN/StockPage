@@ -53,13 +53,14 @@
         <a-date-picker
           style="float:right;"
           size="large"
-          :default-value="
-            today.charAt(0) === '2'
-              ? moment(today, 'YYYY-MM-DD')
-              : moment(today, 'MM-DD-YYYY')
-          "
+
           @change="onDateChange"
         />
+        <!--          :default-value="-->
+        <!--            today.charAt(0) === '2'-->
+        <!--              ? moment(today, 'YYYY-MM-DD')-->
+        <!--              : moment(today, 'MM-DD-YYYY')-->
+        <!--          "-->
       </div>
       <div class="row2-row2">
         <span class="name">上榜个股</span>
@@ -71,7 +72,10 @@
           }}
         </span>
         <span>
-          {{ "星期" + "日一二三四五六".charAt(new Date().getDay()) }}</span
+<!--          {{ "星期" + "日一二三四五六".charAt(new Date().getDay()) }}</span-->
+          {{ "星期" + "日一二三四五六".charAt(new Date(today.charAt(0) === "2"
+            ? moment(today, "YYYY-MM-DD").format("YYYY-MM-DD")
+            : moment(today, "MM-DD-YYYY").format("YYYY-MM-DD")).getDay()) }}</span
         >
       </div>
     </div>
@@ -114,9 +118,10 @@
           <div slot="详情" slot-scope="详情, record">
             <a
               class="bigtxt red"
-              @click="$router.push(`/longhu_detail/` + record.codeName.code)"
+              @click="viewDetail( record.codeName.code)"
               >详情</a
             >
+<!--            @click="$router.push(`/longhu_detail/` + record.codeName.code)"-->
           </div>
           <div slot="连板天" slot-scope="连板天">
             <a class="bigtxt blue">行情</a>
@@ -158,10 +163,14 @@ export default {
     fetch(baseUrl + "/api/rank/rankList.do")
       .then((r) => r.json())
       .then((r) => {
+        console.log(r.rows)
         this.table_data = r.rows;
       });
   },
   methods: {
+    viewDetail(code){
+      this.$router.push({path:"/longhu_detail/",query:{code:code,createDate:this.today}})
+    },
     moment,
     onDateChange(date, dateString) {
       console.log(date, dateString);
@@ -172,21 +181,19 @@ export default {
         .then((r) => r.json())
         .then((r) => {
           this.table_data = r.rows;
+          this.today=dateString;
         });
     },
     // 获取数据
     fetchSearchOptions1(value) {
       var baseUrl = global_url.baseUrl;
+      console.log(value)
 
       fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + value)
         .then((r) => r.json())
         .then((r) => {
-          console.log(r.obj);
           this.searchOptions1 = r.obj || [];
         });
-      // this.searchOptions1 = new Array(10).fill().map((i) => {
-      //   return { key: Math.random(), value: Math.random() };
-      // });
     },
     handleSearch1(value) {
       this.fetchSearchOptions1(value);
@@ -197,8 +204,9 @@ export default {
       // this.table_data = [];
 
       this.$router.push({
-        name: "longhu_detail",
-        params: { id: this.searchValue1 },
+        path: "/longhu_detail/",
+        query: { code: this.searchValue1,
+          createDate:this.today },
       });
     },
     // 获取数据
@@ -219,8 +227,7 @@ export default {
     handleInfiniteOnLoad() {
       const data = this.table_data;
       this.loading = true;
-      var that = this;
-      const next_page = that.current_page + 1;
+      const next_page = this.current_page + 1;
       // console.log(next_page+"--"+that.current_page)
       var baseUrl = global_url.baseUrl;
       fetch(
@@ -231,8 +238,13 @@ export default {
           if (next_page <= r.totalPage) {
             this.table_data = data.concat(r.rows);
             this.loading = false;
-            that.current_page = r.pageNo;
-            that.totalPage = r.totalPage;
+            this.current_page = r.pageNo;
+            this.totalPage = r.totalPage;
+            if(r.rows!=null && r.rows[0].date!=null){
+              console.log(r.rows[0].date);
+              this.today = r.rows[0].date
+            }
+
           } else {
             console.log(r.pageNo + "--" + r.totalPage);
             this.loading = false;

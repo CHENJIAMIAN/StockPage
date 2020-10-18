@@ -18,41 +18,52 @@
     </div>
     <div class="wkhmd-row3">
       <div v class="name">上榜历史</div>
-      <a-table
-        :pagination="false"
-        :columns="listedHistory_columns"
-        :data-source="listedHistory_data"
-        rowKey="id"
+      <div
+          v-infinite-scroll="handleInfiniteOnLoad"
+          class="demo-infinite-container"
+          :infinite-scroll-disabled="busy"
+          :infinite-scroll-distance="10"
       >
-        <div slot="上榜股票" slot-scope="上榜股票">
-          <div class="bigtxt">{{ 上榜股票.名称 }}</div>
-          <div>{{ 上榜股票.代码 }}</div>
-        </div>
-        <div slot="买入" slot-scope="买入">
-          <div
-            :class="{
-              red: Number(买入.value) > 0,
-              green: Number(买入.value) < 0,
-              gray: Number(买入.value) === 0,
-              bignum: true,
-            }"
-          >
-            {{ 买入.value + 买入.unit }}
+        <a-table
+          :pagination="false"
+          :columns="listedHistory_columns"
+          :data-source="listedHistory_data"
+          rowKey="id"
+        >
+          <div slot="nameCode" slot-scope="nameCode">
+            <a @click="$router.push(`/stock_detail/` + nameCode.code)">
+              <div class="bigtxt">{{ nameCode.name }}</div>
+              <div>{{ nameCode.code }}</div>
+            </a>
           </div>
-        </div>
-        <div slot="卖出" slot-scope="卖出, record">
-          <div
-            :class="{
-              red: Number(record.买入.value) > 0,
-              green: Number(record.买入.value) < 0,
-              gray: Number(record.买入.value) === 0,
-              bignum: true,
-            }"
-          >
-            {{ 卖出.value + 卖出.unit }}
+          <div slot="buyAmt" slot-scope="buyAmt">
+            <div
+              :class="{
+                red: Number(buyAmt) > 0,
+                gray: Number(buyAmt) === 0,
+                bignum: true,
+              }"
+            >
+              {{ buyAmt }} 万
+            </div>
           </div>
+          <div slot="sellAmt" slot-scope="sellAmt, record">
+            <div
+              :class="{
+                green: Number(record.sellAmt) > 0,
+                gray: Number(record.sellAmt) === 0,
+                bignum: true,
+              }"
+            >
+              {{ sellAmt  }} 万
+            </div>
+          </div>
+        </a-table>
+        <div v-if="loading && !busy" class="demo-loading-container">
+          <a-spin />
         </div>
-      </a-table>
+        <div v-show="alreadyBottom" style="text-align: center;">到底啦</div>
+      </div>
     </div>
   </div>
 </template>
@@ -66,9 +77,14 @@ import global_url from "../App.vue"
 export default {
   data() {
     return {
+      alreadyBottom: false,
+      loading: false,
+      busy: false,
       data,
       listedHistory_columns,
-      listedHistory_data,
+      listedHistory_data:[],
+      current_page: 0,
+      totalPage: 1,
     };
   },
   created() {
@@ -80,7 +96,37 @@ export default {
         .then((r) => {
           this.data = r.obj
         });
+
   },
+
+  methods: {
+    handleInfiniteOnLoad() {
+      var idleFundId = this.$route.params.id;
+      const data = this.listedHistory_data;
+      this.loading = true;
+      const next_page = this.current_page + 1;
+      fetch(
+          global_url.baseUrl +
+          "/api/idle/idleRankHistoryList.do?pageNo=" +next_page +"&idleFundId="+idleFundId+
+          "&pageSize=10"
+      )
+          .then((r) => r.json())
+          .then((r) => {
+            console.log(r.pageNo + "--" + r.totalPage);
+            if (next_page <= r.totalPage) {
+              this.listedHistory_data = data.concat(r.rows);
+              this.loading = false;
+              this.current_page = r.pageNo;
+              this.totalPage = r.totalPage;
+            } else {
+              console.log(r.pageNo + "--" + r.totalPage);
+              this.loading = false;
+              this.alreadyBottom = true;
+            }
+          });
+    },
+  },
+
 };
 </script>
 <style lang="scss" scoped>

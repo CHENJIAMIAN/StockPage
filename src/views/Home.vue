@@ -310,7 +310,7 @@
 
     <div class="bankuaihangye">
       <div class="bankuaihangye-head">
-        <div class="title-txt">板块行业</div>
+        <div class="title-txt">行业板块</div>
         <div class="more-txt" @click="handleRoute('business_fund')">更多➔</div>
       </div>
       <div class="bankuaihangye-content">
@@ -330,7 +330,9 @@
           >
             {{ obj.zhangdie }}%
           </div>
-          <div class="graytxt">{{ obj.gongsi }}</div>
+          <div class="graytxt">
+            <a @click="$router.push(`/stock_detail/` + obj.codeName.code)">{{ obj.codeName.name }}</a>
+          </div>
         </div>
       </div>
     </div>
@@ -338,7 +340,7 @@
     <div class="gainianbankuai bankuaihangye">
       <div class="bankuaihangye-head">
         <div class="title-txt">概念板块</div>
-        <div class="more-txt">更多➔</div>
+        <div class="more-txt" @click="handleRoute('concept_fund')">更多➔</div>
       </div>
       <div class="bankuaihangye-content">
         <div
@@ -357,7 +359,9 @@
           >
             {{ obj.zhangdie }}%
           </div>
-          <div class="graytxt">{{ obj.gongsi }}</div>
+          <div class="graytxt">
+            <a @click="$router.push(`/stock_detail/` + obj.codeName.code)">{{ obj.codeName.name }}</a>
+          </div>
         </div>
       </div>
     </div>

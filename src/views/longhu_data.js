@@ -45,6 +45,7 @@ export const table_data = [
             code: '6003001'
         },
         zhangfu: "+8.80",
+        date:"20201016"
     },
     {
         id: 1,
@@ -53,6 +54,7 @@ export const table_data = [
             code: '6003001'
         },
         zhangfu: "+8.80",
+        date:"20201016"
     },
     {
         id: 2,
@@ -61,6 +63,7 @@ export const table_data = [
             code: '6003001'
         },
         zhangfu: "+8.80",
+        date:"20201016"
     },
     {
         id: 3,
@@ -69,6 +72,7 @@ export const table_data = [
             code: '6003001'
         },
         zhangfu: "+8.80",
+        date:"20201016"
     },
     {
         id: 4,
@@ -77,6 +81,7 @@ export const table_data = [
             code: '6003001'
         },
         zhangfu: "+8.80",
+        date:"20201016"
     },
     {
         id: 5,
@@ -85,5 +90,6 @@ export const table_data = [
             code: '6003001'
         },
         zhangfu: "+8.80",
+        date:"20201016"
     }
 ];

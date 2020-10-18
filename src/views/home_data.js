@@ -326,32 +326,50 @@ export const bankuaihangye = [
         id: 1,
         hangye: '食品加工制造',
         zhangdie: '-3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 2,
         hangye: '食品加工制造',
         zhangdie: '-3.4',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 3,
         hangye: '食品加工制造',
         zhangdie: '+3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 4,
         hangye: '食品加工制造',
         zhangdie: '+3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 6,
         hangye: '食品加工制造',
         zhangdie: '+3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 7,
         hangye: '食品加工制造',
         zhangdie: '+3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     },
 ]
 
@@ -360,32 +378,50 @@ export const gainianbankuai = [
         id: 1,
         hangye: '食品加工制造',
         zhangdie: '-3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 2,
         hangye: '食品加工制造',
         zhangdie: '+3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 3,
         hangye: '食品加工制造',
         zhangdie: '-4.0',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 4,
         hangye: '食品加工制造',
         zhangdie: '+3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 6,
         hangye: '食品加工制造',
         zhangdie: '+3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     }, {
         id: 7,
         hangye: '食品加工制造',
         zhangdie: '+3.70',
-        gongsi: '天润乳业'
+        codeName: {
+            name: "天润乳业",
+            code: '6003001'
+        },
     },
 ];
 

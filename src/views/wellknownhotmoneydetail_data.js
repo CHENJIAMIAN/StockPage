@@ -17,8 +17,8 @@ export const data = {
 export const listedHistory_columns = [
     {
         title: "时间",
-        dataIndex: "时间",
-        key: "时间",
+        dataIndex: "date",
+        key: "date",
         customRender: (value, row, index, column) => {
             // text, record, index, column
             column.class = 'bigtxt'
@@ -53,23 +53,23 @@ export const listedHistory_columns = [
     },
     {
         title: "上榜股票",
-        dataIndex: "上榜股票",
-        key: "上榜股票",
-        scopedSlots: { customRender: '上榜股票' },
+        dataIndex: "nameCode",
+        key: "nameCode",
+        scopedSlots: { customRender: 'nameCode' },
         align: 'right'
     },
     {
         title: "买入",
-        dataIndex: "买入",
-        key: "买入",
-        scopedSlots: { customRender: '买入' },
+        dataIndex: "buyAmt",
+        key: "buyAmt",
+        scopedSlots: { customRender: 'buyAmt' },
         align: 'right'
     },
     {
         title: "卖出",
-        dataIndex: "卖出",
-        key: "卖出",
-        scopedSlots: { customRender: '卖出' },
+        dataIndex: "sellAmt",
+        key: "sellAmt",
+        scopedSlots: { customRender: 'sellAmt' },
         align: 'right'
     },
 ];
@@ -77,104 +77,74 @@ export const listedHistory_columns = [
 export const listedHistory_data = [
     {
         id: 0,
-        时间: "2020-9-21",
-        上榜股票: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        date: "2020-9-21",
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        买入: {
-            value: "+1000",
-            unit: '万'
-        },
-        卖出: {
-            value: "+1000",
-            unit: '万'
-        },
+        buyAmt: "+1000",
+        sellAmt: "+1000",
+        units: '万'
 
     },
     {
         id: 1,
-        时间: "2020-9-21",
-        上榜股票: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        date: "2020-9-21",
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        买入: {
-            value: "-1000",
-            unit: '万'
-        },
-        卖出: {
-            value: "+1000",
-            unit: '万'
-        },
+        buyAmt: "+1000",
+        sellAmt: "+1000",
+        units: '万'
 
     },
     {
         id: 2,
-        时间: "2020-9-20",
-        上榜股票: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        date: "2020-9-21",
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        买入: {
-            value: "-1000",
-            unit: '万'
-        },
-        卖出: {
-            value: "+1000",
-            unit: '万'
-        },
+        buyAmt: "+1000",
+        sellAmt: "+1000",
+        units: '万'
 
     },
     {
         id: 3,
-        时间: "2020-9-20",
-        上榜股票: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        date: "2020-9-21",
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        买入: {
-            value: "-1000",
-            unit: '万'
-        },
-        卖出: {
-            value: "+1000",
-            unit: '万'
-        },
+        buyAmt: "+1000",
+        sellAmt: "+1000",
+        units: '万'
 
     },
     {
         id: 4,
-        时间: "2020-9-18",
-        上榜股票: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        date: "2020-9-21",
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        买入: {
-            value: "-1000",
-            unit: '万'
-        },
-        卖出: {
-            value: "+1000",
-            unit: '万'
-        },
+        buyAmt: "+1000",
+        sellAmt: "+1000",
+        units: '万'
 
     },
     {
         id: 5,
-        时间: "2020-9-18",
-        上榜股票: {
-            名称: "阿里巴巴",
-            代码: '6003001'
+        date: "2020-9-21",
+        nameCode: {
+            name: "阿里巴巴",
+            code: '6003001'
         },
-        买入: {
-            value: "-1000",
-            unit: '万'
-        },
-        卖出: {
-            value: "+1000",
-            unit: '万'
-        },
+        buyAmt: "+1000",
+        sellAmt: "+1000",
+        units: '万'
 
     }
 ];
