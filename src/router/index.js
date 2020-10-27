@@ -37,7 +37,7 @@ const routes = [
     }
   },
   {
-    path: '/wkhmd/:id',
+    path: '/wkhmd/',
     name: 'wkhmd',
     component: () => import('@/views/well-known-hot-money-detail.vue'),
     meta: {
@@ -77,7 +77,7 @@ const routes = [
     }
   },
   {
-    path: '/daily_limit_analysis_detail/:date',
+    path: '/daily_limit_analysis_detail',
     name: 'daily_limit_analysis_detail',
     component: () => import('@/views/daily-limit-analysis-detail.vue'),
     meta: {

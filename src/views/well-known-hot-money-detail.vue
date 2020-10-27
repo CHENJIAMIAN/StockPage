@@ -89,7 +89,8 @@ export default {
   },
   created() {
     // 根据id去获取数据
-    var idleFundId = this.$route.params.id;
+    // var idleFundId = this.$route.params.id;
+    var idleFundId = this.$route.query.idleFundId;
     var baseUrl = global_url.baseUrl
     fetch(baseUrl+"/api/idle/idleFundOrgList.do?idleFundId="+idleFundId)
         .then((r) => r.json())
@@ -101,14 +102,24 @@ export default {
 
   methods: {
     handleInfiniteOnLoad() {
-      var idleFundId = this.$route.params.id;
+      var createDate = this.$route.query.createDate;
+      var idleFundId = this.$route.query.idleFundId;
+      var url = global_url.baseUrl +"/api/idle/idleRankHistoryList.do"
+
+      if(idleFundId ==null || createDate == 'undefined'){
+        alert("出错啦，游资id有误，请重新操作")
+        return;
+      }
+      url +="?idleFundId="+idleFundId
+      if (createDate != null && createDate != '' && createDate != 'undefined'){
+        url +="&createDate="+createDate
+      }
       const data = this.listedHistory_data;
       this.loading = true;
       const next_page = this.current_page + 1;
       fetch(
-          global_url.baseUrl +
-          "/api/idle/idleRankHistoryList.do?pageNo=" +next_page +"&idleFundId="+idleFundId+
-          "&pageSize=10"
+          url +
+          "&pageNo=" +next_page + "&pageSize=10"
       )
           .then((r) => r.json())
           .then((r) => {

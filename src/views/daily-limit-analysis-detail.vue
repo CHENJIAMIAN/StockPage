@@ -12,6 +12,7 @@
         :pagination="false"
         :columns="table_columns"
         :data-source="table_data"
+        :customRow="click"
         rowKey="id"
       >
         <div slot="nameCode" slot-scope="nameCode">
@@ -71,12 +72,45 @@ export default {
     // this.date = this.$route.params.date;
   },
   methods: {
+    // table 每一行点击事件
+    click(record, index){
+      return {
+        on: {
+          click: () => {
+            this.$router.push(`/stock_detail/` + record.nameCode.code).catch(err => {err});
+          }
+        }
+      }
+    },
+
     handleInfiniteOnLoad() {
+      this.date = this.$route.query.createDate;
+      var countValue = this.$route.query.countValue;
+      var beginValue = this.$route.query.beginValue;
+      var endValue = this.$route.query.endValue;
+      var  subject = this.$route.query.subject;
+      var url = global_url.baseUrl +"/api/replay/replayList.do"
+      if (this.date == null || this.date == 'undefined'){
+        this.date = ""
+      }
+      url +="?createDate="+this.date;
+
+      if(countValue !=null && countValue !="" && countValue !="undefined"){
+        url +="&countValue="+countValue
+      }
+      if(beginValue !=null && beginValue !="" && beginValue !="undefined"){
+        url +="&beginValue="+beginValue
+      }
+      if(endValue !=null && endValue !="" && endValue !="undefined"){
+        url +="&endValue="+endValue
+      }
+      if(subject !=null && subject !="" && subject !="undefined"){
+        url +="&subject="+subject
+      }
       const data = this.table_data;
       this.loading = true;
-      this.date = this.$route.params.date;
       const next_page = this.current_page + 1;
-      fetch(global_url.baseUrl +"/api/replay/replayList.do?createDate="+this.date+"&pageNo=" +next_page + "&pageSize=10")
+      fetch(url+"&pageNo=" +next_page + "&pageSize=10")
           .then((r) => r.json())
           .then((r) => {
             if (next_page <= r.totalPage) {

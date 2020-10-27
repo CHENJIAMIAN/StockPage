@@ -49,7 +49,10 @@ export const table_data = [
             code: '6003001'
         },
         zhangdiefu: "-8.80",
-        xianjia: 6,
+        xianjia: {
+            value:"6",
+            isUp:false
+        },
         jiaozuori: {
             value: "3",
             isUp: false
@@ -62,7 +65,10 @@ export const table_data = [
             code: '6003001'
         },
         zhangdiefu: "+8.80",
-        xianjia: 6,
+        xianjia: {
+            value:"6",
+            isUp:false
+        },
         jiaozuori: {
             value: "3",
             isUp: true
@@ -75,7 +81,10 @@ export const table_data = [
             code: '6003001'
         },
         zhangdiefu: "+8.80",
-        xianjia: 6,
+        xianjia: {
+            value:"6",
+            isUp:false
+        },
         jiaozuori: {
             value: "3",
             isUp: true
@@ -88,7 +97,10 @@ export const table_data = [
             code: '6003001'
         },
         zhangdiefu: "+8.80",
-        xianjia: 6,
+        xianjia: {
+            value:"6",
+            isUp:false
+        },
         jiaozuori: {
             value: "3",
             isUp: true
@@ -101,7 +113,10 @@ export const table_data = [
             code: '6003001'
         },
         zhangdiefu: "+8.80",
-        xianjia: 6,
+        xianjia: {
+            value:"6",
+            isUp:false
+        },
         jiaozuori: {
             value: "3",
             isUp: true
@@ -114,7 +129,10 @@ export const table_data = [
             code: '6003001'
         },
         zhangdiefu: "+8.80",
-        xianjia: 6,
+        xianjia: {
+            value:"6",
+            isUp:false
+        },
         jiaozuori: {
             value: "3",
             isUp: true

@@ -373,6 +373,8 @@ export const bankuaihangye = [
     },
 ]
 
+export const marketReview={title:"20201010复盘总结"}
+
 export const gainianbankuai = [
     {
         id: 1,

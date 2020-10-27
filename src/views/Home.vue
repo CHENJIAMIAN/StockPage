@@ -3,7 +3,7 @@
     <div class="search">
       <a-input-search
         size="large"
-        placeholder=" 请输入名称或代码：如友阿股份"
+        placeholder=" 请输入股票名称或代码"
         v-model="searchKey"
         ref="searchInput"
         v-on:keyup="whenInput($event)"
@@ -19,6 +19,9 @@
           <a-icon type="medicine-box" :style="{ fontSize: '1.2rem' }" /> 诊股
         </a-button>
       </a-input-search>
+      <div v-show="searchCauseError" class="searchCauseError">
+        <span class="red" :style="{ fontSize: '0.5rem' }" >{{errorMessage}}</span>
+      </div>
       <div
         class="hintsbox ant-select-dropdown--single ant-select-dropdown-placement-bottomLeft"
         v-show="showHintsBox"
@@ -98,9 +101,9 @@
       </div>
     </div>
     <div class="notify blue">
-      <div class="notify-col1">
+      <div class="notify-col1 padding" @click="handleReview(marketReview.createDate)">
         <img src="../assets/img/laba.png" />
-        {{ new Date().toLocaleDateString() }}复盘总结
+        {{ marketReview.title }}
       </div>
       <div class="notify-col2" @click="handleRoute('review_summary')">更多➔</div>
     </div>
@@ -366,52 +369,52 @@
       </div>
     </div>
 
-    <div class="zhangtingfenxi">
-      <div class="zhangtingfenxi-head">
-        <div class="title-txt">涨停分析</div>
-        <div class="more-txt" @click="handleRoute('daily_limit_analysis')">更多➔</div>
-      </div>
-      <a-tabs default-active-key="1" size="large">
-        <a-tab-pane key="1" tab="昨日涨停(100)">昨日涨停(100)</a-tab-pane>
-        <a-tab-pane key="2" tab="今日连板(25)"> </a-tab-pane>
-        <a-tab-pane key="3" tab="最高6连板"></a-tab-pane>
-      </a-tabs>
-      <div class="zhangtingfenxi-row1"></div>
-      <a-table
-        :pagination="false"
-        :columns="zhangtingfenxi_columns"
-        :data-source="zhangtingfenxi_data"
-        rowKey="id"
-      >
-        <div slot="nameCode" slot-scope="nameCode">
-          <div class="bigtxt">{{ nameCode.name }}</div>
-          <div>{{ nameCode.code }}</div>
-        </div>
-        <div slot="zhangdiefu" slot-scope="zhangdiefu">
-          <div class="bignum red">{{ zhangdiefu }}%</div>
-        </div>
-        <div slot="lianbantianshu" slot-scope="lianbantianshu">
-          <div class="bignum red">{{ lianbantianshu }}</div>
-        </div>
-        <div slot="subject" slot-scope="subject">
-          <div class="bigtxt">{{ subject }}</div>
-        </div>
+<!--    <div class="zhangtingfenxi">-->
+<!--      <div class="zhangtingfenxi-head">-->
+<!--        <div class="title-txt">涨停分析</div>-->
+<!--        <div class="more-txt" @click="handleRoute('daily_limit_analysis')">更多➔</div>-->
+<!--      </div>-->
+<!--      <a-tabs default-active-key="1" size="large">-->
+<!--        <a-tab-pane key="1" tab="昨日涨停(100)">昨日涨停(100)</a-tab-pane>-->
+<!--        <a-tab-pane key="2" tab="今日连板(25)"> </a-tab-pane>-->
+<!--        <a-tab-pane key="3" tab="最高6连板"></a-tab-pane>-->
+<!--      </a-tabs>-->
+<!--      <div class="zhangtingfenxi-row1"></div>-->
+<!--      <a-table-->
+<!--        :pagination="false"-->
+<!--        :columns="zhangtingfenxi_columns"-->
+<!--        :data-source="zhangtingfenxi_data"-->
+<!--        rowKey="id"-->
+<!--      >-->
+<!--        <div slot="nameCode" slot-scope="nameCode">-->
+<!--          <div class="bigtxt">{{ nameCode.name }}</div>-->
+<!--          <div>{{ nameCode.code }}</div>-->
+<!--        </div>-->
+<!--        <div slot="zhangdiefu" slot-scope="zhangdiefu">-->
+<!--          <div class="bignum red">{{ zhangdiefu }}%</div>-->
+<!--        </div>-->
+<!--        <div slot="lianbantianshu" slot-scope="lianbantianshu">-->
+<!--          <div class="bignum red">{{ lianbantianshu }}</div>-->
+<!--        </div>-->
+<!--        <div slot="subject" slot-scope="subject">-->
+<!--          <div class="bigtxt">{{ subject }}</div>-->
+<!--        </div>-->
 
-        <!--        <div slot="代码名称" slot-scope="代码名称">-->
-        <!--          <div class="bigtxt">{{ 代码名称.名称 }}</div>-->
-        <!--          <div>{{ 代码名称.代码 }}</div>-->
-        <!--        </div>-->
-        <!--        <div slot="涨跌幅" slot-scope="涨跌幅">-->
-        <!--          <div class="bignum red">{{ 涨跌幅 }}%</div>-->
-        <!--        </div>-->
-        <!--        <div slot="连扳天数" slot-scope="连扳天数">-->
-        <!--          <div class="bignum red">{{ 连扳天数 }}</div>-->
-        <!--        </div>-->
-        <!--        <div slot="概念" slot-scope="概念">-->
-        <!--          <div class="bigtxt">{{ 概念 }}</div>-->
-        <!--        </div>-->
-      </a-table>
-    </div>
+<!--        &lt;!&ndash;        <div slot="代码名称" slot-scope="代码名称">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="bigtxt">{{ 代码名称.名称 }}</div>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div>{{ 代码名称.代码 }}</div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <div slot="涨跌幅" slot-scope="涨跌幅">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="bignum red">{{ 涨跌幅 }}%</div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <div slot="连扳天数" slot-scope="连扳天数">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="bignum red">{{ 连扳天数 }}</div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <div slot="概念" slot-scope="概念">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="bigtxt">{{ 概念 }}</div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </a-table>-->
+<!--    </div>-->
 
     <div class="solution">
       <div class="solution-row1 title-txt">策略池</div>
@@ -470,6 +473,7 @@ import {
   zhangtingfenxi_data,
   solution_columns,
   solution_data,
+  marketReview,
   zhishu,
   shichangwendu,
   bankuaihangye,
@@ -486,13 +490,16 @@ export default {
     return {
       searchKey: "",
       hints: [],
+      searchCauseError:false,
+      errorMessage:"请输入股票名称或代码",
+      searchSelect:false,
       showHintsBox: false,
       activeNo: -1,
-
       zhangtingfenxi_columns,
       zhangtingfenxi_data,
       solution_columns,
       solution_data,
+      marketReview,
       zhishu,
       shichangwendu,
       bankuaihangye,
@@ -517,6 +524,12 @@ export default {
       .then((r) => {
         this.zhangtingfenxi_data = r.obj;
       });
+    // 复盘总结
+    fetch(baseUrl + "/home/review.do")
+        .then((r) => r.json())
+        .then((r) => {
+          this.marketReview = r.obj;
+        });
 
     //市场指数
     fetch(baseUrl + "/home/summary.do")
@@ -575,20 +588,36 @@ export default {
   },
   mounted() {},
   methods: {
+
+
     handleRoute(routeName) {
       this.$router.push(`/${routeName}`);
+    },
+    handleReview(createDate){
+      this.$router.push({ path: "review_summary", query: { createDate: createDate } });
     },
 
     handleZhenguClick() {
       var code = this.searchKey;
-      console.log(code);
-      if (typeof code == "undefined") {
+      if (code == '' || typeof code == "undefined") {
         this.$refs.searchInput.focus();
+        this.errorMessage='请输入股票名称或代码'
+        this.searchCauseError=true;
         return;
       }
-      // this.$router.push({name:"zhenduanbaogao", params:{"code": code}});
 
-      // this.$router.push("/diagnose_report");
+      if(this.searchCauseError ){
+        this.$refs.searchInput.focus();
+        this.searchCauseError=false;
+        return;
+      }
+      if(!this.searchSelect){
+        this.searchCauseError=true;
+        this.$refs.searchInput.focus();
+        this.errorMessage='请选择搜索结果中匹配中的股票或代码'
+        return;
+      }
+
       this.$router.push({ name: "diagnose_report", params: { code: code } });
     },
 
@@ -655,11 +684,20 @@ export default {
       fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + this.searchKey)
         .then((r) => r.json())
         .then((r) => {
+          if(r.obj==null){
+            this.searchCauseError=true;
+            this.$refs.searchInput.focus();
+            this.errorMessage="请输入正确的股票名称或代码"
+          }else if(r.obj.length==1 && (this.searchKey== r.obj[0].code || this.searchKey==r.obj[0].name)){
+            this.searchCauseError=false;
+            this.searchSelect=true;
+          }
+          else{
+            this.searchCauseError=false;
+            this.searchSelect=false;
+          }
           this.hints = r.obj || [];
         });
-      // var arr = [{name:"1",code:"11"},
-      //   {name:"2",code:"22"}, {name:"3",code:"33"}, {name:"4",code:"44"}]; //模拟后台返回的数据
-
       this.showHintsBox = true;
     },
 
@@ -667,6 +705,7 @@ export default {
     fillInput: function(index) {
       this.searchKey = this.hints[index].code;
       this.showHintsBox = false;
+      this.searchSelect= true;
       this.closeHintsBox();
     },
 
@@ -706,6 +745,13 @@ export default {
       border: none;
       background: #f7f7f7;
     }
+
+
+
+
+  }
+  .searchCauseError{
+    padding: 0px 10px 0px 30px;
   }
 }
 
@@ -814,6 +860,7 @@ export default {
     img {
       width: 1.8rem;
     }
+    width:15.2rem;
   }
   &-col2 {
     justify-self: end;
@@ -882,7 +929,8 @@ export default {
     &-col1 {
     }
     &-col2 {
-      justify-self: center;
+      padding: 5px 10px 45px 15px;
+      //justify-self: center;
       font-size: 1.15rem;
       font-weight: bold;
       color: #000000b8;
@@ -992,6 +1040,7 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+
 ::v-deep {
   .ant-input-search > input {
     border-radius: 32px !important;

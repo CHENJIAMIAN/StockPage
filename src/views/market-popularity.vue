@@ -29,6 +29,7 @@
         :pagination="false"
         :columns="table_columns"
         :data-source="table_data"
+        :customRow="click"
         rowKey="id"
       >
         <div slot="rank" slot-scope="rank">
@@ -37,17 +38,20 @@
         </div>
         <div slot="jiaozuori" slot-scope="jiaozuori">
           <img v-if="jiaozuori.isUp" src="../assets/img/up.png" width="16px" />
-          <img v-else src="../assets/img/down.png" width="16px" />
+          <img v-else src="../assets/img/down.png" width="16px" :style="jiaozuori.value==0?'display:none':'display:true'"/>
           <span class="bigtxt">{{ jiaozuori.value }}</span>
         </div>
         <div slot="codeName" slot-scope="codeName">
-          <a @click="$router.push(`/stock_detail/` + codeName.code)">
             <div class="bigtxt">{{ codeName.name }}</div>
             <div>{{ codeName.code }}</div>
-          </a>
         </div>
         <div slot="xianjia" slot-scope="xianjia">
-          <div class="bignum red">{{ xianjia }}</div>
+          <div
+              :class="xianjia.up ? 'red bignum' : 'green bignum'"
+
+          >
+            {{ xianjia.value }}
+          </div>
         </div>
         <div slot="zhangdiefu" slot-scope="zhangdiefu">
           <div
@@ -98,6 +102,17 @@ export default {
     //   });
   },
   methods: {
+    click(record, index){
+      return {
+        on: {
+          click: () => {
+            this.$router.push(`/stock_detail/` + record.codeName.code)
+          }
+        }
+      }
+    },
+
+
     handleInfiniteOnLoad() {
       const data = this.table_data;
       this.loading = true;
@@ -110,7 +125,7 @@ export default {
       )
         .then((r) => r.json())
         .then((r) => {
-          console.log(r.pageNo + "--" + r.totalPage);
+          // console.log(r.rows)
           if (next_page <= r.totalPage) {
             this.table_data = data.concat(r.rows);
             this.loading = false;
@@ -132,8 +147,11 @@ export default {
         });
     },
     handleChange(value) {
+      if(value == "" || value=="undefine"){
+        alert("输入数据不能为空")
+      }
+
       this.searchValue = value;
-      console.log("handleChange" + value);
       fetch(global_url.baseUrl + "/api/popular/popular.do?stockCode=" + value)
         .then((r) => r.json())
         .then((r) => {

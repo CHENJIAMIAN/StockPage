@@ -6,8 +6,13 @@
     </div> -->
     <!-- 头 -->
     <div class="row1">
-      <div class="red">
-        <div class="price">{{ data.price }}</div>
+      <div class="row1-col1">
+        <div :class="{
+            red: Number(data.quoteChangePercent) > 0,
+            green: Number(data.quoteChangePercent) < 0,
+            gray: Number(data.quoteChangePercent) === 0,
+            bignum: true,
+          }">{{ data.price }}</div>
 <!--        <div class="quote">-->
         <div :class="{
             red: Number(data.quoteChangePercent) > 0,
@@ -15,7 +20,7 @@
             gray: Number(data.quoteChangePercent) === 0,
             bignum: true,
           }">
-          <span style="padding-right:1rem;"
+          <span style="padding-right:0.5rem;"
             >{{ data.quoteChangePercent }}%</span
           >
           <span>{{ data.quoteChangeAmount }}</span>
@@ -24,27 +29,36 @@
       <div class="row1-col2">
         <div class="row1-col2-row1">
           <span>今开：</span>
-          <span class="red">{{ data.openPrice }} </span>
+          <span :class="{
+                red: Number(data.quoteChangePercent) > 0,
+            green: Number(data.quoteChangePercent) < 0,
+            gray: Number(data.quoteChangePercent) === 0}">{{ data.openPrice }} </span>
           <span style="padding-left:1rem;">最高：</span>
-          <span class="red">{{ data.highest }}</span>
+          <span :class="{
+                red: Number(data.quoteChangePercent) > 0,
+            green: Number(data.quoteChangePercent) < 0,
+            gray: Number(data.quoteChangePercent) === 0}">{{ data.highest }}</span>
+<!--          <span>最低：</span>-->
+<!--          <span class="red">{{ data.lowest }} </span>-->
+<!--          <span>成交量：</span>-->
+<!--          <span >{{ data.tradeover }} 万手 </span>-->
+
+        </div>
+        <div class="row1-col2-row1">
           <span>最低：</span>
-          <span class="red">{{ data.lowest }} </span>
-          <span>成交量：</span>
-          <span >{{ data.tradeover }} 万手 </span>
+          <span :class="{
+                red: Number(data.quoteChangePercent) > 0,
+            green: Number(data.quoteChangePercent) < 0,
+            gray: Number(data.quoteChangePercent) === 0}">{{ data.lowest }} </span>
           <span>市盈：</span>
           <span>{{ data.priceEarningRatio }} </span>
+        </div>
+        <div class="row1-col2-row1">
+          <span>成交量:</span>
+          <span >{{ data.tradeover }} <span style="font-size: 1px">万手 </span> </span>
           <span>市净：</span>
           <span>{{ data.priceBookRatio }}</span>
         </div>
-<!--        <div class="row1-col2-row2">-->
-<!--          <span>流值:</span>-->
-<!--          <span>{{ data.circulationValue + data.circulationValueUnit }}</span>-->
-<!--          <span style="padding-left:1rem;">牛散:</span>-->
-<!--          <span class="blue" :key="item.id" v-for="item in data.awesomeRetail">-->
-<!--            {{ item.name }}-->
-<!--          </span>-->
-<!--          <span class="more blue">更多</span>-->
-<!--        </div>-->
       </div>
     </div>
     <!-- 图表 -->
@@ -163,12 +177,12 @@ export default {
 
   created() {
     var stockCode=this.$route.params.id
-    console.log(stockCode)
+    // console.log(stockCode)
     var baseUrl = global_url.baseUrl
     fetch(baseUrl+"/api/stockDetail/stockDetail.do?stockCode="+stockCode)
         .then((r) => r.json())
         .then((r) => {
-          console.log(r.obj)
+          // console.log(r.obj)
           this.data=r.obj
           this.$emit("title", this.data.name + " " + this.data.market + ":" + this.data.code);
 
@@ -216,7 +230,7 @@ export default {
     grid-template-columns: 1fr 3fr;
     border-bottom: 10px #f4f8f9 solid;
     padding: 1rem;
-    .red {
+    &-col1{
       .price {
         font-size: 1.5rem;
         font-family: DIN Medium;
@@ -230,7 +244,25 @@ export default {
         color: #ea3031;
         line-height: 34px;
       }
+      .bignum{
+        font-size: 1.3rem;
+      }
     }
+    //.red {
+    //  .price {
+    //    font-size: 1.5rem;
+    //    font-family: DIN Medium;
+    //    font-weight: 500;
+    //    color: #ea3031;
+    //  }
+    //  .quote {
+    //    font-size: 1rem;
+    //    font-family: DIN Medium;
+    //    font-weight: 400;
+    //    color: #ea3031;
+    //    line-height: 34px;
+    //  }
+    //}
     &-col2 {
       justify-self: end;
       font-size: 1rem;

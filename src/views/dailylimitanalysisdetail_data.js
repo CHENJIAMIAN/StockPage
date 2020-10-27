@@ -10,21 +10,21 @@ export const table_columns = [
         dataIndex: "zhangdiefu",
         key: "zhangdiefu",
         scopedSlots: { customRender: 'zhangdiefu' },
-        align: 'right'
+        align: 'center'
     },
     {
         title: "几天几板",
         dataIndex: "jitianjiban",
         key: "jitianjiban",
         scopedSlots: { customRender: 'jitianjiban' },
-        align: 'right'
+        align: 'center'
     },
     {
         title: "连板天",
         dataIndex: "lianbantianshu",
         key: "lianbantianshu",
         scopedSlots: { customRender: 'lianbantianshu' },
-        align: 'right'
+        align: 'center'
     },
     {
         title: "短线主题",
@@ -60,7 +60,7 @@ export const table_columns = [
             return obj;
         },
         // scopedSlots: { customRender: '短线主题' },
-        align: 'right'
+        align: 'center'
     },
 ];
 

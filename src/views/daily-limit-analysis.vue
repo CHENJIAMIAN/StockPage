@@ -2,46 +2,56 @@
   <div class="daily-limit-analysis">
     <div class="row1">{{ data.date }}</div>
     <div class="row2">
-      <div>
+      <div class="border-bottom">
         <span class="bluetxt">两市涨停数：</span>
-        <span class="redtxt">{{ data.count }}只</span>
+        <span class="redtxt"  @click="conditionClick(data.date,null,null,null,null)">{{ data.count }}只</span>
       </div>
       <div class="border-bottom">
-        <span class="bluetxt">其中，涨幅{{ " " }}</span>
-        <span class="redtxt">20%（{{ data.increase20Percent }}）</span>
-        <span class="bluetxt">涨幅：</span>
-        <span class="redtxt">10%（{{ data.increase10Percent }}）</span>
+        <span class="bluetxt">涨幅20%：</span>
+        <span class="redtxt" @click="conditionClick(data.date,'quote_change',20,null,null)">{{ data.increase20Percent }}只</span>
+<!--        <span class="bluetxt">，涨幅10%：</span>-->
+<!--        <span class="redtxt" @click="conditionClick(data.date,'quote_change',10,20,null)">{{ data.increase10Percent }}只</span>-->
+      </div>
+      <div class="border-bottom">
+<!--        <span class="bluetxt">涨幅20%：</span>-->
+<!--        <span class="redtxt" @click="conditionClick(data.date,'quote_change',20,null,null)">{{ data.increase20Percent }}只</span>-->
+        <span class="bluetxt">涨幅10%：</span>
+        <span class="redtxt" @click="conditionClick(data.date,'quote_change',10,20,null)">{{ data.increase10Percent }}只</span>
       </div>
       <div class="border-bottom">
         <span class="bluetxt">热点题材：</span>
         <template v-for="item in data.hotTopics">
-          <span :key="item.id">{{ item.name }}</span>
-          <span class="redtxt">（{{ item.count }}）</span>
+          <span :key="item.id">{{ item.name }}：</span>
+          <span class="redtxt" @click="conditionClick(data.date,null,null,null, item.name)">{{ item.count }}只 </span>
         </template>
       </div>
       <div class="border-bottom">
         <span class="bluetxt">今日最高：</span>
         <span>{{ data.highest.name }}</span>
-        <span class="redtxt">{{
+        <span class="redtxt" @click="conditionClick(data.date,
+        'continue_limitup',data.highest.continuousDailyLimitNumber,null)">{{
           " " + data.highest.continuousDailyLimitNumber + " "
         }}</span>
         <span>连板</span>
       </div>
       <div
         class="more"
-        @click="$router.push(`/daily_limit_analysis_detail/` + data.date)"
+        @click="conditionClick(data.date,null,null,null, null)"
+
       >
-        查看更多涨停分析 >
+<!--        @click="$router.push(`/daily_limit_analysis_detail/` + data.date)"-->
+        查看更多当日涨停分析 >
       </div>
     </div>
     <div class="row3">
-      <div class="name border-bottom">历史涨停版分析</div>
+      <div class="name border-bottom">历史涨停板分析</div>
       <div class="date">
         <div
           v-for="(item, index) in historyDates"
           :key="index"
-          @click="$router.push(`/daily_limit_analysis_detail/` + item)"
+          @click="conditionClick(item, null, null, null, null)"
         >
+<!--          @click="$router.push(`/daily_limit_analysis_detail/` + item)"-->
           {{ item }}
         </div>
       </div>
@@ -68,19 +78,35 @@ export default {
     fetch(baseUrl+"/api/replay/statistic.do")
         .then((r) => r.json())
         .then((r) => {
-          console.log(r.obj)
           this.data = r.obj
         });
 
     fetch(baseUrl+"/api/replay/replayDistinctDate.do")
         .then((r) => r.json())
         .then((r) => {
-          console.log(r.obj)
           this.historyDates = r.obj
         });
 
 
   },
+
+  methods:{
+    conditionClick(date, countValue, beginValue, endValue, subject){
+      this.$router.push({
+        path: "/daily_limit_analysis_detail/",
+        query: {
+          createDate:date,
+          countValue:countValue,
+          beginValue:beginValue,
+          endValue:endValue,
+          subject:subject
+
+        },
+      }).catch(err => {err});
+    },
+
+  }
+
 };
 </script>
 <style lang="scss" scoped>
@@ -117,7 +143,8 @@ export default {
   }
   .row2 {
     display: grid;
-    grid-template-rows: 3rem 1fr 2fr 2fr 3rem;
+    //grid-template-rows: 3rem 1fr 2fr 2fr 3rem;
+    grid-template-rows: 3rem 3rem 3rem 3rem 3rem;
     align-items: center;
     padding: 1rem;
 

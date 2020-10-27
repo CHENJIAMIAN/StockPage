@@ -26,26 +26,26 @@ export const listedHistory_columns = [
                 children: value,
                 attrs: {}
             };
-            if (index === 0) {
-                obj.attrs.rowSpan = 2;
-            }
-            if (index === 1) {
-                obj.attrs.rowSpan = 0;
-            }
-            //
-            if (index === 2) {
-                obj.attrs.rowSpan = 2;
-            }
-            if (index === 3) {
-                obj.attrs.rowSpan = 0;
-            }
-            //
-            if (index === 4) {
-                obj.attrs.rowSpan = 2;
-            }
-            if (index === 5) {
-                obj.attrs.rowSpan = 0;
-            }
+            // if (index === 0) {
+            //     obj.attrs.rowSpan = 2;
+            // }
+            // if (index === 1) {
+            //     obj.attrs.rowSpan = 0;
+            // }
+            // //
+            // if (index === 2) {
+            //     obj.attrs.rowSpan = 2;
+            // }
+            // if (index === 3) {
+            //     obj.attrs.rowSpan = 0;
+            // }
+            // //
+            // if (index === 4) {
+            //     obj.attrs.rowSpan = 2;
+            // }
+            // if (index === 5) {
+            //     obj.attrs.rowSpan = 0;
+            // }
             return obj;
         },
         // 在有customRender时失效

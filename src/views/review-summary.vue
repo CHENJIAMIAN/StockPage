@@ -58,19 +58,25 @@ export default {
   methods:{
 
     handleInfiniteOnLoad() {
+      var query = this.$route.query
+      console.log(this.$route.query)
+      var url = global_url.baseUrl +
+          "/api/marketReview/reviews.do?pageSize=10"
+      if (query != null && query.createDate != null && query.createDate !="undefined" ){
+        url +="&createDate="+query.createDate
+      }
+
       const data = this.table_data;
       this.loading = true;
       const next_page = this.current_page + 1;
 
       fetch(
-          global_url.baseUrl +
-          "/api/marketReview/reviews.do?pageNo=" +
-          next_page +
-          "&pageSize=10"
+          url+="&pageNo=" +
+          next_page
       )
           .then((r) => r.json())
           .then((r) => {
-            console.log(r.pageNo + "--" + r.totalPage);
+            console.log(r.rows)
             if (next_page <= r.totalPage) {
               this.table_data = data.concat(r.rows);
               this.loading = false;

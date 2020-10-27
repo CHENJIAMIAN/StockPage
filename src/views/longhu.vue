@@ -1,51 +1,51 @@
 // 龙虎榜全览
 <template>
   <div class="longhu">
-    <div class="row1">
-      <div class="row1-row1">龙虎榜数据全览</div>
-      <div class="row1-row2">个股龙虎榜数据</div>
-      <div class="row1-row3">
-        <a-select
-          show-search
-          :value="searchValue1"
-          size="large"
-          placeholder="输入代码、名称或简拼"
-          style="width: 100%;"
-          :default-active-first-option="false"
-          :show-arrow="!false"
-          :filter-option="false"
-          :not-found-content="null"
-          @search="handleSearch1"
-          @change="handleChange1"
-        >
-          <a-icon slot="suffixIcon" type="search" />
-          <a-select-option v-for="d in searchOptions1" :key="d.code">
-            {{ d.code }} -- {{ d.name }}
-          </a-select-option>
-        </a-select>
-      </div>
-      <div class="row1-row4">营业部查询</div>
-      <div class="row1-row5">
-        <a-select
-          show-search
-          :value="searchValue2"
-          size="large"
-          placeholder="输入营业部名称"
-          style="width: 100%;"
-          :default-active-first-option="false"
-          :show-arrow="!false"
-          :filter-option="false"
-          :not-found-content="null"
-          @search="handleSearch2"
-          @change="handleChange2"
-        >
-          <a-icon slot="suffixIcon" type="search" />
-          <a-select-option v-for="d in searchOptions2" :key="d.key">
-            {{ d.value }}
-          </a-select-option>
-        </a-select>
-      </div>
-    </div>
+<!--    <div class="row1">-->
+<!--      <div class="row1-row1">龙虎榜数据全览</div>-->
+<!--      <div class="row1-row2">个股龙虎榜数据</div>-->
+<!--      <div class="row1-row3">-->
+<!--        <a-select-->
+<!--          show-search-->
+<!--          :value="searchValue1"-->
+<!--          size="large"-->
+<!--          placeholder="输入代码、名称或简拼"-->
+<!--          style="width: 100%;"-->
+<!--          :default-active-first-option="false"-->
+<!--          :show-arrow="!false"-->
+<!--          :filter-option="false"-->
+<!--          :not-found-content="null"-->
+<!--          @search="handleSearch1"-->
+<!--          @change="handleChange1"-->
+<!--        >-->
+<!--          <a-icon slot="suffixIcon" type="search" />-->
+<!--          <a-select-option v-for="d in searchOptions1" :key="d.code">-->
+<!--            {{ d.code }} &#45;&#45; {{ d.name }}-->
+<!--          </a-select-option>-->
+<!--        </a-select>-->
+<!--      </div>-->
+<!--      <div class="row1-row4">营业部查询</div>-->
+<!--      <div class="row1-row5">-->
+<!--        <a-select-->
+<!--          show-search-->
+<!--          :value="searchValue2"-->
+<!--          size="large"-->
+<!--          placeholder="输入营业部名称"-->
+<!--          style="width: 100%;"-->
+<!--          :default-active-first-option="false"-->
+<!--          :show-arrow="!false"-->
+<!--          :filter-option="false"-->
+<!--          :not-found-content="null"-->
+<!--          @search="handleSearch2"-->
+<!--          @change="handleChange2"-->
+<!--        >-->
+<!--          <a-icon slot="suffixIcon" type="search" />-->
+<!--          <a-select-option v-for="d in searchOptions2" :key="d.key">-->
+<!--            {{ d.value }}-->
+<!--          </a-select-option>-->
+<!--        </a-select>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="row2">
       <div class="row2-row1">
         <span>历史数据查询</span>
@@ -81,7 +81,7 @@
     </div>
     <div class="row3">
       <span>{{ data.msg }}</span>
-      <span class="more">更多 ></span>
+<!--      <span class="more">更多 ></span>-->
     </div>
     <div class="row4">
       <div
@@ -123,8 +123,8 @@
             >
 <!--            @click="$router.push(`/longhu_detail/` + record.codeName.code)"-->
           </div>
-          <div slot="连板天" slot-scope="连板天">
-            <a class="bigtxt blue">行情</a>
+          <div slot="连板天" slot-scope="连板天,record">
+            <a class="bigtxt blue" @click="$router.push(`/stock_detail/` + record.codeName.code)">行情</a>
           </div>
         </a-table>
         <div v-if="loading && !busy" class="demo-loading-container">
@@ -163,17 +163,26 @@ export default {
     fetch(baseUrl + "/api/rank/rankList.do")
       .then((r) => r.json())
       .then((r) => {
-        console.log(r.rows)
         this.table_data = r.rows;
       });
   },
   methods: {
+    // table 每一行点击事件
+    click(record, index){
+      return {
+        on: {
+          click: () => {
+            this.$router.push(`/stock_detail/` + record.codeName.code)
+          }
+        }
+      }
+    },
+
     viewDetail(code){
       this.$router.push({path:"/longhu_detail/",query:{code:code,createDate:this.today}})
     },
     moment,
     onDateChange(date, dateString) {
-      console.log(date, dateString);
       // 根据选择date的值去获取 table_data 表数据
       // this.table_data = [];
       var baseUrl = global_url.baseUrl;
@@ -241,7 +250,7 @@ export default {
             this.current_page = r.pageNo;
             this.totalPage = r.totalPage;
             if(r.rows!=null && r.rows[0].date!=null){
-              console.log(r.rows[0].date);
+              // console.log(r.rows[0].date);
               this.today = r.rows[0].date
             }
 

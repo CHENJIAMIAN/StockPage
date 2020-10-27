@@ -66,11 +66,12 @@ export default {
         line-height: 34px;
       }
       &-desc {
-        font-size: 1.2rem;
+        padding: 0px 5px 0 15px;
+        font-size: 1.0rem;
         font-family: PingFang SC;
         font-weight: 500;
         color: #333333;
-        line-height: 34px;
+        line-height: 30px;
       }
     }
     .row2 {

@@ -165,17 +165,17 @@ export default {
   },
 
   created() {
-    var stockCode=this.$route.query.code
     var createDate= this.$route.query.createDate
+    var stockCode = this.$route.query.code
     if (createDate == null || createDate == 'undefined'){
       createDate = ""
     }
-    console.log(this.$route.query)
+    // console.log(this.$route.query)
     var baseUrl = global_url.baseUrl
     fetch(baseUrl+"/api/rank/rankDetail.do?stockCode="+stockCode+"&createDate="+createDate)
         .then((r) => r.json())
         .then((r) => {
-          console.log(r.obj)
+          // console.log(r.obj)
           this.data=r.obj
           this.$emit("title", this.data.name + " " + this.data.market + ":" + this.data.code);
 
@@ -290,7 +290,7 @@ export default {
 
       .row3 {
         height: 3rem;
-        line-height: 3rem;
+        line-height: 1.5rem;
         padding-left: 1rem;
         font-size: 1rem;
         font-weight: 500;
