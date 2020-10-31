@@ -55,7 +55,7 @@
             :key="item.id"
           >
 
-              <div class="block-row-square-name" ><a @click="$router.push(`/stock_detail/` + item.code)">{{ item.name }}</a></div>
+              <div class="block-row-square-name" ><a @click="viewLonghuDetail( item.code,today)">{{ item.name }}</a></div>
 
             <div class="block-row-square-type">
               <span
@@ -86,7 +86,7 @@
                 }"
                 style="background:unset;font-size: 1rem"
               >
-                {{ item.buyamt }}<span style="font-size: 0.4rem">{{ item.unit }}</span>
+                {{ item.buyamt }}<span style="font-size: 0.5rem">{{ item.unit }}</span>
               </span>
               <br/>
               <span
@@ -104,7 +104,7 @@
                 }"
                     style="background:unset;font-size: 1rem"
                 >
-                  {{ item.saleamt }}<span style="font-size: 0.4rem">{{ item.unit }}</span>
+                  {{ item.saleamt }}<span style="font-size: 0.5rem">{{ item.unit }}</span>
               </span>
             </div>
           </div>
@@ -151,6 +151,10 @@ export default {
         });
   },
   methods:{
+
+    viewLonghuDetail(code,createDate){
+      this.$router.push({path:"/longhu_detail/",query:{code:code,createDate:createDate}})
+    },
 
     viewDetail(idleFundId,createDate){
 

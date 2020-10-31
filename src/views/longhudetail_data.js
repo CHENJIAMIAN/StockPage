@@ -32,7 +32,9 @@ export const data = {
                         buy: 1262.56,
                         buyUnit: '万',
                         sale: 5.09,
-                        saleUnit: '万'
+                        saleUnit: '万',
+                        idleName:"",
+                        idleId:""
                     },
                     {
                         id: 1,
@@ -40,7 +42,9 @@ export const data = {
                         buy: 1262.56,
                         buyUnit: '万',
                         sale: 5.09,
-                        saleUnit: '万'
+                        saleUnit: '万',
+                        idleName:"",
+                        idleId:""
                     },
                     {
                         id: 2,
@@ -48,7 +52,9 @@ export const data = {
                         buy: 1262.56,
                         buyUnit: '万',
                         sale: 5.09,
-                        saleUnit: '万'
+                        saleUnit: '万',
+                        idleName:"",
+                        idleId:""
                     },
                     {
                         id: 3,
@@ -56,7 +62,9 @@ export const data = {
                         buy: 1262.56,
                         buyUnit: '万',
                         sale: 5.09,
-                        saleUnit: '万'
+                        saleUnit: '万',
+                        idleName:"",
+                        idleId:""
                     },
                 ]
             },
@@ -70,7 +78,9 @@ export const data = {
                         buy: 1262.56,
                         buyUnit: '万',
                         sale: 5.09,
-                        saleUnit: '万'
+                        saleUnit: '万',
+                        idleName:"",
+                        idleId:""
                     },
                     {
                         id: 1,
@@ -78,7 +88,9 @@ export const data = {
                         buy: 1262.56,
                         buyUnit: '万',
                         sale: 5.09,
-                        saleUnit: '万'
+                        saleUnit: '万',
+                        idleName:"",
+                        idleId:""
                     },
                     {
                         id: 2,
@@ -86,7 +98,9 @@ export const data = {
                         buy: 1262.56,
                         buyUnit: '万',
                         sale: 5.09,
-                        saleUnit: '万'
+                        saleUnit: '万',
+                        idleName:"",
+                        idleId:""
                     },
                     {
                         id: 3,
@@ -94,7 +108,9 @@ export const data = {
                         buy: 1262.56,
                         buyUnit: '万',
                         sale: 5.09,
-                        saleUnit: '万'
+                        saleUnit: '万',
+                        idleName:"",
+                        idleId:""
                     },
                 ]
             }

@@ -31,7 +31,7 @@
           rowKey="id"
         >
           <div slot="nameCode" slot-scope="nameCode">
-            <a @click="$router.push(`/stock_detail/` + nameCode.code)">
+            <a @click="viewLonghuDetail( nameCode.code, null)">
               <div class="bigtxt">{{ nameCode.name }}</div>
               <div>{{ nameCode.code }}</div>
             </a>
@@ -101,6 +101,13 @@ export default {
   },
 
   methods: {
+    viewLonghuDetail(code,createDate){
+      if (createDate == null || createDate ==""){
+        createDate = this.$route.query.createDate;
+      }
+      this.$router.push({path:"/longhu_detail/",query:{code:code,createDate:createDate}})
+    },
+
     handleInfiniteOnLoad() {
       var createDate = this.$route.query.createDate;
       var idleFundId = this.$route.query.idleFundId;

@@ -8,7 +8,7 @@
       </div>
       <div class="border-bottom">
         <span class="bluetxt">涨幅20%：</span>
-        <span class="redtxt" @click="conditionClick(data.date,'quote_change',20,null,null)">{{ data.increase20Percent }}只</span>
+        <span class="redtxt" @click="conditionClick(data.date,'quote_change',19.00,null,null)">{{ data.increase20Percent }}只</span>
 <!--        <span class="bluetxt">，涨幅10%：</span>-->
 <!--        <span class="redtxt" @click="conditionClick(data.date,'quote_change',10,20,null)">{{ data.increase10Percent }}只</span>-->
       </div>
@@ -16,7 +16,7 @@
 <!--        <span class="bluetxt">涨幅20%：</span>-->
 <!--        <span class="redtxt" @click="conditionClick(data.date,'quote_change',20,null,null)">{{ data.increase20Percent }}只</span>-->
         <span class="bluetxt">涨幅10%：</span>
-        <span class="redtxt" @click="conditionClick(data.date,'quote_change',10,20,null)">{{ data.increase10Percent }}只</span>
+        <span class="redtxt" @click="conditionClick(data.date,'quote_change',9.00,19.00,null)">{{ data.increase10Percent }}只</span>
       </div>
       <div class="border-bottom">
         <span class="bluetxt">热点题材：</span>

@@ -107,7 +107,7 @@
                 <div class="item" v-for="item in buyAndSell.list" :key="item.id">
                   <div>
                     <span class="blue">{{ item.name }}</span>
-                    <span class="gray">历史</span>
+                    <span class="red" @click="viewDetail(item.idleId, null)"> {{item.idleName}}</span>
                   </div>
                   <div class="buy-sale">
                     <div class="red">{{ item.buy + item.buyUnit }}</div>
@@ -151,6 +151,7 @@ import global_url from "../App.vue"
 export default {
   data() {
     return {
+      today: new Date().toLocaleDateString().replace(/\//g, "-"),
       data,
       html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
       minute_img_src:"http://img1.money.126.net/chart/hs/time/540x360/1002277.png",
@@ -167,6 +168,7 @@ export default {
   created() {
     var createDate= this.$route.query.createDate
     var stockCode = this.$route.query.code
+    this.today = createDate
     if (createDate == null || createDate == 'undefined'){
       createDate = ""
     }
@@ -175,7 +177,7 @@ export default {
     fetch(baseUrl+"/api/rank/rankDetail.do?stockCode="+stockCode+"&createDate="+createDate)
         .then((r) => r.json())
         .then((r) => {
-          // console.log(r.obj)
+          console.log(r.obj)
           this.data=r.obj
           this.$emit("title", this.data.name + " " + this.data.market + ":" + this.data.code);
 
@@ -197,7 +199,20 @@ export default {
     // 使用刚指定的配置项和数据显示图表。
     // myChart.setOption(option);
   },
-  methods: {},
+  methods: {
+    viewDetail(idleFundId,createDate){
+      if(createDate == null || createDate ==""){
+        createDate = this.today
+      }
+      if(idleFundId == null || idleFundId == ""){
+        return ;
+      }
+      console.log(createDate)
+      this.$router.push({path:"/wkhmd/",query:{idleFundId:idleFundId,createDate:createDate}})
+    },
+
+
+  },
 };
 </script>
 
