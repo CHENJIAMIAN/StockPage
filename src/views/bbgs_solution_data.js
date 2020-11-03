@@ -17,7 +17,6 @@ export const table_columns = [
         dataIndex: "codeName",
         key: "codeName",
         scopedSlots: { customRender: 'codeName' },
-        width: 110
     },
     {
         title: "涨跌幅",

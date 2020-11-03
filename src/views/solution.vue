@@ -23,7 +23,7 @@
 </template>
 <script>
 import { data } from "@/views/solution_data.js";
-import global_url from "../App.vue"
+import global_url from "../App.vue";
 export default {
   data() {
     return {
@@ -31,14 +31,14 @@ export default {
     };
   },
   created() {
-    var baseUrl = global_url.baseUrl
-    fetch(baseUrl+"/api/strategy/strategies.do")
-        .then((r) => r.json())
-        .then((r) => {
-          // console.log(r.rows)
-          this.data = r.rows
-          // this.table_data = r.rows
-        });
+    var baseUrl = global_url.baseUrl;
+    fetch(baseUrl + "/api/strategy/strategies.do")
+      .then((r) => r.json())
+      .then((r) => {
+        // console.log(r.rows)
+        this.data = r.rows;
+        // this.table_data = r.rows
+      });
   },
 };
 </script>
@@ -47,17 +47,23 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-  align-items: center;
   margin-bottom: 1rem;
+  gap: 30px 0;
+  padding: 15px 0;
+
   .block {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto 120px;
     justify-items: center;
-    align-items: center;
+    align-items: start;
+    gap: 10px 0;
     .row1 {
       display: grid;
       justify-items: center;
       align-items: center;
+      grid-template-rows: auto 1fr;
+      height: 100%;
+      padding: 0 20px;
       &-name {
         font-size: 1.5rem;
         font-family: PingFang SC;
@@ -67,7 +73,7 @@ export default {
       }
       &-desc {
         padding: 0px 5px 0 15px;
-        font-size: 1.0rem;
+        font-size: 1rem;
         font-family: PingFang SC;
         font-weight: 500;
         color: #333333;
