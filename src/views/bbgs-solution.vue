@@ -78,8 +78,6 @@ export default {
 
    activated(){
     document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['bbgs_solution'] || 0;
-  },
-  beforeCreate () {
     var solution_id = this.$route.params.id
     if(solution_id==1){
       document.title = "短线收割机"
@@ -90,9 +88,8 @@ export default {
     }else{
       document.title = "策略池"
     }
-
+    this.$emit("title", document.title);
   },
-
   methods: {
     handleInfiniteOnLoad() {
       const data = this.table_data;

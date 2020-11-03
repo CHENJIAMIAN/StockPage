@@ -57,7 +57,7 @@ const routes = [
     name: 'bbgs_solution',
     component: () => import('@/views/bbgs-solution.vue'),
     meta: {
-      title: "步步高升策略池"
+      // title: "步步高升策略池"
     }
   },
   {
