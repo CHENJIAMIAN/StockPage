@@ -78,7 +78,9 @@ export default {
     //   });
 
   },
-
+  activated(){
+    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['concept_fund'] || 0;
+  },
   methods:{
 
     handleInfiniteOnLoad() {

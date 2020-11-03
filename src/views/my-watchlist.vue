@@ -87,6 +87,9 @@ export default {
         // this.table_data = r.rows
       });
   },
+  activated(){
+    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['my_watchlist'] || 0;
+  },
   methods: {
     handleInfiniteOnLoad() {
       const data = this.table_data;

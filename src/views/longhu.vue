@@ -166,6 +166,9 @@ export default {
         this.table_data = r.rows;
       });
   },
+    activated(){
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['longhu'] || 0;
+  },
   methods: {
     // table 每一行点击事件
     click(record, index){

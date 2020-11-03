@@ -78,6 +78,9 @@ export default {
     //   });
 
   },
+  activated(){
+    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['business_fund'] || 0;
+  },
 
   methods:{
 

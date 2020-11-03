@@ -54,7 +54,9 @@ export default {
     //   });
 
   },
-
+  activated(){
+    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['review_summary'] || 0;
+  },
   methods:{
 
     handleInfiniteOnLoad() {

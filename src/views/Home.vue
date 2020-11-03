@@ -514,8 +514,8 @@ export default {
     };
   },
   created() {
-    // var baseUrl = "http://client.lemengsc.com/admin";
-    var baseUrl = global_url.baseUrl;
+    var baseUrl = "http://client.lemengsc.com/admin";
+    // var baseUrl = global_url.baseUrl;
 
     //涨停分析返回数据
 
@@ -586,7 +586,13 @@ export default {
         this.celuechi_data = r.obj;
       });
   },
-  mounted() {},
+  mounted() {
+  },
+  activated(){
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['home'] || 0;
+  },
+  deactivated(){
+  },
   methods: {
 
 
@@ -679,8 +685,8 @@ export default {
 
     //获取候选列表
     getHintsList: function() {
-      // var baseUrl = "http://client.lemengsc.com/admin";
-      var baseUrl = global_url.baseUrl;
+      var baseUrl = "http://client.lemengsc.com/admin";
+      // var baseUrl = global_url.baseUrl;
       fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + this.searchKey)
         .then((r) => r.json())
         .then((r) => {

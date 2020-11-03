@@ -41,6 +41,7 @@ export default {
           this.table_data = r.rows
         });
   },
+  
 };
 </script>
 <style lang="scss" scoped></style>

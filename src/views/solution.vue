@@ -25,12 +25,13 @@
 import { data } from "@/views/solution_data.js";
 import global_url from "../App.vue";
 export default {
+  name:"solution",
   data() {
     return {
       data,
     };
   },
-  created() {
+  mounted() {
     var baseUrl = global_url.baseUrl;
     fetch(baseUrl + "/api/strategy/strategies.do")
       .then((r) => r.json())
@@ -39,6 +40,9 @@ export default {
         this.data = r.rows;
         // this.table_data = r.rows
       });
+  },
+  activated(){
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['solution'] || 0;
   },
 };
 </script>

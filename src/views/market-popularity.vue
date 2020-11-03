@@ -101,6 +101,9 @@ export default {
     //     this.totalPage = r.totalPage
     //   });
   },
+  activated(){
+    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['market_popularity'] || 0;
+  },
   methods: {
     click(record, index){
       return {

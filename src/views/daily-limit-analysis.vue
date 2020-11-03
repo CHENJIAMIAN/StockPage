@@ -89,7 +89,9 @@ export default {
 
 
   },
-
+     activated(){
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['daily_limit_analysis'] || 0;
+  },
   methods:{
     conditionClick(date, countValue, beginValue, endValue, subject){
       this.$router.push({

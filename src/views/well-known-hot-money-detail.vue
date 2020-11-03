@@ -99,7 +99,9 @@ export default {
         });
 
   },
-
+  activated(){
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['wkhmd'] || 0;
+  },
   methods: {
     viewLonghuDetail(code,createDate){
       if (createDate == null || createDate ==""){

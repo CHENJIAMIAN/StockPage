@@ -71,6 +71,9 @@ export default {
     //   });
     // this.date = this.$route.params.date;
   },
+  activated(){
+    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['daily_limit_analysis_detail'] || 0;
+  },
   methods: {
     // table 每一行点击事件
     click(record, index){

@@ -150,6 +150,9 @@ export default {
           console.log(r.obj)
         });
   },
+   activated(){
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['wkhm'] || 0;
+  },
   methods:{
 
     viewLonghuDetail(code,createDate){

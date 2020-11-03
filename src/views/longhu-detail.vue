@@ -190,7 +190,9 @@ export default {
 
         });
   },
-
+  activated(){
+    // document.getElementsByClassName('body')[0].scrollTop =localStorage['longhu_detail'] || 0;
+  },
   mounted() {
     // 基于准备好的dom，初始化echarts实例
     // var myChart = this.$echarts.init(document.getElementById("main"));

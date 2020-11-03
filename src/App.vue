@@ -12,7 +12,10 @@
       @back="back"
     />
     <div class="body">
-      <router-view @title="gotTitle" />
+      <keep-alive>
+        <router-view @title="gotTitle">
+        </router-view>
+      </keep-alive>
     </div>
     <div class="bottom-nav" v-if="isNavRoute">
       <img
@@ -98,8 +101,8 @@
 </template>
 <script>
 
-const baseUrl = "http://127.0.0.1:8888/admin";
-// const baseUrl = "http://client.lemengsc.com/admin";
+// const baseUrl = "http://127.0.0.1:8888/admin";
+const baseUrl = "http://client.lemengsc.com/admin";
 
 export default {
   baseUrl,
@@ -113,8 +116,14 @@ export default {
   watch: {
     $route: {
       immediate: true,
-      handler(v) {
-        this.currRouteName = v.name;
+      handler(to,from) {
+        // 记录滚动位置,在activated时恢复位置
+        if(from)
+          localStorage[from.name] = 
+          (document.getElementsByClassName('demo-infinite-container')[0] && document.getElementsByClassName('demo-infinite-container')[0].scrollTop )
+          || 
+          document.getElementsByClassName('body')[0].scrollTop;
+        this.currRouteName = to.name;
       },
     },
   },

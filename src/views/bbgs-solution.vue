@@ -49,6 +49,7 @@
 import { table_columns, table_data } from "@/views/bbgs_solution_data.js";
 import global_url from "../App.vue";
 export default {
+  name:"bbgs-solution",
   data() {
     return {
       alreadyBottom: false,
@@ -75,6 +76,9 @@ export default {
     //   });
   },
 
+   activated(){
+    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['bbgs_solution'] || 0;
+  },
   beforeCreate () {
     var solution_id = this.$route.params.id
     if(solution_id==1){
