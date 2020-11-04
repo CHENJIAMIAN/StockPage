@@ -175,7 +175,7 @@ export default {
     };
   },
 
-  created() {
+  activated() {
     var stockCode=this.$route.params.id
     // console.log(stockCode)
     var baseUrl = global_url.baseUrl

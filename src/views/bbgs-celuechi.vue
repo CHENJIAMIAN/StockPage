@@ -32,7 +32,7 @@ export default {
   data() {
     return { table_columns, table_data };
   },
-  created() {
+  activated() {
     var baseUrl = global_url.baseUrl
     var strategyId = this.$route.params
     fetch(baseUrl+"/api/strategy/strategyList.do?strategyId="+strategyId)

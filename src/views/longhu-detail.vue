@@ -165,7 +165,8 @@ export default {
     };
   },
 
-  created() {
+  activated() {
+    document.getElementsByClassName('body')[0].scrollTop = 0;
     var createDate= this.$route.query.createDate
     var stockCode = this.$route.query.code
     this.today = createDate
@@ -189,9 +190,6 @@ export default {
           this.day_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+stockSource+""+r.obj.code+".png"
 
         });
-  },
-  activated(){
-    // document.getElementsByClassName('body')[0].scrollTop =localStorage['longhu_detail'] || 0;
   },
   mounted() {
     // 基于准备好的dom，初始化echarts实例

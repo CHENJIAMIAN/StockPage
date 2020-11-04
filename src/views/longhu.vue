@@ -158,16 +158,15 @@ export default {
       searchValue2: undefined, //undefined才会显示placeholder
     };
   },
-  created() {
+  activated() {
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['longhu'] || 0;
+
     var baseUrl = global_url.baseUrl;
     fetch(baseUrl + "/api/rank/rankList.do")
       .then((r) => r.json())
       .then((r) => {
         this.table_data = r.rows;
       });
-  },
-    activated(){
-    document.getElementsByClassName('body')[0].scrollTop =localStorage['longhu'] || 0;
   },
   methods: {
     // table 每一行点击事件

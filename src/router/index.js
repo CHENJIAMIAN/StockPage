@@ -152,6 +152,9 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  scrollBehavior: () => ({
+    y: 0
+  }),
   routes
 })
 

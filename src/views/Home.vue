@@ -513,7 +513,7 @@ export default {
       maxValueInChart: Math.max(...shichangwendu.chart.map((i) => i.value)),
     };
   },
-  created() {
+  activated() {
     var baseUrl = "http://client.lemengsc.com/admin";
     // var baseUrl = global_url.baseUrl;
 

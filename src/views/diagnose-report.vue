@@ -138,7 +138,8 @@ export default {
       html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
     };
   },
-  created() {
+  activated() {
+    document.getElementsByClassName('body')[0].scrollTop = 0;
     var code = this.$route.params.code;
     // var baseUrl = global_baseUrl.baseUrl;
     var baseUrl = "http://client.lemengsc.com/admin";

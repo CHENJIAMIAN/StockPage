@@ -78,7 +78,9 @@ export default {
   data() {
     return { loading: false, busy: false, table_columns, table_data: [], date };
   },
-  created() {
+  activated() {
+    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['my_watchlist'] || 0;
+
     var baseUrl = global_url.baseUrl;
     fetch(baseUrl + "/api/user/select.do?userId=" + 1)
       .then((r) => r.json())
@@ -86,9 +88,6 @@ export default {
         this.table_data = r.rows;
         // this.table_data = r.rows
       });
-  },
-  activated(){
-    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['my_watchlist'] || 0;
   },
   methods: {
     handleInfiniteOnLoad() {

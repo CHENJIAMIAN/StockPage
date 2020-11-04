@@ -140,7 +140,8 @@ export default {
     };
   },
 
-  created() {
+  activated() {
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['wkhm'] || 0;
     var baseUrl = global_url.baseUrl
     fetch(baseUrl+"/api/idle/idleList.do")
         .then((r) => r.json())
@@ -149,9 +150,6 @@ export default {
           this.today = r.obj.today
           console.log(r.obj)
         });
-  },
-   activated(){
-    document.getElementsByClassName('body')[0].scrollTop =localStorage['wkhm'] || 0;
   },
   methods:{
 

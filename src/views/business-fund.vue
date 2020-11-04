@@ -66,7 +66,7 @@ export default {
       totalPage: 1,
     };
   },
-  created() {
+  // created() {
     // var code = this.$route.params.code;
     // fetch(global_baseUrl.baseUrl + "/api/popular/popularList.do?pageSize=10")
     //   .then((r) => r.json())
@@ -77,7 +77,7 @@ export default {
     //     this.totalPage = r.totalPage
     //   });
 
-  },
+  // },
   activated(){
     document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['business_fund'] || 0;
   },

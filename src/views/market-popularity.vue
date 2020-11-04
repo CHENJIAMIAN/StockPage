@@ -91,7 +91,7 @@ export default {
       totalPage: 1,
     };
   },
-  created() {
+  // created() {
     // var baseUrl = global_url.baseUrl;
     // fetch(baseUrl + "/api/popular/popularList.do?pageSize=10")
     //   .then((r) => r.json())
@@ -100,7 +100,7 @@ export default {
     //     this.current_page = r.pageNo;
     //     this.totalPage = r.totalPage
     //   });
-  },
+  // },
   activated(){
     document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['market_popularity'] || 0;
   },

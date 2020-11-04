@@ -60,7 +60,7 @@ export default {
       date: "",
     };
   },
-  created() {
+  // created() {
     // 根据 date 去获取数据
     // var baseUrl = global_url.baseUrl;
     // fetch(baseUrl + "/api/replay/replayList.do?")
@@ -70,7 +70,7 @@ export default {
     //     this.table_data = r.obj;
     //   });
     // this.date = this.$route.params.date;
-  },
+  // },
   activated(){
     document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['daily_limit_analysis_detail'] || 0;
   },

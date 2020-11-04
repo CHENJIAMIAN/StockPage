@@ -87,7 +87,8 @@ export default {
       totalPage: 1,
     };
   },
-  created() {
+  activated() {
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['wkhmd'] || 0;
     // 根据id去获取数据
     // var idleFundId = this.$route.params.id;
     var idleFundId = this.$route.query.idleFundId;
@@ -98,9 +99,6 @@ export default {
           this.data = r.obj
         });
 
-  },
-  activated(){
-    document.getElementsByClassName('body')[0].scrollTop =localStorage['wkhmd'] || 0;
   },
   methods: {
     viewLonghuDetail(code,createDate){

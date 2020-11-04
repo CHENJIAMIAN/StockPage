@@ -73,7 +73,8 @@ export default {
       ),
     };
   },
-  created() {
+  activated() {
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['daily_limit_analysis'] || 0;
     var baseUrl = global_url.baseUrl
     fetch(baseUrl+"/api/replay/statistic.do")
         .then((r) => r.json())
@@ -88,9 +89,6 @@ export default {
         });
 
 
-  },
-     activated(){
-    document.getElementsByClassName('body')[0].scrollTop =localStorage['daily_limit_analysis'] || 0;
   },
   methods:{
     conditionClick(date, countValue, beginValue, endValue, subject){

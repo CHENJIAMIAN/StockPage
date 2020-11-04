@@ -61,7 +61,7 @@ export default {
       totalPage: 1,
     };
   },
-  created() {
+  // created() {
     // // 根据id去获取数据
     // this.$route.params.id;
     //
@@ -74,7 +74,7 @@ export default {
     //     this.table_data = r.rows;
     //     // this.table_data = r.rows
     //   });
-  },
+  // },
 
    activated(){
     document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['bbgs_solution'] || 0;
