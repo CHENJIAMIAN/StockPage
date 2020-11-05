@@ -52,22 +52,6 @@
       </div>
     </div>
 
-    <!--    <div class="search">-->
-    <!--      <a-input-search-->
-    <!--        size="large"-->
-    <!--        placeholder=" 请输入名称或代码：如友阿股份"-->
-    <!--        @search="handleZhenguClick"-->
-    <!--      >-->
-    <!--        <a-icon-->
-    <!--          slot="prefix"-->
-    <!--          type="search"-->
-    <!--          :style="{ fontSize: '1.3rem', color: '#c6c4c7' }"-->
-    <!--        />-->
-    <!--        <a-button shape="round" type="primary" slot="enterButton">-->
-    <!--          <a-icon type="medicine-box" :style="{ fontSize: '1.2rem' }" /> 诊股-->
-    <!--        </a-button>-->
-    <!--      </a-input-search>-->
-    <!--    </div>-->
     <div class="menuicon">
       <div class="menuicon-cell" @click="handleRoute('market_popularity')">
         <img src="../assets/img/renqi.png" />
@@ -108,7 +92,7 @@
       <div class="notify-col2" @click="handleRoute('review_summary')">更多➔</div>
     </div>
     <div class="zhishu">
-      <div class="zhishu-cell" :key="obj.id" v-for="obj in zhishu">
+      <div class="zhishu-cell"  @click="viewDetail(obj.name)" :key="obj.id" v-for="obj in zhishu" >
         <div class="bigtxt">{{ obj.name }}</div>
         <div
           :class="{
@@ -136,85 +120,6 @@
         </div>
       </div>
     </div>
-
-    <!--    <div class="shichangwendu">-->
-    <!--      <div class="shichangwendu-row1">-->
-    <!--        <div class="shichangwendu-row1-col1 title-txt">市场温度</div>-->
-    <!--        <div class="shichangwendu-row1-col2">-->
-    <!--          <div class="relative">-->
-    <!--            <a-progress-->
-    <!--              class="absolute"-->
-    <!--              :width="80"-->
-    <!--              type="circle"-->
-    <!--              :strokeWidth="10"-->
-    <!--              :percent="shichangwendu.wendu / 2"-->
-    <!--            >-->
-    <!--              <template #format="percent">-->
-    <!--                <span>{{ shichangwendu.wendu + "℃" }}</span>-->
-    <!--              </template>-->
-    <!--            </a-progress>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="shichangwendu-row1-col3">-->
-    <!--          <div>{{ new Date().toLocaleDateString().replace(/\//g, "-") }}</div>-->
-    <!--          <div>持仓建议：适宜中仓位</div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="shichangwendu-row2">-->
-    <!--        <div class="relative" :key="obj.id" v-for="obj in shichangwendu.chart">-->
-    <!--          <div class="zhuzi1">-->
-    <!--            <div>{{ obj.value }}</div>-->
-    <!--            <div-->
-    <!--              :style="{ height: (obj.value / maxValueInChart) * 150 + 'px' }"-->
-    <!--              :class="{-->
-    <!--                'zhuzi1-bg': true,-->
-    <!--                greenbg: obj.type === 1,-->
-    <!--                graybg: obj.type === 2,-->
-    <!--                redbg: obj.type === 3,-->
-    <!--              }"-->
-    <!--            ></div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="justify-self-center">跌停</div>-->
-    <!--        <div class="justify-self-center">>7</div>-->
-    <!--        <div class="justify-self-center">4~7</div>-->
-    <!--        <div class="justify-self-center">2~4</div>-->
-    <!--        <div class="justify-self-center">0~2</div>-->
-    <!--        <div class="justify-self-center">平</div>-->
-    <!--        <div class="justify-self-center">0~2</div>-->
-    <!--        <div class="justify-self-center">2~4</div>-->
-    <!--        <div class="justify-self-center">4~7</div>-->
-    <!--        <div class="justify-self-center">>7</div>-->
-    <!--        <div class="justify-self-center">涨停</div>-->
-    <!--      </div>-->
-    <!--      <div-->
-    <!--        class="shichangwendu-row3"-->
-    <!--        :style="{-->
-    <!--          'grid-template-columns':-->
-    <!--            ' 1rem ' +-->
-    <!--            Math.abs(shichangwendu.die) / this.sum +-->
-    <!--            'fr 2px ' +-->
-    <!--            Math.abs(shichangwendu.ping) / this.sum +-->
-    <!--            'fr 2px ' +-->
-    <!--            Math.abs(shichangwendu.zhang) / this.sum +-->
-    <!--            'fr 1rem',-->
-    <!--        }"-->
-    <!--      >-->
-    <!--        <img src="../assets/img/down.png" />-->
-    <!--        <div class="greenbg"></div>-->
-    <!--        <div></div>-->
-    <!--        <div class="graybg"></div>-->
-    <!--        <div></div>-->
-    <!--        <div class="redbg"></div>-->
-    <!--        <img src="../assets/img/up.png" />-->
-    <!--      </div>-->
-    <!--      <div class="shichangwendu-row4">-->
-    <!--        <div class="">泸股通资金</div>-->
-    <!--        <div class="green">{{ shichangwendu.hugutongzijin }}亿</div>-->
-    <!--        <div class="">深股通资金</div>-->
-    <!--        <div class="red">{{ shichangwendu.shengutongzijin }}亿</div>-->
-    <!--      </div>-->
-    <!--    </div>-->
 
     <div class="shichangwendu">
       <div class="shichangwendu-row1">
@@ -369,98 +274,9 @@
       </div>
     </div>
 
-<!--    <div class="zhangtingfenxi">-->
-<!--      <div class="zhangtingfenxi-head">-->
-<!--        <div class="title-txt">涨停分析</div>-->
-<!--        <div class="more-txt" @click="handleRoute('daily_limit_analysis')">更多➔</div>-->
-<!--      </div>-->
-<!--      <a-tabs default-active-key="1" size="large">-->
-<!--        <a-tab-pane key="1" tab="昨日涨停(100)">昨日涨停(100)</a-tab-pane>-->
-<!--        <a-tab-pane key="2" tab="今日连板(25)"> </a-tab-pane>-->
-<!--        <a-tab-pane key="3" tab="最高6连板"></a-tab-pane>-->
-<!--      </a-tabs>-->
-<!--      <div class="zhangtingfenxi-row1"></div>-->
-<!--      <a-table-->
-<!--        :pagination="false"-->
-<!--        :columns="zhangtingfenxi_columns"-->
-<!--        :data-source="zhangtingfenxi_data"-->
-<!--        rowKey="id"-->
-<!--      >-->
-<!--        <div slot="nameCode" slot-scope="nameCode">-->
-<!--          <div class="bigtxt">{{ nameCode.name }}</div>-->
-<!--          <div>{{ nameCode.code }}</div>-->
-<!--        </div>-->
-<!--        <div slot="zhangdiefu" slot-scope="zhangdiefu">-->
-<!--          <div class="bignum red">{{ zhangdiefu }}%</div>-->
-<!--        </div>-->
-<!--        <div slot="lianbantianshu" slot-scope="lianbantianshu">-->
-<!--          <div class="bignum red">{{ lianbantianshu }}</div>-->
-<!--        </div>-->
-<!--        <div slot="subject" slot-scope="subject">-->
-<!--          <div class="bigtxt">{{ subject }}</div>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash;        <div slot="代码名称" slot-scope="代码名称">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div class="bigtxt">{{ 代码名称.名称 }}</div>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div>{{ 代码名称.代码 }}</div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <div slot="涨跌幅" slot-scope="涨跌幅">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div class="bignum red">{{ 涨跌幅 }}%</div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <div slot="连扳天数" slot-scope="连扳天数">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div class="bignum red">{{ 连扳天数 }}</div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <div slot="概念" slot-scope="概念">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div class="bigtxt">{{ 概念 }}</div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--      </a-table>-->
-<!--    </div>-->
-
     <div class="solution">
       <div class="solution-row1 title-txt">策略池</div>
       <solution class="solution-row2" />
-      <!-- <div class="solution-row2">
-        <div class="graytxt">短线收割机</div>
-        <div class="more-txt">更多➔</div>
-      </div>
-      <a-table
-        :pagination="false"
-        :columns="solution_columns"
-        :data-source="solution_data"
-        rowKey="id"
-      >
-        <div slot="代码名称" slot-scope="代码名称">
-          <div class="bigtxt">{{ 代码名称.名称 }}</div>
-          <div>{{ 代码名称.代码 }}</div>
-        </div>
-        <div slot="涨跌幅" slot-scope="涨跌幅">
-          <div
-            :class="{
-              red: Number(涨跌幅) > 0,
-              green: Number(涨跌幅) < 0,
-              gray: Number(涨跌幅) === 0,
-              bignum: true,
-            }"
-          >
-            {{ 涨跌幅 }}%
-          </div>
-        </div>
-        <div slot="现价" slot-scope="现价, record">
-          <div
-            :class="{
-              red: Number(record.涨跌幅) > 0,
-              green: Number(record.涨跌幅) < 0,
-              gray: Number(record.涨跌幅) === 0,
-              bignum: true,
-            }"
-          >
-            {{ 现价 }}
-          </div>
-        </div>
-        <div slot="行业" slot-scope="行业">
-          <div class="bigtxt">{{ 行业 }}</div>
-        </div>
-      </a-table> -->
     </div>
   </div>
 </template>
@@ -515,8 +331,8 @@ export default {
   },
   activated() {
     document.getElementsByClassName('body')[0].scrollTop =localStorage['home'] || 0;
-    var baseUrl = "http://client.lemengsc.com/admin";
-    // var baseUrl = global_url.baseUrl;
+    // var baseUrl = "http://client.lemengsc.com/admin";
+    var baseUrl = global_url.baseUrl;
 
     //涨停分析返回数据
 
@@ -564,14 +380,6 @@ export default {
       });
 
     //策略名称
-    // fetch(baseUrl+"/strategy/strategies.do")
-    //     .then((r) => r.json())
-    //     .then((r) => {
-    //       // console.log(r.rows)
-    //       this.data = r.rows
-    //       // this.table_data = r.rows
-    //     });
-
     fetch(baseUrl + "/home/strategy.do")
       .then((r) => r.json())
       .then((r) => {
@@ -594,6 +402,31 @@ export default {
   },
   methods: {
 
+    viewDetail(name){
+      let code
+      let stockSource
+      if(name =="上证指数"){
+        code="000001"
+        stockSource=1
+      }else if(name =="深证指数"){
+        code="399001"
+        stockSource=0
+      }else if(name =="中小板"){
+        code="399005"
+        stockSource=0
+      }else if(name =="创业指数"){
+        code="399006"
+        stockSource=0
+      }else if(name =="科创50"){
+        code="000688"
+        stockSource=1
+      } else if(name =="上证50"){
+        code="000016"
+        stockSource=1
+
+      }
+      this.$router.push({path:"/stock_detail/"+code,query:{stockSource:stockSource}})
+    },
 
     handleRoute(routeName) {
       this.$router.push(`/${routeName}`);
@@ -684,8 +517,8 @@ export default {
 
     //获取候选列表
     getHintsList: function() {
-      var baseUrl = "http://client.lemengsc.com/admin";
-      // var baseUrl = global_url.baseUrl;
+      // var baseUrl = "http://client.lemengsc.com/admin";
+      var baseUrl = global_url.baseUrl;
       fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + this.searchKey)
         .then((r) => r.json())
         .then((r) => {

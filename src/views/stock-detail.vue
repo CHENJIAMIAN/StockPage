@@ -1,4 +1,4 @@
-// 龙虎榜详情
+// 个股详情
 <template>
   <div class="stock-detail">
      <!-- <div class="row0">
@@ -32,7 +32,7 @@
           <span :class="{
                 red: Number(data.quoteChangePercent) > 0,
             green: Number(data.quoteChangePercent) < 0,
-            gray: Number(data.quoteChangePercent) === 0}">{{ data.openPrice }} </span>
+            gray: Number(data.quoteChangePercent) === 0}">{{ data.openPrice }}</span>
           <span style="padding-left:1rem;">最高：</span>
           <span :class="{
                 red: Number(data.quoteChangePercent) > 0,
@@ -50,14 +50,14 @@
                 red: Number(data.quoteChangePercent) > 0,
             green: Number(data.quoteChangePercent) < 0,
             gray: Number(data.quoteChangePercent) === 0}">{{ data.lowest }} </span>
-          <span>市盈：</span>
-          <span>{{ data.priceEarningRatio }} </span>
+          <span>换手率：</span>
+          <span>{{ data.turnoverRate }}%</span>
         </div>
         <div class="row1-col2-row1">
           <span>成交量:</span>
-          <span >{{ data.tradeover }} <span style="font-size: 1px">万手 </span> </span>
-          <span>市净：</span>
-          <span>{{ data.priceBookRatio }}</span>
+          <span >{{ data.tradeover }} <span style="font-size: 1px">{{ data.tradeoverUnit}} </span> </span>
+          <span>成交额：</span>
+          <span>{{ data.tradeVolume }}<span style="font-size: 1px">{{ data.tradeVolumeUnit}}</span></span>
         </div>
       </div>
     </div>
@@ -128,31 +128,6 @@
         </a-tab-pane>
       </a-tabs>
     </div>
-    <!-- 蓝条 -->
-<!--    <div class="detail">-->
-<!--      <div class="grid"-->
-<!--           v-for="rankDetail in data.stockRankDetail"-->
-<!--           :key="rankDetail.id">-->
-<!--          <div class="row3">{{ rankDetail.msg }}</div>-->
-<!--          <div class="row4">-->
-<!--            <div class="grid"-->
-<!--                 v-for="buyAndSell in rankDetail.maximumBuyAndSell"-->
-<!--                 :key="buyAndSell.id">-->
-<!--                <div class="name">{{ buyAndSell.name }}</div>-->
-<!--                <div class="item" v-for="item in buyAndSell.list" :key="item.id">-->
-<!--                  <div>-->
-<!--                    <span class="blue">{{ item.name }}</span>-->
-<!--                    <span class="gray">历史</span>-->
-<!--                  </div>-->
-<!--                  <div class="buy-sale">-->
-<!--                    <div class="red">{{ item.buy + item.buyUnit }}</div>-->
-<!--                    <div class="green">{{ item.sale + item.saleUnit }}</div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--      </div>-->
-<!--    </div>-->
 
   </div>
 </template>
@@ -177,9 +152,14 @@ export default {
 
   activated() {
     var stockCode=this.$route.params.id
-    // console.log(stockCode)
+    var url = "/api/stockDetail/stockDetail.do?stockCode="+stockCode
+    if(this.$route.query.stockSource !=null){
+      url = url + "&stockSource=" +this.$route.query.stockSource
+    }
+
+
     var baseUrl = global_url.baseUrl
-    fetch(baseUrl+"/api/stockDetail/stockDetail.do?stockCode="+stockCode)
+    fetch(baseUrl+url)
         .then((r) => r.json())
         .then((r) => {
           // console.log(r.obj)

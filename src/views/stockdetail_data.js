@@ -13,8 +13,10 @@ export const data = {
     openPrice:"0.00",
     highest:"1.00",
     lowest:"0.00",
+    turnoverRate:"0.00",
     tradeover:"10",
-    priceEarningRatio:"0.00",
-    priceBookRatio:"0.00"
+    tradeoverUnit:"万手",
+    tradeVolume:"0.00",
+    tradeVolumeUnit:"亿"
 
 }

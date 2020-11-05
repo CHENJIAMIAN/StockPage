@@ -72,6 +72,7 @@ export default {
     // this.date = this.$route.params.date;
   // },
   activated(){
+    console.log(localStorage['daily_limit_analysis_detail'])
     document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['daily_limit_analysis_detail'] || 0;
   },
   methods: {
