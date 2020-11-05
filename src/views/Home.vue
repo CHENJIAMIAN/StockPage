@@ -514,6 +514,7 @@ export default {
     };
   },
   activated() {
+    document.getElementsByClassName('body')[0].scrollTop =localStorage['home'] || 0;
     var baseUrl = "http://client.lemengsc.com/admin";
     // var baseUrl = global_url.baseUrl;
 
@@ -588,9 +589,7 @@ export default {
   },
   mounted() {
   },
-  activated(){
-    document.getElementsByClassName('body')[0].scrollTop =localStorage['home'] || 0;
-  },
+
   deactivated(){
   },
   methods: {
