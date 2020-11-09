@@ -6,7 +6,7 @@
       :value="searchValue"
       size="large"
       placeholder="搜索"
-      style="width: 100%;padding:10px;"
+      style="width: 100%; padding: 10px"
       :default-active-first-option="false"
       :show-arrow="!false"
       :filter-option="false"
@@ -38,18 +38,20 @@
         </div>
         <div slot="jiaozuori" slot-scope="jiaozuori">
           <img v-if="jiaozuori.isUp" src="../assets/img/up.png" width="16px" />
-          <img v-else src="../assets/img/down.png" width="16px" :style="jiaozuori.value==0?'display:none':'display:true'"/>
+          <img
+            v-else
+            src="../assets/img/down.png"
+            width="16px"
+            :style="jiaozuori.value == 0 ? 'display:none' : 'display:true'"
+          />
           <span class="bigtxt">{{ jiaozuori.value }}</span>
         </div>
         <div slot="codeName" slot-scope="codeName">
-            <div class="bigtxt">{{ codeName.name }}</div>
-            <div>{{ codeName.code }}</div>
+          <div class="bigtxt">{{ codeName.name }}</div>
+          <div>{{ codeName.code }}</div>
         </div>
         <div slot="xianjia" slot-scope="xianjia">
-          <div
-              :class="xianjia.up ? 'red bignum' : 'green bignum'"
-
-          >
+          <div :class="xianjia.up ? 'red bignum' : 'green bignum'">
             {{ xianjia.value }}
           </div>
         </div>
@@ -69,7 +71,7 @@
       <div v-if="loading && !busy" class="demo-loading-container">
         <a-spin />
       </div>
-      <div v-show="alreadyBottom" style="text-align: center;">到底啦</div>
+      <div v-show="alreadyBottom" style="text-align: center">到底啦</div>
     </div>
   </div>
 </template>
@@ -92,36 +94,36 @@ export default {
     };
   },
   // created() {
-    // var baseUrl = global_url.baseUrl;
-    // fetch(baseUrl + "/api/popular/popularList.do?pageSize=10")
-    //   .then((r) => r.json())
-    //   .then((r) => {
-    //     this.table_data = r.rows;
-    //     this.current_page = r.pageNo;
-    //     this.totalPage = r.totalPage
-    //   });
+  // var baseUrl = global_url.baseUrl;
+  // fetch(baseUrl + "/api/popular/popularList.do?pageSize=10")
+  //   .then((r) => r.json())
+  //   .then((r) => {
+  //     this.table_data = r.rows;
+  //     this.current_page = r.pageNo;
+  //     this.totalPage = r.totalPage
+  //   });
   // },
-  activated(){
-    document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['market_popularity'] || 0;
+  activated() {
+    document.getElementsByClassName("demo-infinite-container")[0].scrollTop =
+      localStorage["market_popularity"] || 0;
   },
   methods: {
-    click(record, index){
+    click(record, index) {
       return {
         on: {
           click: () => {
-            this.$router.push(`/stock_detail/` + record.codeName.code)
-          }
-        }
-      }
+            this.$router.push(`/stock_detail/` + record.codeName.code);
+          },
+        },
+      };
     },
-
 
     handleInfiniteOnLoad() {
       const data = this.table_data;
       this.loading = true;
       const next_page = this.current_page + 1;
       fetch(
-          global_url.baseUrl +
+        global_url.baseUrl +
           "/api/popular/popularList.do?pageNo=" +
           next_page +
           "&pageSize=10"
@@ -150,8 +152,8 @@ export default {
         });
     },
     handleChange(value) {
-      if(value == "" || value=="undefine"){
-        alert("输入数据不能为空")
+      if (value == "" || value == "undefine") {
+        alert("输入数据不能为空");
       }
 
       this.searchValue = value;
@@ -162,7 +164,7 @@ export default {
           this.current_page = r.pageNo;
           this.totalPage = r.totalPage;
         });
-      this.searchValue=[]
+      this.searchValue = [];
     },
   },
 };
@@ -178,4 +180,5 @@ export default {
   width: 100%;
   text-align: center;
 }
+
 </style>

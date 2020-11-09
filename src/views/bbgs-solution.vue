@@ -11,6 +11,7 @@
       :columns="table_columns"
       :data-source="table_data"
       rowKey="id"
+      :scroll="{ x: 480 }"
     >
       <div slot="id" slot-scope="id">
         <div class="bigtxt">{{ id }}</div>

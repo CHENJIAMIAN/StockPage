@@ -7,14 +7,13 @@
   >
     <a-page-header
       v-if="!isNavRoute"
-      style="background: #3A84F7;color: #FFFFFF;"
+      style="background: #3a84f7; color: #ffffff"
       :title="$router.currentRoute.meta.title || navTitle || '无'"
       @back="back"
     />
     <div class="body">
       <keep-alive>
-        <router-view @title="gotTitle">
-        </router-view>
+        <router-view @title="gotTitle"> </router-view>
       </keep-alive>
     </div>
     <div class="bottom-nav" v-if="isNavRoute">
@@ -100,7 +99,6 @@
   </div>
 </template>
 <script>
-
 // const baseUrl = "http://127.0.0.1:8888/admin";
 const baseUrl = "http://client.lemengsc.com/admin";
 
@@ -110,19 +108,20 @@ export default {
     return {
       navTitle: "",
       currRouteName: "",
-      navRoutes: ["home", "solution", "my_watchlist", "user"],
+      navRoutes: ["home", /* "solution", "my_watchlist", */ "user"],
     };
   },
   watch: {
     $route: {
       immediate: true,
-      handler(to,from) {
+      handler(to, from) {
         // 记录滚动位置,在activated时恢复位置
-        if(from)
-          localStorage[from.name] = 
-          (document.getElementsByClassName('demo-infinite-container')[0] && document.getElementsByClassName('demo-infinite-container')[0].scrollTop )
-          || 
-          document.getElementsByClassName('body')[0].scrollTop;
+        if (from)
+          localStorage[from.name] =
+            (document.getElementsByClassName("demo-infinite-container")[0] &&
+              document.getElementsByClassName("demo-infinite-container")[0]
+                .scrollTop) ||
+            document.getElementsByClassName("body")[0].scrollTop;
         this.currRouteName = to.name;
       },
     },
@@ -212,6 +211,11 @@ body {
 }
 
 /* ant-table */
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 6px 6px !important;
+}
 .ant-table-thead > tr > th {
   background: white !important;
   border-bottom: 0.5px solid #80808014 !important;

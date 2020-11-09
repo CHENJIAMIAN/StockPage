@@ -33,7 +33,7 @@
                 red: Number(data.quoteChangePercent) > 0,
             green: Number(data.quoteChangePercent) < 0,
             gray: Number(data.quoteChangePercent) === 0}">{{ data.openPrice }}</span>
-          <span style="padding-left:1rem;">最高：</span>
+          <span style="padding-left:5px;">最高：</span>
           <span :class="{
                 red: Number(data.quoteChangePercent) > 0,
             green: Number(data.quoteChangePercent) < 0,
@@ -245,11 +245,12 @@ export default {
     //}
     &-col2 {
       justify-self: end;
-      font-size: 1rem;
       font-family: PingFang SC;
       font-weight: 500;
       color: #333333;
       line-height: 34px;
+      font-size: 0.9rem;
+      
       &-row1 {
       }
       &-row2 {

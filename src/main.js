@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
+import '@/assets/index.scss'
 import router from './router'
 import echarts from 'echarts'
 import infiniteScroll from "vue-infinite-scroll";

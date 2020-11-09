@@ -12,6 +12,7 @@
         :columns="table_columns"
         :data-source="table_data"
         rowKey="id"
+        :scroll="{ x: 480 }"
       >
         <div slot="codeName" slot-scope="codeName">
           <div class="bigtxt">{{ codeName.name }}</div>
@@ -110,10 +111,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 ::v-deep {
-  .ant-table-thead > tr > th,
-  .ant-table-tbody > tr > td {
-    padding: 16px 5px;
-  }
   // ant switch样式修改
   .ant-switch {
     height: 40px;

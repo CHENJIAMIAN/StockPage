@@ -10,7 +10,7 @@ export const table_columns = [
         },
         // 在有customRender时失效
         // scopedSlots: { customRender: 'status' },
-        width: 60
+        width: 50
     },
     {
         title: "代码名称",

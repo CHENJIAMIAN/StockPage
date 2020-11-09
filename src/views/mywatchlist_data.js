@@ -4,42 +4,47 @@ export const table_columns = [
         dataIndex: "codeName",
         key: "codeName",
         scopedSlots: { customRender: 'codeName' },
+        width:90
     },
     {
         title: "选入时间",
         dataIndex: "selectDate",
         key: "selectDate",
         scopedSlots: { customRender: 'selectDate' },
-        align: 'right'
+        align: 'center',
+        width:95
     },
     {
         title: "进入价格",
         dataIndex: "selectPrice",
         key: "selectPrice",
         scopedSlots: { customRender: 'selectPrice' },
-        align: 'right'
+        align: 'center',
+        width:90
     },
     {
         title: "涨幅",
         dataIndex: "zhangfu",
         key: "zhangfu",
         scopedSlots: { customRender: 'zhangfu' },
-        align: 'right'
+        align: 'center',
+        width:80
     },
     {
         title: "现价",
         dataIndex: "nowPrice",
         key: "nowPrice",
         scopedSlots: { customRender: 'nowPrice' },
-
-        align: 'right'
+        align: 'right',
+        width:50
     },
     {
         title: "操作",
         dataIndex: "operation",
         key: "operation",
         scopedSlots: { customRender: 'operation' },
-        align: 'center'
+        align: 'center',
+        width:50
     },
 ];
 
