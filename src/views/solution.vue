@@ -10,7 +10,7 @@
         <div class="row2-name">
           {{ item.codeName.name }}({{ item.codeName.code }})
         </div>
-        <div class="row2-quote">{{ item.zhangdiefu }}</div>
+        <div class="row2-quote">{{ item.zhangdiefu }}%</div>
         <div
           class="row2-more"
           @click="$router.push(`/bbgs_solution/` + item.strategyId)"
@@ -36,9 +36,7 @@ export default {
     fetch(baseUrl + "/api/strategy/strategies.do")
       .then((r) => r.json())
       .then((r) => {
-        // console.log(r.rows)
         this.data = r.rows;
-        // this.table_data = r.rows
       });
   },
   activated(){

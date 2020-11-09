@@ -23,7 +23,7 @@
           </a>
         </div>
         <div slot="zhangdiefu" slot-scope="zhangdiefu">
-          <div class="bignum red">{{ zhangdiefu }}%</div>
+          <div class=" red " style="font-size: 1.2rem;  font-weight: 500;  font-family: DIN Medium;">{{ zhangdiefu }}%</div>
         </div>
         <div slot="jitianjiban" slot-scope="jitianjiban">
           <div class="bigtxt">{{ jitianjiban }}</div>

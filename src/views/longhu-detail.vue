@@ -23,31 +23,59 @@
       </div>
       <div class="row1-col2">
         <div class="row1-col2-row1">
-          <span>总值:</span>
-          <span>{{ data.totalValue + data.totalValueUnit }}</span>
-          <span style="padding-left:1rem;">主营:</span>
-          <span>{{ data.mainBusiness }}</span>
+          <span>今开：</span>
+          <span :class="{
+                red: Number(data.quoteChangePercent) > 0,
+            green: Number(data.quoteChangePercent) < 0,
+            gray: Number(data.quoteChangePercent) === 0}">{{ data.openPrice }}</span>
+		  <span style="padding-left:5px;">最高：</span>
+          <span :class="{
+                red: Number(data.quoteChangePercent) > 0,
+            green: Number(data.quoteChangePercent) < 0,
+            gray: Number(data.quoteChangePercent) === 0}">{{ data.highest }}</span>
+          <!--          <span>最低：</span>-->
+          <!--          <span class="red">{{ data.lowest }} </span>-->
+          <!--          <span>成交量：</span>-->
+          <!--          <span >{{ data.tradeover }} 万手 </span>-->
+
         </div>
-        <div class="row1-col2-row2">
-          <span>流值:</span>
-          <span>{{ data.circulationValue + data.circulationValueUnit }}</span>
-          <span style="padding-left:1rem;">牛散:</span>
-          <span class="blue" :key="item.id" v-for="item in data.awesomeRetail">
-            {{ item.name }}
-          </span>
-          <span class="more blue">更多</span>
+        <div class="row1-col2-row1">
+          <span>最低：</span>
+          <span :class="{
+                red: Number(data.quoteChangePercent) > 0,
+            green: Number(data.quoteChangePercent) < 0,
+            gray: Number(data.quoteChangePercent) === 0}">{{ data.lowest }} </span>
+          <span>换手率：</span>
+          <span>{{ data.turnoverRate }}%</span>
+        </div>
+        <div class="row1-col2-row1">
+          <span>成交量:</span>
+          <span >{{ data.tradeover }}<span style="font-size: 1px">{{ data.tradeoverUnit}} </span> </span>
+          <span>成交额:</span>
+          <span>{{ data.tradeVolume }}<span style="font-size: 1px">{{ data.tradeVolumeUnit}}</span></span>
         </div>
       </div>
+
+<!--      <div class="row1-col2">-->
+<!--        <div class="row1-col2-row1">-->
+<!--          <span>总值:</span>-->
+<!--          <span>{{ data.totalValue + data.totalValueUnit }}</span>-->
+<!--          <span style="padding-left:1rem;">主营:</span>-->
+<!--          <span>{{ data.mainBusiness }}</span>-->
+<!--        </div>-->
+<!--        <div class="row1-col2-row2">-->
+<!--          <span>流值:</span>-->
+<!--          <span>{{ data.circulationValue + data.circulationValueUnit }}</span>-->
+<!--          <span style="padding-left:1rem;">牛散:</span>-->
+<!--          <span class="blue" :key="item.id" v-for="item in data.awesomeRetail">-->
+<!--            {{ item.name }}-->
+<!--          </span>-->
+<!--          <span class="more blue">更多</span>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
     <!-- 图表 -->
     <div class="row2">
-      <!-- -->
-<!--      <div class="iframe-class" >-->
-<!--        -->
-<!--&lt;!&ndash;        <iframe :src="html_src" ref="iframe" width="100%"></iframe>&ndash;&gt;-->
-<!--      </div>-->
-
-
       <a-tabs default-active-key="2" size="small">
         <a-tab-pane key="1" tab="分时">
           <div class="chart">
@@ -59,38 +87,56 @@
         </a-tab-pane>
         <a-tab-pane key="2" tab="日K">
           <div class="longhu">
-<!--            <div class="head">-->
-<!--              <img src="../assets/img/jx.png" />-->
-<!--              <div>日K</div>-->
-<!--              <img src="../assets/img/ma5.png" />-->
-<!--              <div>MA5</div>-->
-<!--              <img src="../assets/img/ma10.png" />-->
-<!--              <div>MA10</div>-->
-<!--              <img src="../assets/img/ma20.png" />-->
-<!--              <div>MA20</div>-->
-<!--              <img src="../assets/img/ma30.png" />-->
-<!--              <div>MA30</div>-->
-<!--            </div>-->
             <div class="chart">
-              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-<!--              <div id="main" style="width: 100%;height:300px;"></div>-->
-              <img :src="day_img_src" ref="img" width="100%" />
+              <img :src="day_month_img_src" ref="img" width="100%" />
             </div>
-<!--            <div class="date">-->
-<!--              <div-->
-<!--                :class="{ blue: index === 0 }"-->
-<!--                v-for="(item, index) in historyDates"-->
-<!--                :key="index"-->
-<!--              >-->
-<!--                {{ item }}-->
-<!--              </div>-->
-<!--            </div>-->
           </div>
         </a-tab-pane>
-        <a-tab-pane key="3" tab="股东"></a-tab-pane>
-        <a-tab-pane key="4" tab="互动"></a-tab-pane>
-        <a-tab-pane key="5" tab="财务"></a-tab-pane>
-        <a-tab-pane key="6" tab="主营"></a-tab-pane>
+        <a-tab-pane key="3" tab="日K(1季)">
+          <div class="longhu">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="season_img_src" ref="img" width="100%" />
+            </div>
+
+          </div>
+        </a-tab-pane>
+        <a-tab-pane key="4" tab="日K(半年)">
+          <div class="longhu">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="half_year_img_src" ref="img" width="100%" />
+            </div>
+
+          </div>
+        </a-tab-pane>
+        <a-tab-pane key="5" tab="周K">
+          <div class="longhu">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="week_img_src" ref="img" width="100%" />
+            </div>
+
+          </div>
+        </a-tab-pane>
+        <a-tab-pane key="6" tab="月K">
+          <div class="longhu">
+            <div class="chart">
+              <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+              <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
+              <img :src="month_img_src" ref="img" width="100%" />
+            </div>
+
+          </div>
+        </a-tab-pane>
+
+<!--        <a-tab-pane key="3" tab="股东"></a-tab-pane>-->
+<!--        <a-tab-pane key="4" tab="互动"></a-tab-pane>-->
+<!--        <a-tab-pane key="5" tab="财务"></a-tab-pane>-->
+<!--        <a-tab-pane key="6" tab="主营"></a-tab-pane>-->
       </a-tabs>
     </div>
     <!-- 蓝条 -->
@@ -153,9 +199,13 @@ export default {
     return {
       today: new Date().toLocaleDateString().replace(/\//g, "-"),
       data,
-      html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
       minute_img_src:"http://img1.money.126.net/chart/hs/time/540x360/1002277.png",
-      day_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
+      day_month_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
+      season_img_src:"http://img1.money.126.net/chart/hs/kline/day/90/1002277.png",
+      half_year_img_src:"http://img1.money.126.net/chart/hs/kline/day/180/1002277.png",
+      week_img_src:"http://img1.money.126.net/chart/hs/kline/week/1002277.png",
+      month_img_src:"http://img1.money.126.net/chart/hs/kline/month/1002277.png",
+
       historyDates: new Array(6).fill().map((i, index) =>
         new Date(+new Date() - index * 1000 * 60 * 60 * 24)
           .toLocaleDateString()
@@ -187,7 +237,11 @@ export default {
             stockSource = 1
           }
           this.minute_img_src="http://img1.money.126.net/chart/hs/time/540x360/"+stockSource+""+r.obj.code+".png"
-          this.day_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+stockSource+""+r.obj.code+".png"
+          this.day_month_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+stockSource+""+r.obj.code+".png"
+          this.season_img_src="http://img1.money.126.net/chart/hs/kline/day/90/"+stockSource+""+r.obj.code+".png"
+          this.half_year_img_src="http://img1.money.126.net/chart/hs/kline/day/180/"+stockSource+""+r.obj.code+".png"
+          this.week_img_src="http://img1.money.126.net/chart/hs/kline/week/"+stockSource+""+r.obj.code+".png"
+          this.month_img_src="http://img1.money.126.net/chart/hs/kline/month/"+stockSource+""+r.obj.code+".png"
 
         });
   },
@@ -249,7 +303,7 @@ export default {
     }
     &-col2 {
       justify-self: end;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-family: PingFang SC;
       font-weight: 500;
       color: #333333;

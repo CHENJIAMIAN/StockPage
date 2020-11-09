@@ -35,7 +35,7 @@
             class="hintslist ant-select-dropdown-menu ant-select-dropdown-menu-vertical ant-select-dropdown-menu-root"
           >
             <li
-              :key="item.code"
+              :key="item.code+item.name"
               v-for="(item, index) in hints"
               ref="hint"
               class="hint ant-select-dropdown-menu-item"
@@ -78,11 +78,11 @@
         <!-- <div class="youzi menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">游资</div>
       </div>
-      <div class="menuicon-cell" @click="handleRoute('my_watchlist')">
-        <img src="../assets/img/zixuan.png" />
-        <!-- <div class="zixuan menuicon-cell-icon"></div> -->
-        <div class="menuicon-cell-txt">自选</div>
-      </div>
+<!--      <div class="menuicon-cell" @click="handleRoute('my_watchlist')">-->
+<!--        <img src="../assets/img/zixuan.png" />-->
+<!--        &lt;!&ndash; <div class="zixuan menuicon-cell-icon"></div> &ndash;&gt;-->
+<!--        <div class="menuicon-cell-txt">自选</div>-->
+<!--      </div>-->
     </div>
     <div class="notify blue">
       <div class="notify-col1 padding" @click="handleReview(marketReview.createDate)">
@@ -455,6 +455,8 @@ export default {
         this.errorMessage='请选择搜索结果中匹配中的股票或代码'
         return;
       }
+
+      console.log(code)
 
       this.$router.push({ name: "diagnose_report", params: { code: code } });
     },

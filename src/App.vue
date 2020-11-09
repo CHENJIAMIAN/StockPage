@@ -47,35 +47,35 @@
         class="solution"
         type="solution"
       /> -->
-      <img
-        v-if="currRouteName !== 'my_watchlist'"
-        src="./assets/img/zx1.png"
-        width="30px"
-        @click="handleRoute('my_watchlist')"
-      />
-      <img
-        v-else
-        src="./assets/img/zx2.png"
-        width="30px"
-        @click="handleRoute('my_watchlist')"
-      />
+<!--      <img-->
+<!--        v-if="currRouteName !== 'my_watchlist'"-->
+<!--        src="./assets/img/zx1.png"-->
+<!--        width="30px"-->
+<!--        @click="handleRoute('my_watchlist')"-->
+<!--      />-->
+<!--      <img-->
+<!--        v-else-->
+<!--        src="./assets/img/zx2.png"-->
+<!--        width="30px"-->
+<!--        @click="handleRoute('my_watchlist')"-->
+<!--      />-->
       <!-- <a-icon
         @click="handleRoute('my_watchlist')"
         class="my_watchlist"
         type="check-square"
       /> -->
-      <img
-        v-if="currRouteName !== 'user'"
-        src="./assets/img/user1.png"
-        width="30px"
-        @click="handleRoute('user')"
-      />
-      <img
-        v-else
-        src="./assets/img/user2.png"
-        width="30px"
-        @click="handleRoute('user')"
-      />
+<!--      <img-->
+<!--        v-if="currRouteName !== 'user'"-->
+<!--        src="./assets/img/user1.png"-->
+<!--        width="30px"-->
+<!--        @click="handleRoute('user')"-->
+<!--      />-->
+<!--      <img-->
+<!--        v-else-->
+<!--        src="./assets/img/user2.png"-->
+<!--        width="30px"-->
+<!--        @click="handleRoute('user')"-->
+<!--      />-->
       <!-- <a-icon class="user" type="user" /> -->
       <div :class="['txt', 'home', currRouteName == 'home' && 'blue']">
         首页
@@ -83,18 +83,18 @@
       <div :class="['txt', 'solution', currRouteName == 'solution' && 'blue']">
         策略
       </div>
-      <div
-        :class="[
-          'txt',
-          'my_watchlist',
-          currRouteName == 'my_watchlist' && 'blue',
-        ]"
-      >
-        自选
-      </div>
-      <div :class="['txt', 'user', currRouteName == 'user' && 'blue']">
-        我的
-      </div>
+<!--      <div-->
+<!--        :class="[-->
+<!--          'txt',-->
+<!--          'my_watchlist',-->
+<!--          currRouteName == 'my_watchlist' && 'blue',-->
+<!--        ]"-->
+<!--      >-->
+<!--        自选-->
+<!--      </div>-->
+<!--      <div :class="['txt', 'user', currRouteName == 'user' && 'blue']">-->
+<!--        我的-->
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -214,7 +214,7 @@ body {
 
 .ant-table-thead > tr > th,
 .ant-table-tbody > tr > td {
-  padding: 6px 6px !important;
+  padding: 16px 6px !important;
 }
 .ant-table-thead > tr > th {
   background: white !important;
@@ -259,7 +259,8 @@ body {
     height: $navHei;
     display: grid;
     grid-template-rows: 1fr 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    //grid-template-columns: 1fr 1fr 1fr 1fr; 去掉四栏
+    grid-template-columns: 1fr 1fr ;
     align-items: center;
     justify-items: center;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.18);

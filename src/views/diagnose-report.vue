@@ -135,35 +135,34 @@ export default {
       half_year_img_src:"http://img1.money.126.net/chart/hs/kline/day/180/1002277.png",
       week_img_src:"http://img1.money.126.net/chart/hs/kline/week/1002277.png",
       month_img_src:"http://img1.money.126.net/chart/hs/kline/month/1002277.png",
-      html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
+      // html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
     };
   },
   activated() {
     document.getElementsByClassName('body')[0].scrollTop = 0;
     var code = this.$route.params.code;
-    // var baseUrl = global_baseUrl.baseUrl;
-    var baseUrl = "http://client.lemengsc.com/admin";
+    var baseUrl = global_baseUrl.baseUrl;
+    // var baseUrl = "http://client.lemengsc.com/admin";
     if (typeof code == 'undefined'){
       code="002277"
     }
     fetch(baseUrl +"/home/doctor.do?stockCode=" + code)
         .then((r) => r.json())
         .then((r) => {
+          console.log("report",code)
           if (r.obj == null){
             alert("输入数据有误,将用默认数据展示")
             this.html_src="http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0"
           }else{
             this.data = r.obj;
             this.minute_img_src="http://img1.money.126.net/chart/hs/time/540x360/"+r.obj.stockSource+""+r.obj.code+".png"
-            this.day_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+r.obj.stockSource+""+r.obj.code+".png"
+            this.day_month_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+r.obj.stockSource+""+r.obj.code+".png"
             this.season_img_src="http://img1.money.126.net/chart/hs/kline/day/90/"+r.obj.stockSource+""+r.obj.code+".png"
             this.half_year_img_src="http://img1.money.126.net/chart/hs/kline/day/180/"+r.obj.stockSource+""+r.obj.code+".png"
             this.week_img_src="http://img1.money.126.net/chart/hs/kline/week/"+r.obj.stockSource+""+r.obj.code+".png"
             this.month_img_src="http://img1.money.126.net/chart/hs/kline/month/"+r.obj.stockSource+""+r.obj.code+".png"
 
-            // http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0
-            // this.html_src="http://m.money.163.com/stock/"+r.obj.stockSource+""+r.obj.code+
-            //     ".html?from=singlemessage&isappinstalled=0"
+
           }
 
         });
