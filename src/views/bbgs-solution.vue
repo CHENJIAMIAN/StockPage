@@ -86,6 +86,8 @@ export default {
       document.title = "步步高升"
     }else if (solution_id==3){
       document.title = "金牛角"
+    }else if (solution_id==4){
+      document.title = "小刚走好"
     }else{
       document.title = "策略池"
     }

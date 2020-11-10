@@ -77,7 +77,6 @@ export default {
       )
           .then((r) => r.json())
           .then((r) => {
-            console.log(r.rows)
             if (next_page <= r.totalPage) {
               this.table_data = data.concat(r.rows);
               this.loading = false;

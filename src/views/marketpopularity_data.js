@@ -1,5 +1,12 @@
 export const table_columns = [
     {
+        title: "代码名称",
+        dataIndex: "codeName",
+        key: "codeName",
+        scopedSlots: { customRender: 'codeName' },
+        // align: 'right'
+    },
+    {
         title: "排名",
         dataIndex: "rank",
         key: "rank",
@@ -10,21 +17,16 @@ export const table_columns = [
         // },
         // 在有customRender时失效
         scopedSlots: { customRender: 'rank' },
+        align: 'center'
     },
     {
         title: "较昨日",
         dataIndex: "jiaozuori",
         key: "jiaozuori",
         scopedSlots: { customRender: 'jiaozuori' },
-        align: 'right',
+        align: 'center',
     },
-    {
-        title: "代码名称",
-        dataIndex: "codeName",
-        key: "codeName",
-        scopedSlots: { customRender: 'codeName' },
-        align: 'right'
-    },
+
     {
         title: "现价",
         dataIndex: "xianjia",

@@ -8,7 +8,7 @@ export const data = [
             name: "双良节能",
             code: '603466'
         },
-        zhangdiefu: "+58.99%",
+        zhangdiefu: "+58.99",
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ export const data = [
             name: "双良节能",
             code: '603466'
         },
-        zhangdiefu: "+58.99%",
+        zhangdiefu: "+58.99",
     },
 
     {
@@ -31,7 +31,7 @@ export const data = [
             name: "双良节能",
             code: '603466'
         },
-        zhangdiefu: "+58.99%",
+        zhangdiefu: "+58.99",
     },
     {
         id: 4,
@@ -42,7 +42,7 @@ export const data = [
             name: "双良节能",
             code: '603466'
         },
-        zhangdiefu: "+58.99%",
+        zhangdiefu: "+58.99",
     },
 
     {
@@ -54,7 +54,7 @@ export const data = [
             name: "双良节能",
             code: '603466'
         },
-        zhangdiefu: "+58.99%",
+        zhangdiefu: "+58.99",
     },
     {
         id: 6,
@@ -65,7 +65,7 @@ export const data = [
             name: "双良节能",
             code: '603466'
         },
-        zhangdiefu: "+58.99%",
+        zhangdiefu: "+58.99",
     },
 
     {
@@ -77,7 +77,7 @@ export const data = [
             name: "双良节能",
             code: '603466'
         },
-        zhangdiefu: "+58.99%",
+        zhangdiefu: "+58.99",
     },
     {
         id: 8,
@@ -88,7 +88,7 @@ export const data = [
             name: "双良节能",
             code: '603466'
         },
-        zhangdiefu: "+58.99%",
+        zhangdiefu: "+58.99",
     },
 
 

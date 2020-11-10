@@ -1,6 +1,9 @@
 // 策略池
 <template>
   <div class="solution">
+    <div v-if="loading" class="demo-loading-container">
+      <a-spin />
+    </div>
     <div class="block" v-for="item in data" :key="item.id">
       <div class="row1">
         <div class="row1-name">{{ item.name }}</div>
@@ -19,6 +22,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -28,15 +32,23 @@ export default {
   name:"solution",
   data() {
     return {
-      data,
+      data:[],
+      loading:true
     };
   },
   mounted() {
     var baseUrl = global_url.baseUrl;
+
     fetch(baseUrl + "/api/strategy/strategies.do")
       .then((r) => r.json())
       .then((r) => {
-        this.data = r.rows;
+        if(!r.rows){
+          this.data=[]
+        }else{
+          this.data = r.rows;
+          this.loading=false
+        }
+
       });
   },
   activated(){
@@ -116,5 +128,13 @@ export default {
       }
     }
   }
+  .demo-loading-container {
+    position: absolute;
+    bottom: 40px;
+    width: calc(100% - 1rem);
+    text-align: center;
+  }
+
 }
+
 </style>

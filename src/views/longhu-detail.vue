@@ -228,7 +228,6 @@ export default {
     fetch(baseUrl+"/api/rank/rankDetail.do?stockCode="+stockCode+"&createDate="+createDate)
         .then((r) => r.json())
         .then((r) => {
-          console.log(r.obj)
           this.data=r.obj
           this.$emit("title", this.data.name + " " + this.data.market + ":" + this.data.code);
 

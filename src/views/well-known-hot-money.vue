@@ -148,7 +148,6 @@ export default {
         .then((r) => {
           this.data = r.obj
           this.today = r.obj.today
-          console.log(r.obj)
         });
   },
   methods:{

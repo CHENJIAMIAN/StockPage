@@ -31,10 +31,15 @@
         :data-source="table_data"
         :customRow="click"
         rowKey="id"
+        :scroll="{ x: 480 }"
       >
         <div slot="rank" slot-scope="rank">
           <div class="bigtxt">{{ rank }}</div>
           <!--          <div>{{ rank }}</div>-->
+        </div>
+        <div slot="codeName" slot-scope="codeName">
+          <div class="bigtxt">{{ codeName.name }}</div>
+          <div>{{ codeName.code }}</div>
         </div>
         <div slot="jiaozuori" slot-scope="jiaozuori">
           <img v-if="jiaozuori.isUp" src="../assets/img/up.png" width="16px" />
@@ -46,10 +51,7 @@
           />
           <span class="bigtxt">{{ jiaozuori.value }}</span>
         </div>
-        <div slot="codeName" slot-scope="codeName">
-          <div class="bigtxt">{{ codeName.name }}</div>
-          <div>{{ codeName.code }}</div>
-        </div>
+
         <div slot="xianjia" slot-scope="xianjia">
           <div :class="xianjia.up ? 'red bignum' : 'green bignum'">
             {{ xianjia.value }}
@@ -61,8 +63,8 @@
               red: Number(zhangdiefu) > 0,
               green: Number(zhangdiefu) < 0,
               gray: Number(zhangdiefu) === 0,
-              bignum: true,
             }"
+            style=" font-size: 1.4rem; font-weight: 500; font-family: DIN Medium;"
           >
             {{ zhangdiefu }}%
           </div>
