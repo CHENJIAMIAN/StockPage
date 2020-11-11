@@ -190,21 +190,21 @@ body {
   background-color: #ababab;
 }
 .bigtxt {
-  font-size: 1.2rem;
+  font-size: 1.0rem;
 }
 .bignum {
-  font-size: 1.5rem;
+  font-size: 1.0rem;
   font-weight: 500;
   font-family: DIN Medium;
 }
 .midnum {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   font-family: DIN Medium;
 }
 .graytxt {
   color: #ababab;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 .border-bottom {
   border-bottom: 1px solid #f4f8fb;

@@ -39,7 +39,9 @@ export default {
   mounted() {
     var baseUrl = global_url.baseUrl;
 
-    fetch(baseUrl + "/api/strategy/strategies.do")
+    var t = Math.random();
+
+    fetch(baseUrl + "/api/strategy/strategies.do?t" + t)
       .then((r) => r.json())
       .then((r) => {
         if(!r.rows){
@@ -79,7 +81,7 @@ export default {
       height: 100%;
       padding: 0 20px;
       &-name {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-family: PingFang SC;
         font-weight: 800;
         color: #333333;
@@ -104,7 +106,7 @@ export default {
       padding: 10px;
 
       &-name {
-        font-size: 1.2rem;
+        font-size: 1.0rem;
         font-family: PingFang SC;
         font-weight: 500;
         color: #333333;
@@ -118,11 +120,11 @@ export default {
         line-height: 34px;
       }
       &-more {
-        width: 7rem;
+        width: 5rem;
         background: #3984f7;
         border-radius: 3px;
         text-align: center;
-        font-size: 1.2rem;
+        font-size: 0.8rem;
         color: #ffffff;
         line-height: 34px;
       }

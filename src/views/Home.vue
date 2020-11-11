@@ -89,7 +89,7 @@
         <img src="../assets/img/laba.png" />
         {{ marketReview.title }}
       </div>
-      <div class="notify-col2" @click="handleRoute('review_summary')">更多➔</div>
+      <div class="notify-col2" @click="handleRoute('review_summary')">更多</div>
     </div>
     <div class="zhishu">
       <div class="zhishu-cell"  @click="viewDetail(obj.name)" :key="obj.id" v-for="obj in zhishu" >
@@ -219,7 +219,7 @@
     <div class="bankuaihangye">
       <div class="bankuaihangye-head">
         <div class="title-txt">行业板块</div>
-        <div class="more-txt" @click="handleRoute('business_fund')">更多➔</div>
+        <div class="more-txt" @click="handleRoute('business_fund')">更多</div>
       </div>
       <div class="bankuaihangye-content">
         <div
@@ -248,7 +248,7 @@
     <div class="gainianbankuai bankuaihangye">
       <div class="bankuaihangye-head">
         <div class="title-txt">概念板块</div>
-        <div class="more-txt" @click="handleRoute('concept_fund')">更多➔</div>
+        <div class="more-txt" @click="handleRoute('concept_fund')">更多</div>
       </div>
       <div class="bankuaihangye-content">
         <div
@@ -670,7 +670,7 @@ export default {
     display: grid;
     grid-template-rows: 60px 20px;
     img {
-      width: 40px;
+      width: 35px;
       justify-self: center;
       align-self: center;
     }
@@ -681,7 +681,7 @@ export default {
       background-position-y: 16px;
     }
     &-txt {
-      font-size: 12pt;
+      font-size: 11pt;
     }
   }
 }
@@ -695,10 +695,10 @@ export default {
   align-items: center;
   height: 3.2rem;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   &-col1 {
     img {
-      width: 1.8rem;
+      width: 1.6rem;
     }
     width:15.2rem;
   }
@@ -844,7 +844,7 @@ export default {
   position: absolute;
 }
 .title-txt {
-  font-size: 18pt;
+  font-size: 14pt;
   font-weight: bold;
   padding-left: 0.8rem;
   color: black;
