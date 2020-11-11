@@ -114,7 +114,7 @@ export default {
       var url = global_url.baseUrl +"/api/idle/idleRankHistoryList.do"
 
       if(idleFundId ==null || createDate == 'undefined'){
-        alert("出错啦，游资id有误，请重新操作")
+        // alert("出错啦，游资id有误，请重新操作")
         return;
       }
       url +="?idleFundId="+idleFundId

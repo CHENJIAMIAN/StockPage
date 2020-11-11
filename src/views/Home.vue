@@ -579,7 +579,12 @@ export default {
 
 <style lang="scss" scoped>
 .search {
-  margin: 15pt;
+  background: url(../assets/img/top_bg.png) no-repeat;
+  background-size: 100% 100%;
+  padding-top: 103px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 211px;
   ::v-deep {
     input {
       border: none;
