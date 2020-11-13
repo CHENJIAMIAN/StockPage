@@ -600,6 +600,14 @@ export default {
   }
 }
 
+
+.hintsbox{
+  opacity:0.8;
+  width:75%;
+  border-radius:15px;
+  background-color: #91d5ff;
+}
+
 .zhishu {
   text-align: center;
   display: grid;
