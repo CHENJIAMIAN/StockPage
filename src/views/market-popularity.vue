@@ -60,11 +60,11 @@
         <div slot="zhangdiefu" slot-scope="zhangdiefu">
           <div
             :class="{
-              red: Number(zhangdiefu) > 0,
-              green: Number(zhangdiefu) < 0,
-              gray: Number(zhangdiefu) === 0,
+              'red bignum': Number(zhangdiefu) > 0,
+              'green bignum': Number(zhangdiefu) < 0,
+              'gray bignum': Number(zhangdiefu) === 0,
             }"
-            style=" font-size: 1.4rem; font-weight: 500; font-family: DIN Medium;"
+
           >
             {{ zhangdiefu }}%
           </div>

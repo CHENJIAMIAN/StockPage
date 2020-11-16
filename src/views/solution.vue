@@ -13,7 +13,12 @@
         <div class="row2-name">
           {{ item.codeName.name }}({{ item.codeName.code }})
         </div>
-        <div class="row2-quote">{{ item.zhangdiefu }}%</div>
+        <div class="row2-quote" :class="{
+              red: Number(item.zhangdiefu ) > 0,
+              green: Number(item.zhangdiefu ) < 0,
+              gray: Number(item.zhangdiefu ) === 0,
+            }"
+        >{{ item.zhangdiefu }}%</div>
         <div
           class="row2-more"
           @click="$router.push(`/bbgs_solution/` + item.strategyId)"
@@ -116,7 +121,7 @@ export default {
         font-size: 1.5rem;
         font-family: DIN Medium;
         font-weight: 400;
-        color: #ea3031;
+        //color: #ea3031;
         line-height: 34px;
       }
       &-more {

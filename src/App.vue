@@ -94,6 +94,7 @@
 <!--      </div>-->
 <!--      <div :class="['txt', 'user', currRouteName == 'user' && 'blue']">-->
 <!--        我的-->
+
 <!--      </div>-->
     </div>
   </div>
