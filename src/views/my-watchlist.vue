@@ -75,33 +75,72 @@
 <script>
 import { table_columns, table_data, date } from "@/views/mywatchlist_data.js";
 import global_url from "../App.vue";
+import global_user from "@/App"
 export default {
   data() {
-    return { loading: false, busy: false, table_columns, table_data: [], date };
+    return {
+      loading: false,
+      busy: false,
+      table_columns,
+      table_data: [],
+      date,
+      current_page: 0,
+      totalPage: 1};
   },
+  created() {
+
+  },
+
   activated() {
+
+    if(global_user.userInfo.token=="" ||global_user.userInfo.userId==""){
+      this.$router.push(`/user`);
+    }
     document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['my_watchlist'] || 0;
 
-    var baseUrl = global_url.baseUrl;
-    fetch(baseUrl + "/api/user/select.do?userId=" + 1)
-      .then((r) => r.json())
-      .then((r) => {
-        this.table_data = r.rows;
-        // this.table_data = r.rows
-      });
+    // var baseUrl = global_url.baseUrl;
+    // fetch(baseUrl + "/api/userSelect/select.do?userId=" + global_user.userInfo.userId)
+    //   .then((r) => r.json())
+    //   .then((r) => {
+    //     this.table_data = r.rows;
+    //     // this.table_data = r.rows
+    //   });
   },
   methods: {
+
     handleInfiniteOnLoad() {
+      if(global_user.userInfo.token=="" ||global_user.userInfo.userId==""){
+        this.$router.push(`/user`);
+      }
       const data = this.table_data;
       this.loading = true;
-      var baseUrl = global_url.baseUrl;
-      fetch(baseUrl + "/api/user/select.do?userId=" + 1)
-        .then((r) => r.json())
-        .then((r) => {
-          this.table_data = data.concat(r.rows);
-          this.loading = false;
-        });
+      const next_page = this.current_page + 1;
+      var url = global_url.baseUrl+"/api/userSelect/select.do?pageNo=" +
+          next_page +
+          "&pageSize=10";
+      if(global_user.userInfo.userId!=""){
+        url+="&userId="+global_user.userInfo.userId
+      }else{
+        return;
+      }
+      fetch( url )
+          .then((r) => r.json())
+          .then((r) => {
+            // console.log(r.rows)
+            if (next_page <= r.totalPage) {
+              this.table_data = data.concat(r.rows);
+              this.loading = false;
+              this.current_page = r.pageNo;
+              this.totalPage = r.totalPage;
+            } else {
+              console.log(r.pageNo + "--" + r.totalPage);
+              this.loading = false;
+              this.alreadyBottom = true;
+            }
+          });
     },
+
+
     onChange(id, checked) {
       console.log(`a-switch to ${checked}`, id);
       // 此处请求自选或取消自选的接口

@@ -134,7 +134,10 @@ export default {
         .then((r) => {
           // console.log(r.rows)
           if (next_page <= r.totalPage) {
-            this.table_data = data.concat(r.rows);
+            if(r.rows){
+              this.table_data = data.concat(r.rows);
+            }
+
             this.loading = false;
             this.current_page = r.pageNo;
             this.totalPage = r.totalPage;

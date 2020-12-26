@@ -78,6 +78,11 @@
         <!-- <div class="youzi menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">游资</div>
       </div>
+      <div class="menuicon-cell" @click="handleRoute('search')">
+        <img src="../assets/img/renqi.png" />
+        <!-- <div class="youzi menuicon-cell-icon"></div> -->
+        <div class="menuicon-cell-txt">牛散</div>
+      </div>
 <!--      <div class="menuicon-cell" @click="handleRoute('my_watchlist')">-->
 <!--        <img src="../assets/img/zixuan.png" />-->
 <!--        &lt;!&ndash; <div class="zixuan menuicon-cell-icon"></div> &ndash;&gt;-->
