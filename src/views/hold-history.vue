@@ -130,9 +130,8 @@
 		},
     activated() {
       var query = this.$route.query
-      console.log("hold-history:",this.$route.query)
       var url = global_url.baseUrl +
-          "/api/holder/holderHistory.do?"
+          "/api/holder/holderHistory.do?pageSize=10"
       if (query != null && query.sharehdcode != null && query.sharehdcode !="undefined" ){
         url +="&sharehdcode="+query.sharehdcode
       }

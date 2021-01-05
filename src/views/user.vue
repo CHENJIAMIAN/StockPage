@@ -1,11 +1,10 @@
 <template>
-  <div>
-	<div id="user-page" v-if="global_user.userInfo.token!=''">
+	<div id="user-page" v-if="userInfoIsEmpty">
 		<div class="avater">
 			<img src="../assets/img/top_bg.png" class="avater-box"></img>
 			<div class="avater-info">
 				<div class="avater-info-box">
-					<div class="avater-info-user-name">{{global_user.userInfo.userName}}</div>
+					<div class="avater-info-user-name">{{userInfo.userName}}</div>
 					<div class="avater-info-user-vip">VIP</div>
 				</div>
 				<div class="avater-info-detail">欢迎来到鹰眼诊股</div>
@@ -19,82 +18,34 @@
 		<div class="list">
 			<div class="list-box" v-for="(list,index) in listData" :key="index">
 				<img :src="list.icon" class="list-box-icon"></img>
-				<div class="list-box-title" v-text="list.title"></div>
-				<div class="list-box-text" v-text="list.text"></div>
+
+				<div class="list-box-title"  v-text="list.title"></div>
+
+				<div class="list-box-text" v-if="list.title=='手机号码'"  >{{userInfo.mobile}}</div>
+        <div class="list-box-text" v-else="list.title!='手机号码'" v-text="list.text"></div>
 				<div class="list-box-next"></div>
 			</div>
+      <a-button
+          size="large"
+          style="width: calc(100% - 5px);"
+          type="primary"
+          htmlType="submit"
+          class="login-button"
+          @click="logout"
+      >退出</a-button>
 		</div>
+
 		<div class="shadow"></div>
+
 	</div>
-
-  <div id="user-login" v-else-if="global_user.userInfo.token==''">
-
-    <a-form
-        id="formLogin"
-        class="user-layout-login"
-        ref="formLogin"
-        :form="form"
-        @submit="handleSubmit"
-    >
-      <a-tabs
-          :activeKey="customActiveKey"
-          :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }"
-          @change="handleTabClick"
-      >
-        <a-tab-pane key="tab1" tab="手机号登录">
-          <a-form-item>
-            <a-input size="large" type="text" placeholder="手机号" v-decorator="['mobile', {rules: [{ required: true, pattern: /^1[34578]\d{9}$/, message: '请输入正确的手机号' }], validateTrigger: 'change'}]">
-              <a-icon slot="prefix" type="mobile" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-            </a-input>
-          </a-form-item>
-
-          <a-row :gutter="16">
-            <a-col class="gutter-row" :span="16">
-              <a-form-item>
-                <a-input size="large" type="text" placeholder="验证码" v-decorator="['captcha', {rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'blur'}]">
-                  <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-                </a-input>
-              </a-form-item>
-            </a-col>
-            <a-col class="gutter-row" :span="8">
-              <a-button
-                  class="getCaptcha"
-                  tabindex="-1"
-                  :disabled="state.smsSendBtn"
-                  @click.stop.prevent="getCaptcha"
-                  v-text="!state.smsSendBtn && '获取验证码' || (state.time+' s')"
-              ></a-button>
-            </a-col>
-          </a-row>
-        </a-tab-pane>
-      </a-tabs>
-      <a-form-item style="margin-top:24px">
-        <a-button
-            size="large"
-            type="primary"
-            htmlType="submit"
-            class="login-button"
-            :loading="state.loginBtn"
-            :disabled="state.loginBtn"
-        >确定</a-button>
-      </a-form-item>
-
-    </a-form>
-
-  </div>
-
-  </div>
-
-
 
 </template>
 <script>
-import global_user from "@/App"
 import global_url from "@/App";
 	export default {
 		data() {
 			return {
-			  global_user,
+			  userInfo:JSON.parse(localStorage.getItem("userInfo")),
 				listData: [{
 					icon:require('../assets/img/user-mine.png'),
 					title:'我的订单',
@@ -102,7 +53,7 @@ import global_url from "@/App";
 				},{
 					icon:require('../assets/img/user-phone.png'),
 					title:'手机号码',
-					text:global_user.userInfo.mobile
+					text:""
 				},{
 					icon:require('../assets/img/user-gp.png'),
 					title:'我的自选股',
@@ -117,190 +68,37 @@ import global_url from "@/App";
 					text:''
 				}],
 
-
-
-        customActiveKey: 'tab1',
-        loginBtn: false,
-        // login type: 0 email, 1 username, 2 telephone
-        loginType: 0,
-        stepCaptchaVisible: false,
-        form: this.$form.createForm(this),
-        state: {
-          time: 60,
-          loginBtn: false,
-          // login type: 0 email, 1 username, 2 telephone
-          loginType: 0,
-          smsSendBtn: false
-        },
-        validatorRules: {
-          // userAccount: {
-          //   rules: [{ required: true, message: '请输入用户名!', validator: 'click' }]
-          // },
-          // userPassword: {
-          //   rules: [{ required: true, message: '请输入密码!', validator: 'click' }]
-          // },
-          mobile: { rules: [{ validator: this.validateMobile }] },
-          vcode: { rule: [{ required: true, message: '请输入验证码!' }] },
-          inputCode: {
-            rules: [
-              { required: true, message: '请输入验证码!' },
-              { validator: this.validateInputCode }
-            ]
-          }
-        },
-        vcodeImg: '',
-        verifiedCode: '',
-        inputCodeContent: '',
-        inputCodeNull: true,
-        verkey: ''
-
 			};
 		},
+    computed:{
+		  userInfoIsEmpty(){
+
+        if(this.userInfo == null || this.userInfo.token == null || this.userInfo.token == ""){
+          console.log("computed", false)
+          return false
+        }
+		    else{
+          console.log("computed", true)
+          return true
+        }
+
+      }
+    },
     created() {
-      // console.log("before login", userInfo.userInfo.token)
-		  // if(userInfo.userInfo.token==""){
-		  //   console.log("login")
-      //   this.$router.push(`/login`);
-      // }
 
     },
+
+    activated() {
+      let userInfo = JSON.parse(localStorage.getItem("userInfo"))
+      if(userInfo == null  || userInfo == "" ||userInfo=="default" ||(userInfo.token)==="" || (userInfo.userId)===""){
+        this.$router.push(`/login`);
+      }
+    },
     methods: {
-
-
-      gRandom () {
-        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
-      },
-      guid () {
-        this.verkey = (this.gRandom() + this.gRandom() + '-' + this.gRandom() + '-' + this.gRandom() + '-' + this.gRandom() + '-' + this.gRandom() + this.gRandom() + this.gRandom())
-        console.log(this.verkey)
-        return this.verkey
-      },
-      // imgCode () {
-      //   return 'http://127.0.0.1:8080/auth/vcode?codeKey=' + this.guid() + '&n=' + Math.random()
-      // },
-      // changeImgCode () {
-      //   this.vcodeImg = this.imgCode()
-      // },
-      handleTabClick (key) {
-        this.customActiveKey = key
-        // this.form.resetFields()
-      },
-      handleSubmit (e) {
-        e.preventDefault()
-        const {
-          form: { validateFields },
-          state,
-          customActiveKey,
-          Login,
-          verkey
-        } = this
-        console.log("verkey",verkey)
-        state.loginBtn = true
-        console.log("customActiveKey",customActiveKey)
-        // const validateFieldsKey = customActiveKey === 'tab1' ? ['userAccount', 'userPassword', 'vcode', 'verkey'] : ['mobile', 'captcha', 'vcode', 'verkey']
-        const validateFieldsKey = ['mobile', 'captcha', 'vcode', 'verkey']
-        console.log("validateFieldsKey",validateFieldsKey)
-        validateFields(validateFieldsKey, { force: true }, (err, values) => {
-          if (!err) {
-            // console.log('login form', values)
-            const loginParams = { ...values }
-            delete loginParams.userAccount
-            loginParams.verkey = verkey
-            // console.log(values.mobile, values.captcha)
-            fetch(global_url.baseUrl +
-                "/api/user/login.do",{
-              method:"post",
-              headers:{
-                "Content-type":"application/x-www-form-urlencoded;charset=UTF-8"
-              },
-              body:"mobile="+values.mobile+"&code="+values.captcha
-            }) .then((r) => r.json()).then((r) => {
-              console.log("login ", r.obj, r.errCode, r)
-              if(r.errCode == "200" && r.obj){
-                global_user.userInfo.userName=r.obj.userName
-                global_user.userInfo.mobile=r.obj.mobile
-                global_user.userInfo.token = r.obj.token
-                global_user.userInfo.userId = r.obj.userId
-                console.log("global_user",global_user.userInfo)
-              }else{
-                this.requestFailed(r)
-                state.loginBtn = false
-              }
-
-            })
-
-
-          } else {
-            setTimeout(() => {
-              state.loginBtn = false
-            }, 600)
-          }
-        })
-      },
-      getCaptcha (e) {
-        e.preventDefault()
-        const { form: { validateFields }, state } = this
-
-        validateFields(['mobile'], { force: true }, (err, values) => {
-          if (!err) {
-            state.smsSendBtn = true
-
-            const interval = window.setInterval(() => {
-              if (state.time-- <= 0) {
-                state.time = 60
-                state.smsSendBtn = false
-                window.clearInterval(interval)
-              }
-            }, 1000)
-
-            const hide = this.$message.loading('验证码发送中..', 0)
-
-            fetch(global_url.baseUrl +
-                "/api/user/sendCode.do",{
-              method:"post",
-              headers:{
-                "Content-type":"application/x-www-form-urlencoded;charset=UTF-8"
-              },
-              body:"mobile="+values.mobile
-            }).then((r) => r.json()).then((r) => {
-              console.log("login ", r.obj, r.errCode, r)
-              if(r.errCode == "200"){
-                setTimeout(hide, 2500)
-                this.$notification['success']({
-                  message: '提示',
-                  description: '验证码已经发送到您手机',
-                  duration: 8
-                })
-              }else{
-                this.requestFailed(r)
-                state.loginBtn = false
-              }
-
-            })
-
-
-            //
-            //     .then(res => {
-            //   setTimeout(hide, 2500)
-            //   this.$notification['success']({
-            //     message: '提示',
-            //     description: '验证码已经发送到您手机',
-            //     duration: 8
-            //   })
-            // })
-
-
-          }
-        })
-      },
-
-      requestFailed (err) {
-        this.$notification['error']({
-          message: '错误',
-          description: ((err.response || {}).data  || {}).message || err.msg|| '请求出现错误，请稍后再试',
-          duration: 4
-        })
-      },
+      logout(){
+        localStorage.removeItem("userInfo")
+        this.$router.push({ path: "login"});
+      }
 
 		}
 

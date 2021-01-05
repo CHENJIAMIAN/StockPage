@@ -26,7 +26,7 @@
       :infinite-scroll-distance="10"
     >
       <a-table
-        :pagination="false"
+        :pagination="false"handleInfiniteOnLoad
         :columns="table_columns"
         :data-source="table_data"
         :customRow="click"

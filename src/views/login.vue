@@ -141,6 +141,9 @@
   </div>
 </template>
 
+
+
+
 <script>
 const userInfo={
   userName:"",
@@ -158,7 +161,6 @@ export default {
       loginBtn: false,
       // login type: 0 email, 1 username, 2 telephone
       loginType: 0,
-      // requiredTwoStepCaptcha: false,
       stepCaptchaVisible: false,
       form: this.$form.createForm(this),
       state: {
@@ -169,12 +171,12 @@ export default {
         smsSendBtn: false
       },
       validatorRules: {
-        userAccount: {
-          rules: [{ required: true, message: '请输入用户名!', validator: 'click' }]
-        },
-        userPassword: {
-          rules: [{ required: true, message: '请输入密码!', validator: 'click' }]
-        },
+        // userAccount: {
+        //   rules: [{ required: true, message: '请输入用户名!', validator: 'click' }]
+        // },
+        // userPassword: {
+        //   rules: [{ required: true, message: '请输入密码!', validator: 'click' }]
+        // },
         mobile: { rules: [{ validator: this.validateMobile }] },
         vcode: { rule: [{ required: true, message: '请输入验证码!' }] },
         inputCode: {
@@ -191,47 +193,17 @@ export default {
       verkey: ''
     }
   },
-  created () {
-    // this.vcodeImg = this.imgCode()
-    // get2step({ })
-    //   .then(res => {
-    //     this.requiredTwoStepCaptcha = res.result.stepCode
-    //   })
-    //   .catch(() => {
-    //     this.requiredTwoStepCaptcha = false
-    //   })
-    // this.requiredTwoStepCaptcha = true
+  activated () {
+    let userInfo = JSON.parse(localStorage.getItem("userInfo"))
+
+    if(userInfo != null  && (userInfo.token)!="" && (userInfo.userId)!=""){
+      this.$router.push(`/user`);
+    }
   },
   methods: {
-    // ...mapActions(['Login', 'Logout']),
-    // handler
-    // handleUsernameOrEmail (rule, value, callback) {
-    //   const { state } = this
-    //   const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/
-    //   if (regex.test(value)) {
-    //     state.loginType = 0
-    //   } else {
-    //     state.loginType = 1
-    //   }
-    //   callback()
-    // },
-    gRandom () {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
-    },
-    guid () {
-      this.verkey = (this.gRandom() + this.gRandom() + '-' + this.gRandom() + '-' + this.gRandom() + '-' + this.gRandom() + '-' + this.gRandom() + this.gRandom() + this.gRandom())
-      console.log(this.verkey)
-      return this.verkey
-    },
-    // imgCode () {
-    //   return 'http://127.0.0.1:8080/auth/vcode?codeKey=' + this.guid() + '&n=' + Math.random()
-    // },
-    // changeImgCode () {
-    //   this.vcodeImg = this.imgCode()
-    // },
+
     handleTabClick (key) {
       this.customActiveKey = key
-      // this.form.resetFields()
     },
     handleSubmit (e) {
       e.preventDefault()
@@ -239,7 +211,6 @@ export default {
         form: { validateFields },
         state,
         customActiveKey,
-        Login,
         verkey
       } = this
       console.log("verkey",verkey)
@@ -250,23 +221,11 @@ export default {
       console.log("validateFieldsKey",validateFieldsKey)
       validateFields(validateFieldsKey, { force: true }, (err, values) => {
         if (!err) {
-          console.log('login form', values)
+          // console.log('login form', values)
           const loginParams = { ...values }
           delete loginParams.userAccount
-          // loginParams[!state.loginType ? 'email' : 'userAccount'] = values.userAccount
-          // loginParams.password = md5(values.userPassword)
-          // loginParams.password = values.userPassword
-          // loginParams.userPassword = values.userPassword
-          // loginParams.vcode = values.vcode
           loginParams.verkey = verkey
-          console.log(values.mobile, values.captcha)
-          // Login(loginParams)
-          //     .then((res) => this.loginSuccess(res))
-          //     .catch(err => this.requestFailed(err))
-          //     .finally(() => {
-          //       state.loginBtn = false
-          //     })
-          // params = “mobile=admin&password=admin123”;
+          // console.log(values.mobile, values.captcha)
           fetch(global_url.baseUrl +
               "/api/user/login.do",{
             method:"post",
@@ -274,22 +233,22 @@ export default {
               "Content-type":"application/x-www-form-urlencoded;charset=UTF-8"
             },
             body:"mobile="+values.mobile+"&code="+values.captcha
-            // body:"{ 'mobile': '"+values.mobile+"', 'code':'"+values.captcha +"'}"
           }) .then((r) => r.json()).then((r) => {
-            console.log(r)
-            if(r.errCode == "200" && r.object){
-              // this.$router.push(`/user/` + record.codeName.code);
-              this.$router.push({name:'user',params:{userInfo:r.object}})
+            console.log("login ", r.obj, r.errCode, r)
+            if(r.errCode == "200" && r.obj){
+              userInfo.userName=r.obj.userName
+              userInfo.mobile=r.obj.mobile
+              userInfo.token = r.obj.token
+              userInfo.userId = r.obj.userId
+              localStorage.setItem('userInfo',JSON.stringify(userInfo))
+              console.log("localStorage['userInfo']",localStorage.getItem('userInfo'))
+              this.$router.push({ path: "user"});
             }else{
               this.requestFailed(r)
               state.loginBtn = false
             }
 
           })
-              .catch(err => this.requestFailed(err))
-              .finally(() => {
-                state.loginBtn = false
-              })
 
 
         } else {
@@ -318,72 +277,42 @@ export default {
           const hide = this.$message.loading('验证码发送中..', 0)
 
           fetch(global_url.baseUrl +
-            "/api/user/sendCode.do",{
+              "/api/user/sendCode.do",{
             method:"post",
             headers:{
-              "Content-type":"application:/x-www-form-urlencoded:charset=UTF-8"
+              "Content-type":"application/x-www-form-urlencoded;charset=UTF-8"
             },
             body:"mobile="+values.mobile
-          }).then(res => {
-            setTimeout(hide, 2500)
-            this.$notification['success']({
-              message: '提示',
-              description: '验证码获取成功，您的验证码为：' + res.result.captcha,
-              duration: 8
-            })
-          }).catch(err => {
-            setTimeout(hide, 1)
-            clearInterval(interval)
-            state.time = 60
-            state.smsSendBtn = false
-            this.requestFailed(err)
+          }).then((r) => r.json()).then((r) => {
+            console.log("login ", r.obj, r.errCode, r)
+            if(r.errCode == "200"){
+              setTimeout(hide, 2500)
+              this.$notification['success']({
+                message: '提示',
+                description: '验证码【'+r.obj+'】已经发送到您手机',
+                duration: 8
+              })
+            }else{
+              this.requestFailed(r)
+              state.loginBtn = false
+            }
+
           })
 
-          // getSmsCaptcha({ mobile: values.mobile }).then(res => {
-          //   setTimeout(hide, 2500)
-          //   this.$notification['success']({
-          //     message: '提示',
-          //     description: '验证码获取成功，您的验证码为：' + res.result.captcha,
-          //     duration: 8
-          //   })
-          // }).catch(err => {
-          //   setTimeout(hide, 1)
-          //   clearInterval(interval)
-          //   state.time = 60
-          //   state.smsSendBtn = false
-          //   this.requestFailed(err)
-          // })
+
+
         }
       })
     },
-    // stepCaptchaSuccess () {
-    //   this.loginSuccess()
-    // },
-    // stepCaptchaCancel () {
-    //   this.Logout().then(() => {
-    //     this.loginBtn = false
-    //     this.stepCaptchaVisible = false
-    //   })
-    // },
-    loginSuccess (res) {
-      console.log(res)
-      this.$router.push({ name: 'dashboard' })
-      // 延迟 1 秒显示欢迎信息
-      setTimeout(() => {
-        this.$notification.success({
-          message: '欢迎',
-          // description: `${timeFix()}，欢迎回来`
-          description: `欢迎回来`
-        })
-      }, 1000)
-    },
+
     requestFailed (err) {
       this.$notification['error']({
         message: '错误',
         description: ((err.response || {}).data  || {}).message || err.msg|| '请求出现错误，请稍后再试',
         duration: 4
       })
-    }
+    },
+
   }
 }
 </script>

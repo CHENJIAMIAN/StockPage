@@ -6,6 +6,7 @@
       class="demo-infinite-container"
       :infinite-scroll-disabled="busy"
       :infinite-scroll-distance="10"
+
     >
       <a-table
         :pagination="false"
@@ -54,7 +55,7 @@
               bignum: true,
             }"
           >
-            {{ 现价 }}
+            {{ nowPrice }}
           </div>
         </div>
         <div slot="operation" slot-scope="operation, record">
@@ -62,7 +63,7 @@
             checked-children="取消自选"
             un-checked-children="添加自选"
             :default-checked="operation"
-            @change="onChange(record.id, $event)"
+            @change="onChange(record, $event)"
           />
         </div>
       </a-table>
@@ -73,19 +74,24 @@
   </div>
 </template>
 <script>
-import { table_columns, table_data, date } from "@/views/mywatchlist_data.js";
+import { table_columns,  date } from "@/views/mywatchlist_data.js";
 import global_url from "../App.vue";
 import global_user from "@/App"
+const table_data = [];
+const userInfo =JSON.parse(localStorage.getItem("userInfo"))
 export default {
   data() {
+    this.cacheData = table_data.map(item => ({ ...item }));
     return {
       loading: false,
       busy: false,
       table_columns,
-      table_data: [],
+      table_data,
       date,
       current_page: 0,
-      totalPage: 1};
+      totalPage: 1
+
+    };
   },
   created() {
 
@@ -93,24 +99,21 @@ export default {
 
   activated() {
 
-    if(global_user.userInfo.token=="" ||global_user.userInfo.userId==""){
-      this.$router.push(`/user`);
+    let userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    console.log(userInfo, userInfo == null )
+    if(userInfo == null || userInfo == "" ||userInfo=="default" ||(userInfo.token)==="" || (userInfo.userId)===""){
+      this.$router.push(`/login`);
     }
     document.getElementsByClassName('demo-infinite-container')[0].scrollTop =localStorage['my_watchlist'] || 0;
-
-    // var baseUrl = global_url.baseUrl;
-    // fetch(baseUrl + "/api/userSelect/select.do?userId=" + global_user.userInfo.userId)
-    //   .then((r) => r.json())
-    //   .then((r) => {
-    //     this.table_data = r.rows;
-    //     // this.table_data = r.rows
-    //   });
+    // this.handleInfiniteOnLoad()
   },
   methods: {
 
     handleInfiniteOnLoad() {
-      if(global_user.userInfo.token=="" ||global_user.userInfo.userId==""){
-        this.$router.push(`/user`);
+      console.log("handleInfiniteOnLoad" )
+      let userInfo = JSON.parse(localStorage.getItem("userInfo"))
+      if(userInfo.token=="" ||userInfo.userId==""){
+        this.$router.push(`/login`);
       }
       const data = this.table_data;
       this.loading = true;
@@ -118,8 +121,8 @@ export default {
       var url = global_url.baseUrl+"/api/userSelect/select.do?pageNo=" +
           next_page +
           "&pageSize=10";
-      if(global_user.userInfo.userId!=""){
-        url+="&userId="+global_user.userInfo.userId
+      if(userInfo.userId!=""){
+        url+="&userId="+userInfo.userId
       }else{
         return;
       }
@@ -141,9 +144,47 @@ export default {
     },
 
 
-    onChange(id, checked) {
-      console.log(`a-switch to ${checked}`, id);
+    onChange(record, checked) {
+
+      const newData = [...this.table_data];
+      const newCacheData = [...this.cacheData];
+      const target = newData.filter(item => record.id === item.id)[0];
+      const targetCache = newCacheData.filter(item => record.id === item.id)[0];
+      console.log("target:", target, "targetCache:", targetCache)
+      target.operation=true
+      console.log("target:", target, "targetCache:", targetCache)
+      if (target) {
+        Object.assign(newData, target);
+        this.table_data = newData;
+        console.log("newData:", newData)
+      }
+      console.log(`a-switch to ${checked}`, record.id);
+      console.log('newData:', newData, 'target', target);
       // 此处请求自选或取消自选的接口
+
+      fetch(global_url.baseUrl +
+          "/api/userSelect/cancel.do",{
+        method:"post",
+        headers:{
+          "Content-type":"application/x-www-form-urlencoded;charset=UTF-8"
+        },
+        body:"userId="+userInfo.userId+"&stockCode="+record.codeName.code+"&status="+(checked?1:0)
+      }) .then((r) => r.json()).then((r) => {
+        console.log("cancel ", r.obj, r.errCode, r)
+        if (r.errCode == "200") {
+          this.$notification['success']({
+            message: '修改成功',
+            duration: 2
+          })
+        } else {
+          this.$notification['error']({
+            message: '修改失败',
+            duration: 2
+          })
+        }
+
+      })
+
     },
   },
 };

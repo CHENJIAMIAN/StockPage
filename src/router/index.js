@@ -184,7 +184,7 @@ const routes = [{
 		name: 'hold_ranking',
 		component: () => import('@/views/hold-ranking.vue'),
 		meta: {
-			title: "牛散最新持股排名"
+			// title: "牛散最新持股排名"
 		}
 	},
 
