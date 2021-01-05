@@ -27,7 +27,6 @@
 			</div>
       <a-button
           size="large"
-          style="width: calc(100% - 5px);"
           type="primary"
           htmlType="submit"
           class="login-button"
@@ -280,6 +279,7 @@ import global_url from "@/App";
         font-size: 16px;
         height: 40px;
         width: 100%;
+		width: calc(100% - 5px);
       }
 
       .user-login-other {

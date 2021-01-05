@@ -131,7 +131,7 @@ export default {
 .demo-loading-container {
   position: absolute;
   bottom: 40px;
-  width: calc(100% - 1rem);
+  width: calc(100% - 16px);
   text-align: center;
 }
 </style>

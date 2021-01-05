@@ -112,16 +112,16 @@ export default {
 <style lang="scss" scoped>
 .daily-limit-analysis {
   display: grid;
-  grid-template-rows: 3rem auto auto;
+  grid-template-rows: 48px auto auto;
   align-items: center;
 
-  font-size: 1.2rem;
+  font-size: 19.2px;
   font-family: PingFang SC;
   font-weight: 500;
   color: #333333;
 
   .bluetxt {
-    font-size: 1.3rem;
+    font-size: 20.8px;
     font-family: PingFang SC;
     font-weight: 600;
     color: #3984f7;
@@ -134,23 +134,23 @@ export default {
   }
   .row1 {
     display: grid;
-    font-size: 1.5rem;
+    font-size: 24px;
     font-family: DIN Medium;
     font-weight: 500;
     color: #333333;
     border-bottom: 1px solid #f4f8fb;
-    padding: 1rem;
+    padding: 16px;
   }
   .row2 {
     display: grid;
-    //grid-template-rows: 3rem 1fr 2fr 2fr 3rem;
-    grid-template-rows: 3rem 3rem 3rem 3rem 3rem;
+    //grid-template-rows: 48px 1fr 2fr 2fr 48px;
+    grid-template-rows: 48px 48px 48px 48px 48px;
     align-items: center;
-    padding: 1rem;
+    padding: 16px;
 
     .more {
       text-align: center;
-      font-size: 1.1rem;
+      font-size: 17.6px;
       font-family: PingFang SC;
       font-weight: 500;
       color: #999999;
@@ -160,11 +160,11 @@ export default {
   }
   .row3 {
     display: grid;
-    grid-template-rows: 5rem 1fr;
+    grid-template-rows: 80px 1fr;
     align-items: center;
-    padding: 1rem;
+    padding: 16px;
     .name {
-      font-size: 1.5rem;
+      font-size: 24px;
       font-family: PingFang SC;
       font-weight: 800;
       color: #333333;
@@ -172,9 +172,9 @@ export default {
     .date {
       display: grid;
       grid-template-columns: 1fr 1fr auto;
-      grid-gap: 1rem;
+      grid-gap: 16px;
       align-items: center;
-      font-size: 1.5rem;
+      font-size: 24px;
       font-family: DIN Medium;
       font-weight: 500;
       color: #333333;

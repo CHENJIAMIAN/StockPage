@@ -10,17 +10,13 @@
         v-on:blur="closeHintsBox()"
         @search="handleZhenguClick"
       >
-        <a-icon
-          slot="prefix"
-          type="search"
-          :style="{ fontSize: '1.3rem', color: '#c6c4c7' }"
-        />
+        <a-icon slot="prefix" type="search" class="class1" />
         <a-button shape="round" type="primary" slot="enterButton">
-          <a-icon type="medicine-box" :style="{ fontSize: '1.2rem' }" /> 诊股
+          <a-icon type="medicine-box class3"/> 诊股
         </a-button>
       </a-input-search>
       <div v-show="searchCauseError" class="searchCauseError">
-        <span class="red" :style="{ fontSize: '0.5rem' }" >{{errorMessage}}</span>
+        <span class="red class2">{{ errorMessage }}</span>
       </div>
       <div
         class="hintsbox ant-select-dropdown--single ant-select-dropdown-placement-bottomLeft"
@@ -28,14 +24,14 @@
       >
         <div
           tabindex="-1"
-          style="overflow: auto; transform: translateZ(0px);"
+          style="overflow: auto; transform: translateZ(0px)"
           class="ant-select-dropdown-content"
         >
           <ul
             class="hintslist ant-select-dropdown-menu ant-select-dropdown-menu-vertical ant-select-dropdown-menu-root"
           >
             <li
-              :key="item.code+item.name"
+              :key="item.code + item.name"
               v-for="(item, index) in hints"
               ref="hint"
               class="hint ant-select-dropdown-menu-item"
@@ -43,7 +39,7 @@
               v-cloak
             >
               <span>{{ item.name }}</span>
-              <span style="float: right;margin-right: 30vw;">{{
+              <span style="float: right; margin-right: 30vw">{{
                 item.code
               }}</span>
             </li>
@@ -83,21 +79,29 @@
         <!-- <div class="youzi menuicon-cell-icon"></div> -->
         <div class="menuicon-cell-txt">牛散</div>
       </div>
-<!--      <div class="menuicon-cell" @click="handleRoute('my_watchlist')">-->
-<!--        <img src="../assets/img/zixuan.png" />-->
-<!--        &lt;!&ndash; <div class="zixuan menuicon-cell-icon"></div> &ndash;&gt;-->
-<!--        <div class="menuicon-cell-txt">自选</div>-->
-<!--      </div>-->
+      <!--      <div class="menuicon-cell" @click="handleRoute('my_watchlist')">-->
+      <!--        <img src="../assets/img/zixuan.png" />-->
+      <!--        &lt;!&ndash; <div class="zixuan menuicon-cell-icon"></div> &ndash;&gt;-->
+      <!--        <div class="menuicon-cell-txt">自选</div>-->
+      <!--      </div>-->
     </div>
     <div class="notify blue">
-      <div class="notify-col1 padding" @click="handleReview(marketReview.createDate)">
+      <div
+        class="notify-col1 padding"
+        @click="handleReview(marketReview.createDate)"
+      >
         <img src="../assets/img/laba.png" />
         {{ marketReview.title }}
       </div>
       <div class="notify-col2" @click="handleRoute('review_summary')">更多</div>
     </div>
     <div class="zhishu">
-      <div class="zhishu-cell"  @click="viewDetail(obj.name)" :key="obj.id" v-for="obj in zhishu" >
+      <div
+        class="zhishu-cell"
+        @click="viewDetail(obj.name)"
+        :key="obj.id"
+        v-for="obj in zhishu"
+      >
         <div class="bigtxt">{{ obj.name }}</div>
         <div
           :class="{
@@ -154,7 +158,7 @@
           <div class="zhuzi1">
             <div>{{ obj.value }}</div>
             <div
-              :style="{ height: (obj.value / maxValueInChart) * 150 + 'px' }"
+              :style="{ height: (obj.value / maxValueInChart) * 100 + 'px' }"
               :class="{
                 'zhuzi1-bg': true,
                 greenbg: obj.type === 1,
@@ -178,13 +182,13 @@
         class="shichangwendu-row3"
         :style="{
           'grid-template-columns':
-            ' 1rem ' +
+            ' 16px ' +
             Math.abs(shichangwendu.die) / this.sum +
             'fr 2px ' +
             Math.abs(shichangwendu.ping) / this.sum +
             'fr 2px ' +
             Math.abs(shichangwendu.zhang) / this.sum +
-            'fr 1rem',
+            'fr 16px',
         }"
       >
         <img src="../assets/img/down.png" />
@@ -244,7 +248,9 @@
             {{ obj.zhangdie }}%
           </div>
           <div class="graytxt">
-            <a @click="$router.push(`/stock_detail/` + obj.codeName.code)">{{ obj.codeName.name }}</a>
+            <a @click="$router.push(`/stock_detail/` + obj.codeName.code)">{{
+              obj.codeName.name
+            }}</a>
           </div>
         </div>
       </div>
@@ -273,7 +279,9 @@
             {{ obj.zhangdie }}%
           </div>
           <div class="graytxt">
-            <a @click="$router.push(`/stock_detail/` + obj.codeName.code)">{{ obj.codeName.name }}</a>
+            <a @click="$router.push(`/stock_detail/` + obj.codeName.code)">{{
+              obj.codeName.name
+            }}</a>
           </div>
         </div>
       </div>
@@ -311,9 +319,9 @@ export default {
     return {
       searchKey: "",
       hints: [],
-      searchCauseError:false,
-      errorMessage:"请输入股票名称或代码",
-      searchSelect:false,
+      searchCauseError: false,
+      errorMessage: "请输入股票名称或代码",
+      searchSelect: false,
       showHintsBox: false,
       activeNo: -1,
       zhangtingfenxi_columns,
@@ -335,7 +343,8 @@ export default {
     };
   },
   activated() {
-    document.getElementsByClassName('body')[0].scrollTop =localStorage['home'] || 0;
+    document.getElementsByClassName("body")[0].scrollTop =
+      localStorage["home"] || 0;
     // var baseUrl = "http://client.lemengsc.com/admin";
     var baseUrl = global_url.baseUrl;
 
@@ -348,10 +357,10 @@ export default {
       });
     // 复盘总结
     fetch(baseUrl + "/home/review.do")
-        .then((r) => r.json())
-        .then((r) => {
-          this.marketReview = r.obj;
-        });
+      .then((r) => r.json())
+      .then((r) => {
+        this.marketReview = r.obj;
+      });
 
     //市场指数
     fetch(baseUrl + "/home/summary.do")
@@ -400,75 +409,77 @@ export default {
         this.celuechi_data = r.obj;
       });
   },
-  mounted() {
-  },
+  mounted() {},
 
-  deactivated(){
-  },
+  deactivated() {},
   methods: {
-
-    viewDetail(name){
-      let code
-      let stockSource
-      if(name =="上证指数"){
-        code="000001"
-        stockSource=1
-      }else if(name =="深证指数"){
-        code="399001"
-        stockSource=0
-      }else if(name =="中小板"){
-        code="399005"
-        stockSource=0
-      }else if(name =="创业指数"){
-        code="399006"
-        stockSource=0
-      }else if(name =="科创50"){
-        code="000688"
-        stockSource=1
-      } else if(name =="上证50"){
-        code="000016"
-        stockSource=1
-
+    viewDetail(name) {
+      let code;
+      let stockSource;
+      if (name == "上证指数") {
+        code = "000001";
+        stockSource = 1;
+      } else if (name == "深证指数") {
+        code = "399001";
+        stockSource = 0;
+      } else if (name == "中小板") {
+        code = "399005";
+        stockSource = 0;
+      } else if (name == "创业指数") {
+        code = "399006";
+        stockSource = 0;
+      } else if (name == "科创50") {
+        code = "000688";
+        stockSource = 1;
+      } else if (name == "上证50") {
+        code = "000016";
+        stockSource = 1;
       }
-      this.$router.push({path:"/stock_detail/"+code,query:{stockSource:stockSource}})
+      this.$router.push({
+        path: "/stock_detail/" + code,
+        query: { stockSource: stockSource },
+      });
     },
 
     handleRoute(routeName) {
       this.$router.push(`/${routeName}`);
     },
-    handleReview(createDate){
-      this.$router.push({ path: "review_summary", query: { createDate: createDate } });
+    handleReview(createDate) {
+      this.$router.push({
+        path: "review_summary",
+        query: { createDate: createDate },
+      });
     },
 
     handleZhenguClick() {
       var code = this.searchKey;
-      if (code == '' || typeof code == "undefined") {
+      if (code == "" || typeof code == "undefined") {
         this.$refs.searchInput.focus();
-        this.errorMessage='请输入股票名称或代码'
-        this.searchCauseError=true;
+        this.errorMessage = "请输入股票名称或代码";
+        this.searchCauseError = true;
         return;
       }
 
-      if(this.searchCauseError ){
+      if (this.searchCauseError) {
         this.$refs.searchInput.focus();
-        this.searchCauseError=false;
+        this.searchCauseError = false;
         return;
       }
-      if(!this.searchSelect){
-        this.searchCauseError=true;
+      if (!this.searchSelect) {
+        this.searchCauseError = true;
         this.$refs.searchInput.focus();
-        this.errorMessage='请选择搜索结果中匹配中的股票或代码'
+        this.errorMessage = "请选择搜索结果中匹配中的股票或代码";
         return;
       }
 
-      console.log(code)
+      console.log(code);
 
       this.$router.push({ name: "diagnose_report", params: { code: code } });
     },
 
     //-------------------------------
     //用户输入的时候
-    whenInput: function($event) {
+    whenInput: function ($event) {
       var len = this.hints.length;
 
       //Down键事件
@@ -523,23 +534,25 @@ export default {
     },
 
     //获取候选列表
-    getHintsList: function() {
+    getHintsList: function () {
       // var baseUrl = "http://client.lemengsc.com/admin";
       var baseUrl = global_url.baseUrl;
       fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + this.searchKey)
         .then((r) => r.json())
         .then((r) => {
-          if(r.obj==null){
-            this.searchCauseError=true;
+          if (r.obj == null) {
+            this.searchCauseError = true;
             this.$refs.searchInput.focus();
-            this.errorMessage="请输入正确的股票名称或代码"
-          }else if(r.obj.length==1 && (this.searchKey== r.obj[0].code || this.searchKey==r.obj[0].name)){
-            this.searchCauseError=false;
-            this.searchSelect=true;
-          }
-          else{
-            this.searchCauseError=false;
-            this.searchSelect=false;
+            this.errorMessage = "请输入正确的股票名称或代码";
+          } else if (
+            r.obj.length == 1 &&
+            (this.searchKey == r.obj[0].code || this.searchKey == r.obj[0].name)
+          ) {
+            this.searchCauseError = false;
+            this.searchSelect = true;
+          } else {
+            this.searchCauseError = false;
+            this.searchSelect = false;
           }
           this.hints = r.obj || [];
         });
@@ -547,15 +560,15 @@ export default {
     },
 
     //依据hints数组下标值填充输入框
-    fillInput: function(index) {
+    fillInput: function (index) {
       this.searchKey = this.hints[index].code;
       this.showHintsBox = false;
-      this.searchSelect= true;
+      this.searchSelect = true;
       this.closeHintsBox();
     },
 
     //关闭候选框
-    closeHintsBox: function() {
+    closeHintsBox: function () {
       setTimeout(() => {
         // this.hints = [];
         this.showHintsBox = false;
@@ -565,7 +578,7 @@ export default {
   },
 
   watch: {
-    activeNo: function(val, oldVal) {
+    activeNo: function (val, oldVal) {
       console.log(val, oldVal);
       if (val != -1) {
         //这里可以替换成你想要执行的任意事件
@@ -595,21 +608,16 @@ export default {
       border: none;
       background: #f7f7f7;
     }
-
-
-
-
   }
-  .searchCauseError{
+  .searchCauseError {
     padding: 0px 10px 0px 30px;
   }
 }
 
-
-.hintsbox{
-  opacity:0.8;
-  width:75%;
-  border-radius:15px;
+.hintsbox {
+  opacity: 0.8;
+  width: 75%;
+  border-radius: 15px;
   background-color: #91d5ff;
 }
 
@@ -617,7 +625,7 @@ export default {
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1rem;
+  grid-gap: 16px;
   padding: 10px;
   border-bottom: 10px #f4f8f9 solid;
   height: 60vw;
@@ -628,7 +636,7 @@ export default {
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.05);
     align-items: end;
     background: linear-gradient(0deg, #fef6f4, #ffffff);
-    border-radius: 1rem;
+    border-radius: 16px;
     align-items: center;
     &-row3 {
       display: grid;
@@ -699,7 +707,7 @@ export default {
       background-position-y: 16px;
     }
     &-txt {
-      font-size: 11pt;
+      font-size: 11px;
     }
   }
 }
@@ -711,14 +719,14 @@ export default {
   padding: 0 20px;
   height: 40px;
   align-items: center;
-  height: 3.2rem;
+  height: 51.2px;
   align-items: center;
-  font-size: 1.0rem;
+  font-size: 16px;
   &-col1 {
     img {
-      width: 1.6rem;
+      width: 25.6px;
     }
-    width:15.2rem;
+    width: 243.2px;
   }
   &-col2 {
     justify-self: end;
@@ -726,7 +734,7 @@ export default {
 }
 //
 //.shichangwendu {
-//  padding-bottom: 1.5rem;
+//  padding-bottom: 24px;
 //  border-bottom: 10px #f4f8f9 solid;
 //
 //  &-row1 {
@@ -736,7 +744,7 @@ export default {
 //    }
 //    &-col2 {
 //      justify-self: center;
-//      font-size: 1.15rem;
+//      font-size: 1.240px;
 //      font-weight: bold;
 //      color: #000000b8;
 //    }
@@ -745,24 +753,24 @@ export default {
 //      grid-template-rows: 1fr 1fr;
 //      justify-self: end;
 //      align-self: end;
-//      font-size: 0.8rem;
-//      padding-right: 0.8rem;
+//      font-size: 12.8px;
+//      padding-right: 12.8px;
 //      text-align: end;
-//      font-size: 0.85rem;
+//      font-size: 13.6px;
 //    }
 //  }
 //  &-row2 {
 //    display: grid;
 //    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-//    grid-template-rows: 10rem 1rem;
-//    margin: 0.8rem;
+//    grid-template-rows: 160px 16px;
+//    margin: 12.8px;
 //  }
 //  &-row3 {
 //    display: grid;
-//    grid-template-columns: 1rem 1fr 2px 5px 2px 1fr 1rem;
-//    margin: 1rem 0.8rem;
+//    grid-template-columns: 16px 1fr 2px 5px 2px 1fr 16px;
+//    margin: 16px 12.8px;
 //    img {
-//      width: 1rem;
+//      width: 16px;
 //      justify-self: center;
 //      align-self: center;
 //    }
@@ -770,7 +778,7 @@ export default {
 //  &-row4 {
 //    display: grid;
 //    grid-template-columns: 1fr 3fr 1fr auto;
-//    margin: 0 1.8rem;
+//    margin: 0 28.8px;
 //    .red {
 //      justify-self: end;
 //    }
@@ -778,7 +786,7 @@ export default {
 //}
 
 .shichangwendu {
-  padding-bottom: 1.5rem;
+  padding-bottom: 24px;
   border-bottom: 10px #f4f8f9 solid;
 
   &-row1 {
@@ -789,7 +797,7 @@ export default {
     &-col2 {
       padding: 5px 10px 45px 15px;
       //justify-self: center;
-      font-size: 1.15rem;
+      font-size: 1.24px;
       font-weight: bold;
       color: #000000b8;
     }
@@ -798,24 +806,24 @@ export default {
       grid-template-rows: 1fr 1fr;
       justify-self: end;
       align-self: end;
-      font-size: 0.8rem;
-      padding-right: 0.8rem;
+      font-size: 12.8px;
+      padding-right: 12.8px;
       text-align: end;
-      font-size: 0.85rem;
+      font-size: 13.6px;
     }
   }
   &-row2 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 10rem 1rem;
-    margin: 0.8rem;
+    grid-template-rows: 160px 16px;
+    margin: 12.8px;
   }
   &-row3 {
     display: grid;
-    grid-template-columns: 1rem 1fr 2px 5px 2px 1fr 1rem;
-    margin: 1rem 0.8rem;
+    grid-template-columns: 16px 1fr 2px 5px 2px 1fr 16px;
+    margin: 16px 12.8px;
     img {
-      width: 1rem;
+      width: 16px;
       justify-self: center;
       align-self: center;
     }
@@ -823,7 +831,7 @@ export default {
   &-row4 {
     display: grid;
     grid-template-columns: 1.5fr 2.6fr 1.5fr auto;
-    margin: 0 1.8rem;
+    margin: 0 28.8px;
     .red {
       justify-self: left;
     }
@@ -834,7 +842,7 @@ export default {
   display: grid;
   grid-template-rows: auto auto;
   &-row2 {
-    // padding-left: 0.8rem;
+    // padding-left: 12.8px;
     // display: grid;
     // grid-template-columns: 1fr 1fr;
     // align-items: center;
@@ -862,16 +870,16 @@ export default {
   position: absolute;
 }
 .title-txt {
-  font-size: 14pt;
+  font-size: 14px;
   font-weight: bold;
-  padding-left: 0.8rem;
+  padding-left: 12.8px;
   color: black;
 }
 
 .more-txt {
   color: #9a9a9a;
   justify-self: end;
-  font-size: 1rem;
+  font-size: 16px;
   padding-right: 20px;
   align-self: center;
 }
@@ -898,8 +906,20 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
-
+.class1 {
+  font-size: 20.8px;
+  color: "#c6c4c7";
+}
+.class2 {
+  font-size: 8px;
+}
+.class3 {
+  font-size: 19.2px;
+}
 ::v-deep {
+  .ant-input-group-addon{
+    background: transparent;
+  }
   .ant-input-search > input {
     border-radius: 32px !important;
   }
@@ -919,7 +939,7 @@ export default {
   }
   .ant-progress-circle .ant-progress-text {
     transform: translate(-40%, -50%) rotate(90deg);
-    font-size: 1.1rem;
+    font-size: 17.6px;
   }
 }
 </style>

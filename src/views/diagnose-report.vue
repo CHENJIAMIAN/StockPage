@@ -41,7 +41,7 @@
       <div class="chart">
         <!-- <div :key="obj.id" v-for="obj in data.zhengu">{{ obj.score }}</div> -->
         <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-        <div id="main" style="width: 100%;height:300px;"></div>
+        <div id="main"></div>
       </div>
       <div class="zhengu">
         <div class="zhengu-grid" :key="obj.id" v-for="obj in data.zhengu">
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div class="iframe-class" >
+      <div class="iframe-class">
         <a-tabs default-active-key="1" size="small">
           <a-tab-pane key="1" tab="分时">
             <div class="chart">
@@ -61,7 +61,6 @@
               <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
               <img :src="minute_img_src" ref="img" width="100%" />
             </div>
-
           </a-tab-pane>
           <a-tab-pane key="2" tab="日K(1月)">
             <div class="longhu">
@@ -70,7 +69,6 @@
                 <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
                 <img :src="day_month_img_src" ref="img" width="100%" />
               </div>
-
             </div>
           </a-tab-pane>
           <a-tab-pane key="3" tab="日K(1季)">
@@ -80,7 +78,6 @@
                 <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
                 <img :src="season_img_src" ref="img" width="100%" />
               </div>
-
             </div>
           </a-tab-pane>
           <a-tab-pane key="4" tab="日K(半年)">
@@ -90,7 +87,6 @@
                 <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
                 <img :src="half_year_img_src" ref="img" width="100%" />
               </div>
-
             </div>
           </a-tab-pane>
           <a-tab-pane key="5" tab="周K">
@@ -100,7 +96,6 @@
                 <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
                 <img :src="week_img_src" ref="img" width="100%" />
               </div>
-
             </div>
           </a-tab-pane>
           <a-tab-pane key="6" tab="月K">
@@ -110,13 +105,11 @@
                 <!--              <div id="main" style="width: 100%;height:300px;"></div>-->
                 <img :src="month_img_src" ref="img" width="100%" />
               </div>
-
             </div>
           </a-tab-pane>
         </a-tabs>
-<!--        <iframe :src="html_src" ref="iframe" width="100%"></iframe>-->
+        <!--        <iframe :src="html_src" ref="iframe" width="100%"></iframe>-->
       </div>
-
     </div>
 
     <div class="riskTip">{{ data.riskTip }}</div>
@@ -124,48 +117,81 @@
 </template>
 <script>
 import { data } from "./diagnosereport_data.js";
-import global_baseUrl from "../App.vue"
+import global_baseUrl from "../App.vue";
 export default {
   data() {
     return {
       data,
-      minute_img_src:"http://img1.money.126.net/chart/hs/time/540x360/1002277.png",
-      day_month_img_src:"http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
-      season_img_src:"http://img1.money.126.net/chart/hs/kline/day/90/1002277.png",
-      half_year_img_src:"http://img1.money.126.net/chart/hs/kline/day/180/1002277.png",
-      week_img_src:"http://img1.money.126.net/chart/hs/kline/week/1002277.png",
-      month_img_src:"http://img1.money.126.net/chart/hs/kline/month/1002277.png",
+      minute_img_src:
+        "http://img1.money.126.net/chart/hs/time/540x360/1002277.png",
+      day_month_img_src:
+        "http://img1.money.126.net/chart/hs/kline/day/30/1002277.png",
+      season_img_src:
+        "http://img1.money.126.net/chart/hs/kline/day/90/1002277.png",
+      half_year_img_src:
+        "http://img1.money.126.net/chart/hs/kline/day/180/1002277.png",
+      week_img_src: "http://img1.money.126.net/chart/hs/kline/week/1002277.png",
+      month_img_src:
+        "http://img1.money.126.net/chart/hs/kline/month/1002277.png",
       // html_src:"http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0",
     };
   },
   activated() {
-    document.getElementsByClassName('body')[0].scrollTop = 0;
+    document.getElementsByClassName("body")[0].scrollTop = 0;
     var code = this.$route.params.code;
     var baseUrl = global_baseUrl.baseUrl;
     // var baseUrl = "http://client.lemengsc.com/admin";
-    if (typeof code == 'undefined'){
-      code="002277"
+    if (typeof code == "undefined") {
+      code = "002277";
     }
-    fetch(baseUrl +"/home/doctor.do?stockCode=" + code)
-        .then((r) => r.json())
-        .then((r) => {
-          console.log("report",code)
-          if (r.obj == null){
-            alert("输入数据有误,将用默认数据展示")
-            this.html_src="http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0"
-          }else{
-            this.data = r.obj;
-            this.minute_img_src="http://img1.money.126.net/chart/hs/time/540x360/"+r.obj.stockSource+""+r.obj.code+".png"
-            this.day_month_img_src="http://img1.money.126.net/chart/hs/kline/day/30/"+r.obj.stockSource+""+r.obj.code+".png"
-            this.season_img_src="http://img1.money.126.net/chart/hs/kline/day/90/"+r.obj.stockSource+""+r.obj.code+".png"
-            this.half_year_img_src="http://img1.money.126.net/chart/hs/kline/day/180/"+r.obj.stockSource+""+r.obj.code+".png"
-            this.week_img_src="http://img1.money.126.net/chart/hs/kline/week/"+r.obj.stockSource+""+r.obj.code+".png"
-            this.month_img_src="http://img1.money.126.net/chart/hs/kline/month/"+r.obj.stockSource+""+r.obj.code+".png"
-
-
-          }
-
-        });
+    fetch(baseUrl + "/home/doctor.do?stockCode=" + code)
+      .then((r) => r.json())
+      .then((r) => {
+        console.log("report", code);
+        if (r.obj == null) {
+          alert("输入数据有误,将用默认数据展示");
+          this.html_src =
+            "http://m.money.163.com/stock/1002277.html?from=singlemessage&isappinstalled=0";
+        } else {
+          this.data = r.obj;
+          this.minute_img_src =
+            "http://img1.money.126.net/chart/hs/time/540x360/" +
+            r.obj.stockSource +
+            "" +
+            r.obj.code +
+            ".png";
+          this.day_month_img_src =
+            "http://img1.money.126.net/chart/hs/kline/day/30/" +
+            r.obj.stockSource +
+            "" +
+            r.obj.code +
+            ".png";
+          this.season_img_src =
+            "http://img1.money.126.net/chart/hs/kline/day/90/" +
+            r.obj.stockSource +
+            "" +
+            r.obj.code +
+            ".png";
+          this.half_year_img_src =
+            "http://img1.money.126.net/chart/hs/kline/day/180/" +
+            r.obj.stockSource +
+            "" +
+            r.obj.code +
+            ".png";
+          this.week_img_src =
+            "http://img1.money.126.net/chart/hs/kline/week/" +
+            r.obj.stockSource +
+            "" +
+            r.obj.code +
+            ".png";
+          this.month_img_src =
+            "http://img1.money.126.net/chart/hs/kline/month/" +
+            r.obj.stockSource +
+            "" +
+            r.obj.code +
+            ".png";
+        }
+      });
 
     // fetch("http://120.79.39.244:53689/gis/hengli/tileset.json")
     //   .then((r) => r.json())
@@ -253,34 +279,38 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#main {
+  width: 100%;
+  height: 300px;
+}
 .diagnose-report {
   background: #f2f7fb;
   display: grid;
-  grid-template-rows: 22rem 50px 15fr auto auto;
+  grid-template-rows: 352px 50px 15fr auto auto;
   .head {
     background-image: url(../assets/img/topbg0.png);
     background-size: cover;
     display: grid;
-    grid-auto-rows: 2.5rem 5.5rem 1.5rem 0.5rem;
+    grid-auto-rows: 40px 88px 24px 8px;
     grid-gap: 10px;
     color: white;
-    padding-left: 1rem;
-    padding-top: 2rem;
+    padding-left: 16px;
+    padding-top: 32px;
     .name {
-      font-size: 2.5rem;
+      font-size: 40px;
       font-weight: bold;
     }
     .code {
-      font-size: 1.5rem;
+      font-size: 24px;
     }
     .score {
-      font-size: 1.5rem;
+      font-size: 24px;
       span {
         color: #ffee30;
       }
     }
     .bitThan {
-      font-size: 1.5rem;
+      font-size: 24px;
     }
     .circle {
       width: 0;
@@ -321,10 +351,10 @@ export default {
     color: white;
     text-align: center;
     margin: 0 10vw;
-    font-size: 1.2rem;
+    font-size: 19.2px;
     span {
-      margin: 0.3rem;
-      line-height: 3rem;
+      margin: 4.8px;
+      line-height: 48px;
     }
     .active {
       color: #ffee30;
@@ -332,22 +362,22 @@ export default {
   }
   .qushi {
     background: white;
-    margin: 0 0.5rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
+    margin: 0 8px;
+    padding: 16px;
+    border-radius: 8px;
     .grid {
       display: grid;
       grid-template-rows: 1fr auto;
       .row1 {
         display: grid;
-        grid-template-columns: 1rem 2fr 1fr 10px 5px;
-        font-size: 1.2rem;
+        grid-template-columns: 16px 2fr 1fr 10px 5px;
+        font-size: 19.2px;
         color: orange;
         font-weight: bold;
         grid-gap: 10px;
         align-items: center;
         img {
-          width: 1rem;
+          width: 16px;
           align-self: center;
         }
         .bottom-orange {
@@ -364,19 +394,19 @@ export default {
       }
       .row2 {
         color: black;
-        padding: 0.5rem 1.5rem;
+        padding: 8px 24px;
       }
     }
   }
   .content {
     background: white;
-    margin: 1rem 0.5rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
+    margin: 16px 8px;
+    padding: 16px;
+    border-radius: 8px;
     color: black;
     .summary {
-      padding: 1rem 0.5rem;
-      line-height: 1.5rem;
+      padding: 16px 8px;
+      line-height: 24px;
     }
     .chart {
       display: grid;
@@ -391,45 +421,44 @@ export default {
         border: 1px solid orange;
         &-head {
           display: grid;
-          grid-template-columns: 3rem auto;
+          grid-template-columns: 48px auto;
           align-items: center;
           grid-gap: 8px;
           .id {
-            line-height: 2rem;
-            height: 2rem;
-            width: 3rem;
+            line-height: 32px;
+            height: 32px;
+            width: 48px;
             background: #ff7e1d;
             color: white;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 19.2px;
             font-weight: bold;
           }
           .type {
-            font-size: 1.2rem;
+            font-size: 19.2px;
             font-weight: 500;
           }
         }
         &-content {
-          padding: 0.5rem 1rem;
-          line-height: 1.5rem;
+          padding: 8px 16px;
+          line-height: 24px;
         }
       }
     }
 
-    .iframe-class{
-      padding: 1rem 0.1rem 0.5rem 0.1rem;
+    .iframe-class {
+      padding: 16px 1.6px 8px 1.6px;
       display: grid;
       grid-gap: 20px;
       position: relative;
     }
-
   }
 
   .riskTip {
-    font-size: 0.8rem;
+    font-size: 12.8px;
     color: gray;
     text-align: center;
-    height: 2rem;
+    height: 32px;
   }
 }
 </style>

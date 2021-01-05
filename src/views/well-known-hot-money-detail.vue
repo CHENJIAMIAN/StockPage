@@ -152,7 +152,7 @@ export default {
   display: grid;
   grid-template-rows: auto auto auto;
   .name {
-    font-size: 1.5rem;
+    font-size: 24px;
     font-family: PingFang SC;
     font-weight: 800;
     color: #333333;
@@ -167,7 +167,7 @@ export default {
     border-bottom: 10px #f4f8f9 solid;
 
     .desc {
-      font-size: 1.2rem;
+      font-size: 19.2px;
       font-family: PingFang SC;
       font-weight: 500;
       line-height: 34px;
@@ -184,7 +184,7 @@ export default {
       grid-gap: 20px;
       align-items: center;
       .item {
-        font-size: 1.2rem;
+        font-size: 19.2px;
         font-family: PingFang SC;
         font-weight: 500;
         color: #333333;

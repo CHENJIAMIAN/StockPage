@@ -106,7 +106,7 @@
 <!--        >忘记密码</router-link>-->
 <!--      </a-form-item>-->
 
-      <a-form-item style="margin-top:24px">
+      <a-form-item class="class1">
         <a-button
             size="large"
             type="primary"
@@ -318,6 +318,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.class1{
+  margin-top:24px
+}
 .user-layout-login {
   label {
     font-size: 14px;

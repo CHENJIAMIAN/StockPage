@@ -68,7 +68,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   gap: 30px 0;
   padding: 15px 0;
 
@@ -86,7 +86,7 @@ export default {
       height: 100%;
       padding: 0 20px;
       &-name {
-        font-size: 1.2rem;
+        font-size: 19.2px;
         font-family: PingFang SC;
         font-weight: 800;
         color: #333333;
@@ -94,7 +94,7 @@ export default {
       }
       &-desc {
         padding: 0px 5px 0 15px;
-        font-size: 1rem;
+        font-size: 16px;
         font-family: PingFang SC;
         font-weight: 500;
         color: #333333;
@@ -111,25 +111,25 @@ export default {
       padding: 10px;
 
       &-name {
-        font-size: 1.0rem;
+        font-size: 16px;
         font-family: PingFang SC;
         font-weight: 500;
         color: #333333;
         line-height: 34px;
       }
       &-quote {
-        font-size: 1.5rem;
+        font-size: 24px;
         font-family: DIN Medium;
         font-weight: 400;
         //color: #ea3031;
         line-height: 34px;
       }
       &-more {
-        width: 5rem;
+        width: 80px;
         background: #3984f7;
         border-radius: 3px;
         text-align: center;
-        font-size: 0.8rem;
+        font-size: 12.8px;
         color: #ffffff;
         line-height: 34px;
       }
@@ -138,7 +138,7 @@ export default {
   .demo-loading-container {
     position: absolute;
     bottom: 40px;
-    width: calc(100% - 1rem);
+    width: calc(100% - 16px);
     text-align: center;
   }
 

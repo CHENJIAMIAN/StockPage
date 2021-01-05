@@ -13,7 +13,7 @@
         <a-icon
             slot="prefix"
             type="search"
-            :style="{ fontSize: '1.3rem', color: '#c6c4c7' }"
+            class="class1"
         />
 
         <a-button  type="primary" slot="enterButton">
@@ -23,7 +23,7 @@
       <span v-bind:searchkeyCode="searchkeyCode" v-show="false" />
       <span v-bind:searchkeyCode="sharehdtype" v-show="false" />
       <div v-show="searchCauseError" class="searchCauseError">
-        <span class="red" :style="{ fontSize: '0.5rem' }" >{{errorMessage}}</span>
+        <span class="red" :style="{ fontSize: '8px' }" >{{errorMessage}}</span>
       </div>
       <div
           class="hintsbox ant-select-dropdown--single ant-select-dropdown-placement-bottomLeft"
@@ -443,6 +443,10 @@
 	};
 </script>
 <style lang="scss" scoped>
+.class1 {
+  font-size: 20.8px;
+  color: "#c6c4c7";
+}
 	#search-page {
 		width: 100%;
 		min-height: 100%;

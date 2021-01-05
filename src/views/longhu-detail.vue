@@ -15,7 +15,7 @@
             gray: Number(data.quoteChangePercent) === 0,
             bignum: true,
           }">
-          <span style="padding-right:1rem;"
+          <span style="padding-right:16px;"
             >{{ data.quoteChangePercent }}%</span
           >
           <span>{{ data.quoteChangeAmount }}</span>
@@ -60,13 +60,13 @@
 <!--        <div class="row1-col2-row1">-->
 <!--          <span>总值:</span>-->
 <!--          <span>{{ data.totalValue + data.totalValueUnit }}</span>-->
-<!--          <span style="padding-left:1rem;">主营:</span>-->
+<!--          <span style="padding-left:16px;">主营:</span>-->
 <!--          <span>{{ data.mainBusiness }}</span>-->
 <!--        </div>-->
 <!--        <div class="row1-col2-row2">-->
 <!--          <span>流值:</span>-->
 <!--          <span>{{ data.circulationValue + data.circulationValueUnit }}</span>-->
-<!--          <span style="padding-left:1rem;">牛散:</span>-->
+<!--          <span style="padding-left:16px;">牛散:</span>-->
 <!--          <span class="blue" :key="item.id" v-for="item in data.awesomeRetail">-->
 <!--            {{ item.name }}-->
 <!--          </span>-->
@@ -273,9 +273,9 @@ export default {
 .longhu-detail {
   display: grid;
   .row0 {
-    padding: 1rem;
+    padding: 16px;
     background: #3984f7;
-    font-size: 2rem;
+    font-size:32px;
     font-family: PingFang SC;
     font-weight: bold;
     color: #ffffff;
@@ -284,16 +284,16 @@ export default {
     display: grid;
     grid-template-columns: 1fr 3fr;
     border-bottom: 10px #f4f8f9 solid;
-    padding: 1rem;
+    padding: 16px;
     .red {
       .price {
-        font-size: 1.5rem;
+        font-size: 24px;
         font-family: DIN Medium;
         font-weight: 500;
         color: #ea3031;
       }
       .quote {
-        font-size: 1rem;
+        font-size: 16px;
         font-family: DIN Medium;
         font-weight: 400;
         color: #ea3031;
@@ -302,7 +302,7 @@ export default {
     }
     &-col2 {
       justify-self: end;
-      font-size: 0.9rem;
+      font-size: 14.4px;
       font-family: PingFang SC;
       font-weight: 500;
       color: #333333;
@@ -322,7 +322,7 @@ export default {
 
   .row2 {
     display: grid;
-    padding: 1rem;
+    padding: 16px;
     .longhu {
       display: grid;
       grid-template-rows: 1fr auto;
@@ -333,7 +333,7 @@ export default {
         align-items: center;
         grid-auto-flow: column;
         img {
-          width: 1rem;
+          width: 16px;
         }
       }
       .chart {
@@ -341,14 +341,14 @@ export default {
       .date {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 1rem;
+        grid-gap: 16px;
         justify-items: center;
         align-items: center;
-        font-size: 1.1rem;
+        font-size: 17.6px;
         font-family: DIN Medium;
         font-weight: 600;
         color: #333333;
-        line-height: 1.3rem;
+        line-height: 20.8px;
       }
     }
   }
@@ -357,10 +357,10 @@ export default {
     .grid{
 
       .row3 {
-        height: 3rem;
-        line-height: 1.5rem;
-        padding-left: 1rem;
-        font-size: 1rem;
+        height: 48px;
+        line-height: 24px;
+        padding-left: 16px;
+        font-size: 16px;
         font-weight: 500;
         color: #2874e8;
         background: #d4e5ff;
@@ -368,9 +368,9 @@ export default {
 
       .row4 {
         display: grid;
-        padding: 1rem;
+        padding: 16px;
         .name {
-          font-size: 1.4rem;
+          font-size: 22.4px;
           font-family: PingFang SC;
           font-weight: 800;
           color: #333333;
@@ -379,22 +379,22 @@ export default {
         .grid {
           display: grid;
           align-items: center;
-          grid-template-rows: 4rem;
-          grid-gap: 1rem;
+          grid-template-rows:64px;
+          grid-gap: 16px;
           .item {
             display: grid;
-            grid-template-columns: 15rem 1fr;
+            grid-template-columns: 240px 1fr;
             align-items: center;
             border-bottom: 1px solid #80808014;
             .blue {
-              font-size: 1.2rem;
+              font-size: 19.2px;
               font-family: PingFang SC;
               font-weight: 500;
               color: #2874e8;
             }
             .gray {
-              padding-left: 1rem;
-              font-size: 1rem;
+              padding-left: 16px;
+              font-size: 16px;
               font-family: PingFang SC;
               font-weight: 500;
               color: #999999;
@@ -403,7 +403,7 @@ export default {
               justify-self: end;
               display: grid;
               justify-items: end;
-              font-size: 1rem;
+              font-size: 16px;
               font-family: DIN Medium;
               font-weight: 400;
             }
@@ -415,10 +415,10 @@ export default {
   }
 
   //.row3 {
-  //  height: 3rem;
-  //  line-height: 3rem;
-  //  padding-left: 1rem;
-  //  font-size: 1rem;
+  //  height: 48px;
+  //  line-height: 48px;
+  //  padding-left: 16px;
+  //  font-size: 16px;
   //  font-weight: 500;
   //  color: #2874e8;
   //  background: #d4e5ff;
@@ -426,9 +426,9 @@ export default {
 
   //.row4 {
   //  display: grid;
-  //  padding: 1rem;
+  //  padding: 16px;
   //  .name {
-  //    font-size: 1.4rem;
+  //    font-size: 22.4px;
   //    font-family: PingFang SC;
   //    font-weight: 800;
   //    color: #333333;
@@ -437,22 +437,22 @@ export default {
   //  .grid {
   //    display: grid;
   //    align-items: center;
-  //    grid-template-rows: 4rem;
-  //    grid-gap: 1rem;
+  //    grid-template-rows:64px;
+  //    grid-gap: 16px;
   //    .item {
   //      display: grid;
-  //      grid-template-columns: 15rem 1fr;
+  //      grid-template-columns: 240px 1fr;
   //      align-items: center;
   //      border-bottom: 1px solid #80808014;
   //      .blue {
-  //        font-size: 1.2rem;
+  //        font-size: 19.2px;
   //        font-family: PingFang SC;
   //        font-weight: 500;
   //        color: #2874e8;
   //      }
   //      .gray {
-  //        padding-left: 1rem;
-  //        font-size: 1rem;
+  //        padding-left: 16px;
+  //        font-size: 16px;
   //        font-family: PingFang SC;
   //        font-weight: 500;
   //        color: #999999;
@@ -461,7 +461,7 @@ export default {
   //        justify-self: end;
   //        display: grid;
   //        justify-items: end;
-  //        font-size: 1rem;
+  //        font-size: 16px;
   //        font-family: DIN Medium;
   //        font-weight: 400;
   //      }

@@ -23,7 +23,7 @@
           </a>
         </div>
         <div slot="zhangdiefu" slot-scope="zhangdiefu">
-          <div class=" red " style="font-size: 1.2rem;  font-weight: 500;  font-family: DIN Medium;">{{ zhangdiefu }}%</div>
+          <div class="red class1">{{ zhangdiefu }}%</div>
         </div>
         <div slot="jitianjiban" slot-scope="jitianjiban">
           <div class="bigtxt">{{ jitianjiban }}</div>
@@ -67,16 +67,17 @@ export default {
         // console.log(to)
         // console.log(from)
 
-        if(from.path == '/daily_limit_analysis'){
+        if (from.path == "/daily_limit_analysis") {
           // 刷新表
           Object.assign(this.$data, this.$options.data());
           this.handleInfiniteOnLoad();
         }
-        
-        if(from.path.includes('stock_detail')){
+
+        if (from.path.includes("stock_detail")) {
           // 滚动到指定位置
-          document.getElementsByClassName("demo-infinite-container")[0].scrollTop =
-            localStorage["daily_limit_analysis_detail"] || 0;
+          document.getElementsByClassName(
+            "demo-infinite-container"
+          )[0].scrollTop = localStorage["daily_limit_analysis_detail"] || 0;
         }
       },
     },
@@ -92,8 +93,7 @@ export default {
   //   });
   // this.date = this.$route.params.date;
   // },
-  activated() {
-  },
+  activated() {},
   methods: {
     // table 每一行点击事件
     click(record, index) {
@@ -156,19 +156,24 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.class1 {
+  font-size: 19.2px;
+  font-weight: 500;
+  font-family: DIN Medium;
+}
 .daily-limit-analysis-detail {
   display: grid;
   grid-template-rows: auto auto;
   align-items: center;
-  padding: 1rem;
+  padding: 16px;
 
   .row1 {
     border-bottom: 1px solid #f4f8fb;
-    font-size: 1.5rem;
+    font-size: 24px;
     font-family: DIN Medium;
     font-weight: 400;
     color: #333333;
-    line-height: 4rem;
+    line-height: 64px;
   }
 }
 
@@ -179,7 +184,7 @@ export default {
 .demo-loading-container {
   position: absolute;
   bottom: 40px;
-  width: calc(100% - 1rem);
+  width: calc(100% - 16px);
   text-align: center;
 }
 </style>

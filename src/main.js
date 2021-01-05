@@ -6,6 +6,7 @@ import '@/assets/index.scss'
 import router from './router'
 import echarts from 'echarts'
 import infiniteScroll from "vue-infinite-scroll";
+import 'lib-flexible/flexible.js'
 Vue.config.productionTip = false
 
 Vue.prototype.$echarts = echarts

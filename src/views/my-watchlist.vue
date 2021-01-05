@@ -213,7 +213,7 @@ export default {
     margin-right: 5px;
     margin-left: 5px;
     color: #3984f7;
-    font-size: 0.8rem;
+    font-size: 12.8px;
   }
 }
 .daily-limit-analysis-detail {
@@ -228,7 +228,7 @@ export default {
 .demo-loading-container {
   position: absolute;
   bottom: 105px;
-  width: calc(100% - 1rem);
+  width: calc(100% - 16px);
   text-align: center;
 }
 </style>

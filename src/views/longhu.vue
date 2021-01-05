@@ -275,7 +275,7 @@ export default {
 }
 .longhu {
   display: grid;
-  font-size: 1.2rem;
+  font-size: 19.2px;
   font-family: PingFang SC;
   font-weight: 500;
   color: #333333;
@@ -283,54 +283,54 @@ export default {
   .row1 {
     display: grid;
     align-items: end;
-    grid-template-rows: 3rem 3rem 3.5rem 3rem 3.5rem;
+    grid-template-rows: 48px 48px 56px 48px 56px;
     border-bottom: 10px #f4f8f9 solid;
-    padding: 1rem;
+    padding: 16px;
 
     &-row1 {
       align-self: center;
-      font-size: 1.4rem;
+      font-size: 22.4px;
       font-weight: 800;
       border-bottom: 0.5px solid #80808014;
     }
   }
   .row2 {
     display: grid;
-    grid-template-rows: 4rem 3.5rem;
-    padding: 1rem;
+    grid-template-rows: 64px 56px;
+    padding: 16px;
 
     &-row1 {
       display: grid;
       align-items: center;
       grid-template-columns: auto 1fr;
-      grid-gap: 1rem;
+      grid-gap: 16px;
       border-bottom: 0.5px solid #80808014;
     }
     &-row2 {
       align-self: end;
-      font-size: 1.2rem;
+      font-size: 19.2px;
       font-weight: 400;
       color: #666666;
 
       .name {
-        font-size: 1.4rem;
+        font-size: 22.4px;
         font-weight: 800;
         color: #333333;
-        margin-right: 1rem;
+        margin-right: 16px;
       }
     }
   }
   .row3 {
-    height: 3rem;
-    line-height: 3rem;
-    padding-left: 1rem;
-    font-size: 1rem;
+    height: 48px;
+    line-height: 48px;
+    padding-left: 16px;
+    font-size: 16px;
     font-weight: 500;
     color: #2874e8;
     background: #d4e5ff;
     .more {
       float: right;
-      padding-right: 1rem;
+      padding-right: 16px;
     }
   }
   .row4 {
