@@ -345,7 +345,7 @@ export default {
   activated() {
     document.getElementsByClassName("body")[0].scrollTop =
       localStorage["home"] || 0;
-    // var baseUrl = "http://client.lemengsc.com/admin";
+    // var baseUrl = "/api/admin";
     var baseUrl = global_url.baseUrl;
 
     //涨停分析返回数据
@@ -535,7 +535,7 @@ export default {
 
     //获取候选列表
     getHintsList: function () {
-      // var baseUrl = "http://client.lemengsc.com/admin";
+      // var baseUrl = "/api/admin";
       var baseUrl = global_url.baseUrl;
       fetch(baseUrl + "/home/stockCodeFuzzy.do?stockCode=" + this.searchKey)
         .then((r) => r.json())

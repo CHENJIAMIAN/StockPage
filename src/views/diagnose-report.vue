@@ -140,7 +140,7 @@ export default {
     document.getElementsByClassName("body")[0].scrollTop = 0;
     var code = this.$route.params.code;
     var baseUrl = global_baseUrl.baseUrl;
-    // var baseUrl = "http://client.lemengsc.com/admin";
+    // var baseUrl = "/api/admin";
     if (typeof code == "undefined") {
       code = "002277";
     }

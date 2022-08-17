@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import { table_columns } from "@/views/hold_ranking_data";
+import { table_columns,table_data } from "@/views/hold_ranking_data";
 
 import global_url from "@/App";
 
@@ -152,7 +152,7 @@ export default {
       alreadyBottom: false,
       loading: false,
       busy: false,
-      table_data: [],
+      table_data,
       current_page: 0,
       totalPage: 1,
       table_columns: [

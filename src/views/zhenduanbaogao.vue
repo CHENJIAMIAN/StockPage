@@ -73,7 +73,7 @@ export default {
   created() {
     var code = this.$route.params.code;
     // var baseUrl = global_url.baseUrl;
-    var baseUrl = "http://client.lemengsc.com/admin";
+    var baseUrl = "/api/admin";
     if (typeof code == "undefined") {
       code = "002277";
     }
