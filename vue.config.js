@@ -1,5 +1,5 @@
 module.exports = {
-    publicPath: process.env.NODE_ENV !== 'production' ? '' : '/StockPage',
+    publicPath: process.env.NODE_ENV !== 'production' ? '/' : '/StockPage',
     lintOnSave: false,
     devServer: {
         port: 9099,
